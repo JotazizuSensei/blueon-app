@@ -1,0 +1,41 @@
+{
+  "name": "Blue ON",
+  "short_name": "Blue ON",
+  "description": "Treino, nutrição e acompanhamento personalizado Blue ON.",
+  "start_url": "./blue-on-app.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#071B3A",
+  "theme_color": "#071B3A",
+  "lang": "pt-PT",
+  "categories": ["health", "fitness", "lifestyle"],
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Treino de hoje",
+      "short_name": "Hoje",
+      "url": "./blue-on-app.html#hoje",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
