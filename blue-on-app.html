@@ -193,6 +193,8 @@ a{color:var(--cyan);text-decoration:none}
 .pill.active svg{opacity:1}
 
 /* Exercise card */
+.ex-illus{width:100%;height:140px;border-radius:var(--rsm);background:#f1f5fb;border:1px solid var(--line);object-fit:contain;display:block;margin-bottom:10px}
+.ws-img-real{width:100%;height:170px;border-radius:14px;object-fit:contain;background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.1);margin-bottom:14px;display:block}
 .ex{background:var(--card);border:1.5px solid var(--line);border-radius:var(--r);margin-bottom:10px;overflow:hidden}
 .ex.done{border-color:var(--ok);background:#f7fdf9}
 .ex-h{display:flex;align-items:center;gap:11px;padding:12px 14px;user-select:none}
@@ -938,9 +940,9 @@ const DEFAULT = ()=> ({
         {dia:'Seg · Sessão A',exs:[
           {nome:'Aquecimento geral',ic:'🔥',sets:1,reps:'5-7 min',carga:0,hint:'Bike ou caminhada inclinada'},
           {nome:'Estiramento Peitoral no Canto da Parede',ic:'🧘',sets:1,reps:'45s/lado',carga:0,hint:'Foco lado direito (ombro)'},
-          {nome:'Leg Press 45° — Pés LARGOS',ic:'🦵',sets:3,reps:'12',carga:80,hint:'Altura média · @RPE 7'},
-          {nome:'Remada Cabo Sentada — Pega larga pronada',ic:'🚣',sets:3,reps:'12',carga:30,hint:'Trapézio médio · @RPE 7'},
-          {nome:'Hip Thrust com Disco',ic:'🪨',sets:3,reps:'15',carga:30,hint:'Glúteo max · @RPE 7'},
+          {nome:'Leg Press 45° — Pés LARGOS',ic:'🦵',sets:3,reps:'12',carga:80,hint:'Altura média · @RPE 7',img:'https://wger.de/media/exercise-images/192/Sled-45-degree-leg-press-2.png'},
+          {nome:'Remada Cabo Sentada — Pega larga pronada',ic:'🚣',sets:3,reps:'12',carga:30,hint:'Trapézio médio · @RPE 7',img:'https://wger.de/media/exercise-images/118/Seated-cable-rows-1.png'},
+          {nome:'Hip Thrust com Disco',ic:'🪨',sets:3,reps:'15',carga:30,hint:'Glúteo max · @RPE 7',img:'https://wger.de/media/exercise-images/910/hip-thrust.png'},
           {nome:'Face Pull com Cabo',ic:'🎯',sets:3,reps:'15',carga:15,hint:'Corda dupla · ombro posterior'},
           {nome:'Rotação Externa Ombro · Elástico',ic:'💪',sets:3,reps:'15/lado',carga:0,hint:'Cotovelo junto ao tronco · reabilitação'},
           {nome:'Bird Dog',ic:'🐕',sets:3,reps:'8/lado',carga:0,hint:'Braço + perna opostos · core'},
@@ -949,8 +951,8 @@ const DEFAULT = ()=> ({
           {nome:'Aquecimento geral',ic:'🔥',sets:1,reps:'5-7 min',carga:0,hint:'—'},
           {nome:'Hip 90/90 Rotação Ativa',ic:'🧘',sets:1,reps:'6 reps/lado',carga:0,hint:'Tempo 3030'},
           {nome:'Shoulder CARs Bilaterais',ic:'🌀',sets:1,reps:'5 círculos/lado',carga:0,hint:'Muito lento'},
-          {nome:'Smith Machine Squat — Pés MÉDIOS',ic:'🏋️‍♀️',sets:3,reps:'12',carga:35,hint:'@RPE 7'},
-          {nome:'Lat Pulldown — Pega LARGA pronada',ic:'⬇️',sets:3,reps:'12',carga:30,hint:'Grande dorsal · @RPE 7'},
+          {nome:'Smith Machine Squat — Pés MÉDIOS',ic:'🏋️‍♀️',sets:3,reps:'12',carga:35,hint:'@RPE 7',img:'https://wger.de/media/exercise-images/170/Squats-1.png'},
+          {nome:'Lat Pulldown — Pega LARGA pronada',ic:'⬇️',sets:3,reps:'12',carga:30,hint:'Grande dorsal · @RPE 7',img:'https://wger.de/media/exercise-images/119/Wide-grip-lat-pulldown-1.png'},
           {nome:'Extensão de Quadril em Quadrupede',ic:'🦵',sets:3,reps:'12/lado',carga:0,hint:'Glúteo · @RPE 6'},
           {nome:'Press de Ombro Suave — Halteres LEVES',ic:'💪',sets:3,reps:'12',carga:5,hint:'Sem dor no ombro direito · @RPE 5'},
           {nome:'Prancha Frontal',ic:'🎯',sets:3,reps:'30s',carga:0,hint:'Anca alinhada'},
@@ -999,8 +1001,8 @@ const DEFAULT = ()=> ({
         {dia:'Seg · Glúteos + Core',exs:[
           {nome:'Air Bike',ic:'🚴',sets:1,reps:'5 min',carga:0,hint:'Aquecimento'},
           {nome:'90/90 Hip Flow',ic:'🧘',sets:1,reps:'6/lado',carga:0,hint:'Mobilidade da anca'},
-          {nome:'Leg Press',ic:'🦵',sets:3,reps:'10-12',carga:60,hint:'Foco glúteo'},
-          {nome:'Hip Thrust com barra',ic:'🪨',sets:4,reps:'12',carga:30,hint:'Travar glúteo no topo'},
+          {nome:'Leg Press',ic:'🦵',sets:3,reps:'10-12',carga:60,hint:'Foco glúteo',img:'https://wger.de/media/exercise-images/192/Sled-45-degree-leg-press-2.png'},
+          {nome:'Hip Thrust com barra',ic:'🪨',sets:4,reps:'12',carga:30,hint:'Travar glúteo no topo',img:'https://wger.de/media/exercise-images/910/hip-thrust.png'},
           {nome:'Búlgaro com halteres',ic:'🏋️‍♀️',sets:3,reps:'10/perna',carga:8,hint:'Pé atrás no banco'},
           {nome:'Abdução de anca · máquina',ic:'🦵',sets:3,reps:'15',carga:30,hint:'Glúteo médio'},
           {nome:'Prancha Lateral',ic:'🎯',sets:3,reps:'30s/lado',carga:0,hint:'Controlo lombo-pélvico'},
@@ -1759,6 +1761,7 @@ function renderTreinoDay(){
         <div class="ex-chev">▼</div>
       </div>
       <div class="ex-b">
+        ${e.img?`<img class="ex-illus" src="${e.img}" alt="${e.nome}" onerror="this.style.display='none'">`:''}
         ${refRM?`<div class="hint" style="background:rgba(0,196,204,.10);border-color:var(--cyan)">
           🎯 <b>Carga alvo:</b> ${targetLo}–${targetHi} kg &nbsp;·&nbsp; ${z.pct[0]}–${z.pct[1]}% × ${refLabel} (${refRM} kg)
           ${estRM?` &nbsp;·&nbsp; <b>1RM est.</b> ${estRM} kg`:''}
@@ -2505,33 +2508,33 @@ function renderCliSub(sub){
         <div style="text-align:center;background:var(--bg);border-radius:11px;padding:10px"><div style="font-size:.62rem;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.06em">1RM TS</div><div style="font-size:1.3rem;font-weight:900;color:var(--blue);margin-top:3px">${lastAv.deadlift1rm||'—'}<small style="font-size:.7rem;color:var(--muted)"> kg</small></div></div>
       </div></div>
 
-      ${c.treino.plano.map((d,i)=>`
-        <div class="card"><div class="card-head"><h2>${d.dia}</h2><span class="ch-tag">${d.exs.length} ex.</span></div>
-        <div class="card-body" style="padding:8px 16px 14px">
-          ${d.exs.map(e=>{
+      ${c.treino.plano.map((d,di)=>`
+        <div class="card"><div class="card-head"><h2><input value="${d.dia}" onchange="updDayName(${di},this.value)" style="border:none;padding:2px 4px;font-weight:900;color:var(--blue);font-size:.95rem;background:transparent;width:100%"></h2><span class="ch-tag" onclick="addEx(${di})" style="cursor:pointer">+ exercício</span></div>
+        <div class="card-body" style="padding:8px 14px 14px">
+          ${d.exs.map((e,ei)=>{
             const z = zoneFromReps(e.reps);
-            const n = e.nome.toLowerCase();
-            let refRM = null, refLbl = '';
-            if(n.includes('agach')||n.includes('squat')||n.includes('leg press')){ refRM = lastAv.squat1rm; refLbl='Agach.'; }
-            else if(n.includes('supino')||n.includes('bench')||n.includes('press')){ refRM = lastAv.bench1rm; refLbl='Supino'; }
-            else if(n.includes('deadlift')||n.includes('terra')||n.includes('stiff')){ refRM = lastAv.deadlift1rm||lastAv.squat1rm; refLbl='TS'; }
-            const tLo = refRM ? pct1RMtarget(refRM,z.pct[0]) : null;
-            const tHi = refRM ? pct1RMtarget(refRM,z.pct[1]) : null;
-            const estRM = e.carga ? est1RM(e.carga,e.reps) : null;
-            return `<div style="display:flex;flex-direction:column;gap:4px;padding:10px 0;border-top:1px solid var(--line)">
-              <div style="display:flex;align-items:center;gap:8px"><span style="font-size:1.05rem">${e.ic}</span><b style="font-size:.88rem;color:var(--blue);flex:1">${e.nome}</b>
-                <span class="tag" style="background:${z.bg};color:${z.color}">${z.name}</span>
-                <span class="tag">${e.sets}×${e.reps}</span>
+            return `<div style="padding:10px 0;border-top:1px solid var(--line)">
+              <div style="display:grid;grid-template-columns:42px 1fr 36px;gap:6px;align-items:center;margin-bottom:6px">
+                <input value="${e.ic||'💪'}" maxlength="3" style="text-align:center;font-size:1.1rem" onchange="updEx(${di},${ei},'ic',this.value)">
+                <input value="${e.nome}" placeholder="Nome do exercício" onchange="updEx(${di},${ei},'nome',this.value)">
+                <button class="del" onclick="delEx(${di},${ei})">✕</button>
               </div>
-              <div style="font-size:.74rem;color:var(--muted);padding-left:24px">
-                Carga atual <b style="color:var(--blue)">${e.carga||'—'} kg</b>
-                ${refRM?` · alvo <b style="color:var(--cyan)">${tLo}-${tHi} kg</b> (${z.pct[0]}-${z.pct[1]}% × 1RM ${refLbl} ${refRM}kg)`:''}
-                ${estRM?` · 1RM est. <b>${estRM} kg</b>`:''}
+              <div style="display:grid;grid-template-columns:50px 80px 80px 1fr;gap:6px">
+                <input type="number" value="${e.sets}" placeholder="Séries" onchange="updEx(${di},${ei},'sets',+this.value)">
+                <input value="${e.reps}" placeholder="Reps" onchange="updEx(${di},${ei},'reps',this.value)">
+                <input type="number" value="${e.carga||0}" placeholder="kg" onchange="updEx(${di},${ei},'carga',+this.value)">
+                <span class="tag" style="background:${z.bg};color:${z.color};display:flex;align-items:center;justify-content:center">${z.name} ${z.pct[0]}-${z.pct[1]}%</span>
+              </div>
+              <input value="${e.hint||''}" placeholder="Nota técnica (ex: Pés largos · @RPE 7)" onchange="updEx(${di},${ei},'hint',this.value)" style="margin-top:6px;font-size:.82rem">
+              <div style="display:flex;gap:6px;align-items:center;margin-top:6px">
+                ${e.img?`<img src="${e.img}" style="width:46px;height:46px;border-radius:8px;object-fit:contain;background:#f1f5fb;border:1px solid var(--line)">`:`<div style="width:46px;height:46px;border-radius:8px;background:#f1f5fb;border:1px dashed var(--line);display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:var(--muted)">📷</div>`}
+                <input value="${e.img||''}" placeholder="URL da imagem/boneco do exercício" onchange="updEx(${di},${ei},'img',this.value)" style="flex:1;font-size:.74rem">
               </div>
             </div>`;
           }).join('')}
         </div></div>
       `).join('')}
+      <button class="btn btn-primary" style="width:100%;margin-bottom:14px" onclick="addDay()">+ Novo dia de treino</button>
 
       <div class="dbox"><h4>🎯 Cargas inteligentes</h4>
       <p>As zonas de treino são calculadas pelas repetições prescritas (Força 1-5 / Hipertrofia 6-12 / Resistência 13+). Os alvos de carga vêm do 1RM da última avaliação. O 1RM estimado usa a fórmula de Brzycki sobre a carga atual.</p></div>
@@ -2808,6 +2811,14 @@ function suggestSuplImage(i){
 function addCompra(){ curNut().compras.push({n:'Novo item',q:'',b:false,img:''}); save(); renderClienteDetail(); }
 function delCompra(i){ curNut().compras.splice(i,1); save(); renderClienteDetail(); }
 function updCompraF(i,k,v){ curNut().compras[i][k] = v; save(); }
+
+/* === Editor treino (gestor) === */
+function curTreino(){ const c = state.clientData[session.activeClient]; c.treino = c.treino || {plano:[],historico:[]}; return c.treino; }
+function updDayName(di,v){ curTreino().plano[di].dia = v; save(); }
+function updEx(di,ei,k,v){ curTreino().plano[di].exs[ei][k] = v; save(); }
+function addEx(di){ curTreino().plano[di].exs.push({nome:'Novo exercício',ic:'💪',sets:3,reps:'12',carga:0,hint:'',img:''}); save(); renderClienteDetail(); }
+function delEx(di,ei){ if(confirm('Eliminar exercício?')){ curTreino().plano[di].exs.splice(ei,1); save(); renderClienteDetail(); } }
+function addDay(){ curTreino().plano.push({dia:'Novo dia',exs:[]}); save(); renderClienteDetail(); }
 function updNutKey(el,key){ state.clientData[session.activeClient].nutricao[key] = isNaN(+el.value)?el.value:+el.value; save(); }
 function updMacro(el,k){ state.clientData[session.activeClient].nutricao.macros[k] = +el.value; save(); }
 function addAval(){ toast('Em breve: formulário completo de avaliação (50+ campos).'); }
@@ -2943,7 +2954,7 @@ function renderWsEx(){
   document.getElementById('wsExNum').textContent = `Exercício ${ws.exIdx+1} / ${total}`;
   document.getElementById('wsPbar').style.width = ((ws.exIdx+1)/total*100)+'%';
   document.getElementById('wsCard').innerHTML = `
-    <div class="ws-img">${e.ic}</div>
+    ${e.img?`<img class="ws-img-real" src="${e.img}" alt="${e.nome}" onerror="this.outerHTML='<div class=\\'ws-img\\'>${e.ic}</div>'">`:`<div class="ws-img">${e.ic}</div>`}
     <div class="ws-ex">${e.nome}</div>
     <div class="ws-meta"><span>${e.sets} × ${e.reps}</span>${e.carga?`<span>${e._adjCarga||e.carga} kg${e._adjCarga?' (ajustado)':''}</span>`:''}<span>Descanso 90s</span></div>
     <div class="ws-sets">
