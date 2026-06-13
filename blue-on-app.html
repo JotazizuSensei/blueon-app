@@ -1858,13 +1858,16 @@ function toggleShop(i){
 }
 
 /* ============ CLIENTE: PROGRESSO ============ */
-function spark(values, color, h=110, w=380){
+function spark(values, color, h=110, w=380, inverted=false){
   if(!values || values.length<2) return `<svg class="spark" viewBox="0 0 ${w} ${h}"><text x="${w/2}" y="${h/2}" text-anchor="middle" fill="#94a3b8" font-size="11">Sem dados</text></svg>`;
   const min = Math.min(...values), max = Math.max(...values), span = (max-min)||1;
   const pad=12;
+  // Para métricas invertidas (peso, IMC, BF, cintura): mostrar VISUALMENTE como progresso.
+  // Linha sobe quando há melhoria (valor desce). Eixo Y invertido.
   const pts = values.map((v,i)=>{
     const x = pad + (i/(values.length-1)) * (w-pad*2);
-    const y = h-pad - ((v-min)/span) * (h-pad*2);
+    const ratio = (v-min)/span;
+    const y = inverted ? (pad + ratio * (h-pad*2)) : (h-pad - ratio * (h-pad*2));
     return [x,y];
   });
   const path = pts.map((p,i)=>(i?'L':'M')+p[0].toFixed(1)+' '+p[1].toFixed(1)).join(' ');
@@ -1894,23 +1897,35 @@ function renderProg(){
       <div class="kpi up"><div class="kl">% Gordura</div><div class="kv">${cur.bf}%</div><div class="kt">${(cur.bf-first.bf).toFixed(1)} pp</div></div>
     </div>
 
-    <div class="chart-card">
-      <h3>📉 Peso</h3>
-      <div class="chart-meta"><span>${first.date} → ${cur.date}</span><b class="${dPeso>0?'dn':''}">${dPeso>0?'+':''}${dPeso} kg</b></div>
-      ${spark(avs.map(a=>a.peso),'#00C4CC')}
-    </div>
-
-    <div class="chart-card">
-      <h3>💪 1RM Supino</h3>
-      <div class="chart-meta"><span>${first.date} → ${cur.date}</span><b>+${dBench} kg</b></div>
-      ${spark(avs.map(a=>a.bench1rm),'#3b82f6')}
-    </div>
-
-    <div class="chart-card">
-      <h3>📏 Perímetro cintura</h3>
-      <div class="chart-meta"><span>${first.date} → ${cur.date}</span><b class="${dCint>0?'dn':''}">${dCint>0?'+':''}${dCint} cm</b></div>
-      ${spark(avs.map(a=>a.cint),'#f59e0b')}
-    </div>
+    ${(function(){
+      const badge=(good)=>good===null?'':`<span style="background:${good?'#dcfce7':'#fee2e2'};color:${good?'#166534':'#991b1b'};font-size:.66rem;font-weight:900;padding:3px 9px;border-radius:20px">${good?'▲ Melhorou':'▼ Piorou'}</span>`;
+      const pesoGood = dPeso<0 ? true : (dPeso>0 ? false : null);
+      const cintGood = dCint<0 ? true : (dCint>0 ? false : null);
+      const benchGood = dBench>0 ? true : (dBench<0 ? false : null);
+      return `
+        <div class="chart-card">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">
+            <h3 style="margin:0">📉 Peso</h3>${badge(pesoGood)}
+          </div>
+          <div class="chart-meta"><span>${first.date} → ${cur.date}</span><b class="${dPeso>0?'dn':''}">${dPeso>0?'+':''}${dPeso} kg</b></div>
+          ${spark(avs.map(a=>a.peso),pesoGood===false?'#dc2626':'#16a34a',110,380,true)}
+        </div>
+        <div class="chart-card">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">
+            <h3 style="margin:0">💪 1RM Supino</h3>${badge(benchGood)}
+          </div>
+          <div class="chart-meta"><span>${first.date} → ${cur.date}</span><b>+${dBench} kg</b></div>
+          ${spark(avs.map(a=>a.bench1rm),benchGood===false?'#dc2626':'#16a34a')}
+        </div>
+        <div class="chart-card">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">
+            <h3 style="margin:0">📏 Perímetro cintura</h3>${badge(cintGood)}
+          </div>
+          <div class="chart-meta"><span>${first.date} → ${cur.date}</span><b class="${dCint>0?'dn':''}">${dCint>0?'+':''}${dCint} cm</b></div>
+          ${spark(avs.map(a=>a.cint),cintGood===false?'#dc2626':'#16a34a',110,380,true)}
+        </div>
+      `;
+    })()}
 
     <div class="dbox">
       <h4>🎯 Análise Blue ON</h4>
@@ -2357,16 +2372,22 @@ function renderCliSub(sub){
       if(v.length===0) return '';
       const last = v[v.length-1], firstV = v[0];
       const d = delta(last,firstV);
-      const good = inverted ? !d.up : d.up;
+      const good = d.zero ? null : (inverted ? !d.up : d.up);
       const cls = d.zero ? '' : (good ? 'up' : 'dn');
       const col = d.zero ? '#5d7493' : (good ? '#16a34a' : '#dc2626');
+      const badgeTxt = d.zero ? '— Estável' : (good ? '▲ Melhorou' : '▼ Piorou');
+      const badgeBg = d.zero ? '#e2e8f0' : (good ? '#dcfce7' : '#fee2e2');
+      const badgeCol = d.zero ? '#5d7493' : (good ? '#166534' : '#991b1b');
       return `<div class="chart-card">
-        <h3>${icon} ${label}</h3>
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">
+          <h3 style="margin:0">${icon} ${label}</h3>
+          <span style="background:${badgeBg};color:${badgeCol};font-size:.66rem;font-weight:900;padding:3px 9px;border-radius:20px;letter-spacing:.02em">${badgeTxt}</span>
+        </div>
         <div class="chart-meta">
           <span>${first.date} → ${cur.date}</span>
           <b class="${cls}">${d.up?'+':''}${d.v} ${unit}</b>
         </div>
-        ${spark(v,col)}
+        ${spark(v,col,110,380,inverted)}
         <div style="display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted);margin-top:6px">
           <span>min <b style="color:var(--text)">${Math.min(...v)}</b></span>
           <span>atual <b style="color:var(--blue)">${last} ${unit}</b></span>
