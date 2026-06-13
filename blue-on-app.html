@@ -3081,6 +3081,92 @@ function getBadges(c,u){
   ];
 }
 
+/* ============ FIREBASE · sync cloud em tempo real ============ */
+let _fbReady = false;
+let _fbDoc = null;
+let _fbSaveTimer = null;
+let _fbSuppress = false; // evitar loop quando aplicamos snapshot remoto
+
+const FIREBASE_CONFIG = {
+  apiKey: "AIzaSyAjZKMO3FFxE5AdYjrWAfDmAo9V9oL0Oic",
+  authDomain: "blue-on-app.firebaseapp.com",
+  projectId: "blue-on-app",
+  storageBucket: "blue-on-app.firebasestorage.app",
+  messagingSenderId: "786925954169",
+  appId: "1:786925954169:web:cd06bc2313fe7ed1d920a8"
+};
+
+async function firebaseBoot(){
+  try {
+    const [{ initializeApp }, auth, fs] = await Promise.all([
+      import('https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js'),
+      import('https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js'),
+      import('https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js'),
+    ]);
+    const app = initializeApp(FIREBASE_CONFIG);
+    const a = auth.getAuth(app);
+    const db = fs.getFirestore(app);
+    await auth.signInAnonymously(a);
+    _fbDoc = fs.doc(db,'pwa_state','main');
+
+    // 1ª leitura: se há state na cloud, substitui o local; senão grava o nosso
+    const snap = await fs.getDoc(_fbDoc);
+    if(snap.exists()){
+      _fbSuppress = true;
+      state = snap.data().state || state;
+      localStorage.setItem(LS_KEY, JSON.stringify(state));
+      _fbSuppress = false;
+      const v = document.getElementById('view-app');
+      if(v && v.classList.contains('show') && session.tab) selectTab(session.tab);
+    } else {
+      await fs.setDoc(_fbDoc, { state, ts: Date.now() });
+    }
+    _fbReady = true;
+    showSyncBadge('🟢 sync cloud');
+
+    // Listener em tempo real
+    fs.onSnapshot(_fbDoc,(d)=>{
+      if(!d.metadata.hasPendingWrites && d.exists()){
+        _fbSuppress = true;
+        const incoming = d.data().state;
+        if(incoming && JSON.stringify(incoming) !== JSON.stringify(state)){
+          state = incoming;
+          localStorage.setItem(LS_KEY, JSON.stringify(state));
+          const v = document.getElementById('view-app');
+          if(v && v.classList.contains('show') && session.tab) selectTab(session.tab);
+        }
+        _fbSuppress = false;
+      }
+    });
+
+    // Substitui save() para também escrever na cloud (debounced)
+    window.__origSave = save;
+    save = function(){
+      window.__origSave();
+      if(!_fbReady || _fbSuppress) return;
+      clearTimeout(_fbSaveTimer);
+      _fbSaveTimer = setTimeout(async ()=>{
+        try { await fs.setDoc(_fbDoc, { state, ts: Date.now() }); }
+        catch(e){ console.warn('FB save fail',e); showSyncBadge('🟡 erro sync'); }
+      }, 400);
+    };
+  } catch(e) {
+    console.warn('Firebase boot falhou (modo offline):', e);
+    showSyncBadge('🔴 offline');
+  }
+}
+function showSyncBadge(txt){
+  let b = document.getElementById('syncBadge');
+  if(!b){ b = document.createElement('div'); b.id='syncBadge';
+    b.style.cssText='position:fixed;bottom:90px;right:14px;z-index:200;background:rgba(7,27,58,.85);color:#fff;padding:6px 12px;border-radius:30px;font-size:.7rem;font-weight:700;letter-spacing:.04em;backdrop-filter:blur(6px)';
+    document.body.appendChild(b);
+  }
+  b.textContent = txt;
+  clearTimeout(b._t);
+  b._t = setTimeout(()=>b.style.opacity='.3', 3000);
+}
+firebaseBoot();
+
 /* ============ PWA · Service Worker ============ */
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
