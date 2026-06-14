@@ -1061,12 +1061,228 @@ const DEFAULT = ()=> ({
       messages:[
         {id:'cm1',from:'coach',text:'Olá Camila! Plano de tonificação iniciado. Foco em glúteo e core nas primeiras semanas.',date:new Date(Date.now()-7*86400000).toISOString(),read:true},
       ],
+    },
+    u6:{
+      anamnese:{nome:'Edo Santos',sexo:'M',dn:'',idade:20,altura:187,peso:95.7,
+        objetivos:'Fisiculturismo / Hipertrofia competitiva',objetivos2:'Recomposição corporal · simetria',
+        exp:'Musculação · preparação física',contexto:'Ginásio',diasSem:5,minSes:75,
+        patologias:'Problema osteoarticular (PAR-Q+ Q5: Sim)',medicacao:'—',
+        parq:'1 alerta · Osteoarticular',
+        modalidades:'Musculação · cardio controlado',
+        pa:'125/61',fc:73,
+        alimentacao:'omnivora',sono:7,stress:4},
+      avaliacoes:[
+        {date:'2026-06-05',peso:95.7,imc:27.4,abd:99,cint:87,anca:114,bf:14.9,bench1rm:80,squat1rm:120,fc:73,pa:'125/61',mm:77.4,mo:4,gv:2,agua:60,mb:2186,idMet:12,braco:40,coxa:60,gemeo:43},
+      ],
+      nutricao:{tmb:2186,tdee:3280,alvo:3450,macros:{p:230,c:380,g:90},hidrat:3.5,
+        refeicoes:[
+          {nome:'Pequeno-almoço',hora:'07:30',ic:'🥣',items:'Aveia 80g · Whey 30g · Banana · Manteiga amendoim 20g',p:50,c:90,g:18},
+          {nome:'Almoço',hora:'13:00',ic:'🍗',items:'Frango 220g · Arroz 100g · Brócolos · Azeite',p:60,c:90,g:18},
+          {nome:'Pré-treino',hora:'17:00',ic:'🍌',items:'Aveia 60g · Banana · Whey 25g',p:35,c:80,g:8},
+          {nome:'Pós-treino',hora:'19:30',ic:'💪',items:'Whey 30g + Dextrose 30g',p:30,c:35,g:2},
+          {nome:'Jantar',hora:'21:00',ic:'🥩',items:'Carne magra 200g · Batata-doce 200g · Salada',p:55,c:85,g:22},
+        ],
+        supl:[{nome:'Whey isolado',dose:'30g',hora:'pós-treino',obs:''},
+          {nome:'Creatina mono',dose:'5g',hora:'qualquer',obs:'todos os dias'},
+          {nome:'Multivitamínico',dose:'1 comp',hora:'manhã',obs:''}],
+        compras:[{n:'Frango',q:'3 kg',b:false},{n:'Carne magra',q:'2 kg',b:false},{n:'Aveia',q:'2 kg',b:false}]},
+      recoveryProfile:{cns:48,legs:72,back:72,chest:72,shoulders:60,arms:48,core:24,cardio:18,mobility:6},
+      sessions:[],
+      treino:{plano:[
+        {dia:'Seg · Peito + Tríceps',exs:[
+          {nome:'Supino plano · barra',ic:'🏋️',sets:4,reps:'6-8',carga:80,hint:'Foco peitoral'},
+          {nome:'Supino inclinado · halteres',ic:'💪',sets:4,reps:'8-10',carga:32,hint:'Peitoral superior'},
+          {nome:'Crucifixo polia baixa',ic:'🎯',sets:3,reps:'12-15',carga:14,hint:'Estiramento'},
+          {nome:'Paralelas peso',ic:'⬇️',sets:3,reps:'10',carga:20,hint:'Inclinar tronco'},
+          {nome:'Tríceps polia · corda',ic:'🪢',sets:4,reps:'10-12',carga:30,hint:'Abrir no fim'},
+        ]},
+        {dia:'Ter · Costas + Bíceps',exs:[
+          {nome:'Levantamento terra · sumô',ic:'🪨',sets:4,reps:'5',carga:140,hint:'Técnica'},
+          {nome:'Remada barra',ic:'🚣',sets:4,reps:'8',carga:80,hint:'Peito sobre a barra'},
+          {nome:'Lat Pulldown pega larga',ic:'⬇️',sets:3,reps:'10-12',carga:65,hint:'Cotovelos para baixo'},
+          {nome:'Curl barra W',ic:'💪',sets:4,reps:'10',carga:30,hint:'Sem balanço'},
+        ]},
+        {dia:'Qui · Pernas',exs:[
+          {nome:'Agachamento barra alta',ic:'🦵',sets:5,reps:'5-6',carga:120,hint:'Profundo'},
+          {nome:'Leg Press',ic:'🦵',sets:4,reps:'10-12',carga:200,hint:'ROM completo'},
+          {nome:'Stiff',ic:'🪨',sets:4,reps:'10',carga:90,hint:'Posterior'},
+          {nome:'Extensão de pernas',ic:'⚙️',sets:3,reps:'15',carga:60,hint:'Isolar quadríceps'},
+          {nome:'Gémeos em pé',ic:'🦵',sets:5,reps:'15',carga:90,hint:'Pico'},
+        ]},
+        {dia:'Sex · Ombros + Trapézio',exs:[
+          {nome:'Press militar · barra',ic:'🏋️',sets:4,reps:'6-8',carga:55,hint:'Vertical'},
+          {nome:'Elevações laterais',ic:'🎯',sets:4,reps:'12-15',carga:12,hint:'Cotovelo um nada flectido'},
+          {nome:'Face Pull',ic:'🪢',sets:3,reps:'15',carga:18,hint:'Ombro posterior'},
+          {nome:'Encolhimento halteres',ic:'💪',sets:4,reps:'12',carga:38,hint:'Trapézio'},
+        ]},
+      ],historico:[]},
+      checkin:{date:'',energia:7,sono:7,dor:1,semaforo:'verde'},
+      dailyRoutine:[
+        {time:'07:30',ic:'🥣',name:'Pequeno-almoço',type:'meal',notes:'Aveia + whey'},
+        {time:'13:00',ic:'🍗',name:'Almoço',type:'meal',notes:'Frango + arroz'},
+        {time:'17:00',ic:'🍌',name:'Pré-treino',type:'meal',notes:'Aveia + banana'},
+        {time:'18:00',ic:'💪',name:'Treino',type:'workout',notes:'Hipertrofia'},
+        {time:'19:30',ic:'💧',name:'Pós-treino',type:'meal',notes:'Whey + dextrose'},
+        {time:'21:00',ic:'🥩',name:'Jantar',type:'meal',notes:'Carne + batata-doce'},
+        {time:'23:30',ic:'😴',name:'Dormir',type:'sleep',notes:'7-8h'},
+      ],
+      photos:[],
+      messages:[
+        {id:'em1',from:'coach',text:'Olá Edo! Mesociclo de hipertrofia iniciado. Foco em volume controlado e técnica nas séries pesadas.',date:new Date(Date.now()-3*86400000).toISOString(),read:false},
+      ],
+    },
+    u7:{
+      anamnese:{nome:'Luís Freire',sexo:'M',idade:32,altura:181,peso:68.9,
+        objetivos:'Perda de gordura com preservação de massa muscular',
+        exp:'Musculação intermédia',contexto:'Ginásio',diasSem:4,minSes:60,
+        patologias:'—',medicacao:'—',parq:'sem alertas',
+        alimentacao:'omnivora',sono:7,stress:4},
+      avaliacoes:[
+        {date:'2026-02-13',peso:74.3,imc:22.7,bf:0,cint:0,abd:0,anca:0,fc:0,pa:'',obs:'Avaliação inicial'},
+        {date:'2026-03-18',peso:71.2,imc:21.7,bf:19.5,cint:82.5,abd:87.5,anca:98,fc:0,pa:'',mm:54.5,mo:2.9,gv:5,agua:56.6,braco:28,coxa:51,gemeo:35},
+        {date:'2026-04-30',peso:68.8,imc:21.0,bf:17,cint:78,abd:87,anca:98,fc:0,pa:'',mm:54.3,mo:2.9,gv:4,agua:58.6,idMet:25,braco:29,coxa:51.5,gemeo:35,obs:'Ingestão 1600 kcal'},
+        {date:'2026-06-01',peso:68.9,imc:21.0,bf:13.5,cint:0,abd:0,anca:0,fc:0,pa:'',mm:56.5,mo:3,gv:3,agua:62,idMet:18,obs:'Avaliação Maggie · ingestão 2656 kcal'},
+      ],
+      nutricao:{tmb:1700,tdee:2400,alvo:2200,macros:{p:160,c:240,g:65},hidrat:3,
+        refeicoes:[
+          {nome:'Pequeno-almoço',hora:'07:30',ic:'🥣',items:'Aveia 60g · Whey 30g · Fruta',p:40,c:70,g:10},
+          {nome:'Almoço',hora:'13:00',ic:'🍗',items:'Frango 180g · Arroz 80g · Salada',p:45,c:75,g:15},
+          {nome:'Snack',hora:'17:00',ic:'🥜',items:'Iogurte skyr · Frutos secos 20g',p:25,c:25,g:15},
+          {nome:'Jantar',hora:'20:30',ic:'🐟',items:'Peixe 180g · Batata-doce 150g · Vegetais',p:42,c:60,g:12},
+        ],
+        supl:[{nome:'Whey protein',dose:'30g',hora:'manhã',obs:''},
+          {nome:'Creatina mono',dose:'5g',hora:'qualquer',obs:'todos os dias'}],
+        compras:[{n:'Aveia',q:'1 kg',b:false},{n:'Frango',q:'2 kg',b:false},{n:'Peixe',q:'1 kg',b:false}]},
+      recoveryProfile:{cns:48,legs:60,back:60,chest:60,shoulders:48,arms:36,core:24,cardio:18,mobility:6},
+      sessions:[],
+      treino:{plano:[
+        {dia:'Seg · Push',exs:[
+          {nome:'Supino plano halteres',ic:'💪',sets:4,reps:'8-10',carga:24,hint:'Peitoral'},
+          {nome:'Press ombros sentado',ic:'🏋️',sets:4,reps:'8-10',carga:18,hint:'Vertical'},
+          {nome:'Crucifixo polia',ic:'🎯',sets:3,reps:'12',carga:12,hint:'Estiramento'},
+          {nome:'Tríceps polia',ic:'🪢',sets:3,reps:'12',carga:25,hint:''},
+        ]},
+        {dia:'Qua · Pull',exs:[
+          {nome:'Lat Pulldown',ic:'⬇️',sets:4,reps:'10',carga:55,hint:''},
+          {nome:'Remada baixa',ic:'🚣',sets:4,reps:'10',carga:50,hint:''},
+          {nome:'Curl alterno halteres',ic:'💪',sets:3,reps:'12',carga:14,hint:''},
+          {nome:'Face Pull',ic:'🪢',sets:3,reps:'15',carga:15,hint:''},
+        ]},
+        {dia:'Sex · Pernas',exs:[
+          {nome:'Agachamento',ic:'🦵',sets:4,reps:'8',carga:80,hint:'Profundo'},
+          {nome:'Stiff',ic:'🪨',sets:4,reps:'10',carga:60,hint:'Posterior'},
+          {nome:'Leg Press',ic:'🦵',sets:3,reps:'12',carga:140,hint:''},
+          {nome:'Gémeos',ic:'🦵',sets:4,reps:'15',carga:60,hint:''},
+        ]},
+        {dia:'Sáb · Cardio + Core',exs:[
+          {nome:'Caminhada inclinada',ic:'🚶',sets:1,reps:'25 min',carga:0,hint:'8% inclinação'},
+          {nome:'Prancha',ic:'🎯',sets:3,reps:'45s',carga:0,hint:''},
+          {nome:'Dead Bug',ic:'🐛',sets:3,reps:'10/lado',carga:0,hint:''},
+        ]},
+      ],historico:[]},
+      checkin:{date:'',energia:7,sono:7,dor:0,semaforo:'verde'},
+      dailyRoutine:[
+        {time:'07:30',ic:'🥣',name:'Pequeno-almoço',type:'meal',notes:'Aveia + whey'},
+        {time:'13:00',ic:'🍗',name:'Almoço',type:'meal',notes:'Frango + arroz'},
+        {time:'17:00',ic:'🥜',name:'Snack',type:'meal',notes:'Skyr + frutos secos'},
+        {time:'19:00',ic:'💪',name:'Treino',type:'workout',notes:'4x/sem'},
+        {time:'20:30',ic:'🐟',name:'Jantar',type:'meal',notes:'Peixe + batata-doce'},
+      ],
+      photos:[],
+      messages:[
+        {id:'lm1',from:'coach',text:'Olá Luís! Progresso muito bom — 5,4kg perdidos com preservação de massa muscular. Foco agora em manutenção e ganho de força.',date:new Date(Date.now()-2*86400000).toISOString(),read:false},
+      ],
+    },
+    u8:{
+      anamnese:{nome:'Tânia Duarte',sexo:'F',dn:'1979-04-08',idade:47,altura:161,peso:58,
+        email:'tduarte.carmo@gmail.com',
+        objetivos:'Hipertrofia / Ganho de Massa Muscular',objetivos2:'Perder massa gorda teimosa',
+        exp:'Musculação',contexto:'Ginásio',diasSem:5,minSes:60,
+        patologias:'Problema osteoarticular (PAR-Q+ Q5: Sim)',medicacao:'—',
+        parq:'1 alerta · Osteoarticular',
+        modalidades:'Musculação',
+        alimentacao:'omnivora',sono:7,stress:5},
+      avaliacoes:[
+        {date:'2026-05-09',peso:58,imc:22.4,abd:0,cint:81,anca:94,bf:0,fc:0,pa:'',braco:29,coxa:93,gemeo:37,pescoco:35,obs:'BIA não realizada'},
+      ],
+      nutricao:{tmb:1300,tdee:2000,alvo:2150,macros:{p:130,c:230,g:65},hidrat:2.5,
+        refeicoes:[
+          {nome:'Pequeno-almoço',hora:'08:00',ic:'🥣',items:'Aveia 60g · Whey 25g · Fruta',p:35,c:65,g:10},
+          {nome:'Almoço',hora:'13:00',ic:'🍗',items:'Frango 150g · Arroz/quinoa 80g · Vegetais',p:40,c:65,g:14},
+          {nome:'Pré-treino',hora:'17:30',ic:'🍌',items:'Banana · Frutos secos 20g',p:8,c:35,g:10},
+          {nome:'Jantar',hora:'20:30',ic:'🐟',items:'Peixe/ovos 150g · Batata-doce 130g · Salada',p:35,c:55,g:14},
+          {nome:'Ceia',hora:'22:30',ic:'🥛',items:'Iogurte skyr · Manteiga amendoim 10g',p:18,c:15,g:8},
+        ],
+        supl:[{nome:'Whey protein',dose:'25g',hora:'manhã',obs:''},
+          {nome:'Creatina mono',dose:'5g',hora:'qualquer',obs:''},
+          {nome:'Magnésio',dose:'300mg',hora:'noite',obs:'recuperação'}],
+        compras:[{n:'Whey isolado',q:'1 kg',b:false},{n:'Aveia',q:'1 kg',b:false}]},
+      recoveryProfile:{cns:48,legs:60,back:60,chest:60,shoulders:48,arms:36,core:24,cardio:18,mobility:6},
+      sessions:[],
+      treino:{plano:[
+        {dia:'Seg · Glúteo + Posterior',exs:[
+          {dia:'Aquecimento',nome:'Bicicleta',ic:'🚴',sets:1,reps:'5 min',carga:0,hint:''},
+          {nome:'Hip Thrust com barra',ic:'🪨',sets:4,reps:'10',carga:35,hint:'Apertar glúteo no topo'},
+          {nome:'Stiff barra',ic:'🪨',sets:4,reps:'10',carga:35,hint:'Posterior'},
+          {nome:'Búlgaro halteres',ic:'🏋️‍♀️',sets:3,reps:'10/lado',carga:10,hint:''},
+          {nome:'Abdução de anca · máquina',ic:'🦵',sets:3,reps:'15',carga:40,hint:''},
+        ]},
+        {dia:'Ter · Costas + Bíceps',exs:[
+          {nome:'Lat Pulldown',ic:'⬇️',sets:4,reps:'10',carga:35,hint:''},
+          {nome:'Remada baixa',ic:'🚣',sets:4,reps:'10',carga:35,hint:''},
+          {nome:'Remada serrote halteres',ic:'🚣',sets:3,reps:'12/lado',carga:14,hint:''},
+          {nome:'Curl barra W',ic:'💪',sets:3,reps:'12',carga:15,hint:''},
+        ]},
+        {dia:'Qui · Quadríceps + Gémeos',exs:[
+          {nome:'Agachamento Smith',ic:'🏋️‍♀️',sets:4,reps:'10',carga:30,hint:''},
+          {nome:'Leg Press',ic:'🦵',sets:4,reps:'12',carga:80,hint:''},
+          {nome:'Extensão de pernas',ic:'⚙️',sets:3,reps:'15',carga:30,hint:''},
+          {nome:'Gémeos sentado',ic:'🦵',sets:4,reps:'15',carga:40,hint:''},
+        ]},
+        {dia:'Sex · Peito + Ombro + Tríceps',exs:[
+          {nome:'Supino halteres',ic:'💪',sets:4,reps:'10',carga:12,hint:''},
+          {nome:'Press ombro halteres',ic:'🏋️‍♀️',sets:3,reps:'12',carga:8,hint:''},
+          {nome:'Elevações laterais',ic:'🎯',sets:3,reps:'12-15',carga:5,hint:''},
+          {nome:'Tríceps polia',ic:'🪢',sets:3,reps:'12',carga:20,hint:''},
+        ]},
+      ],historico:[]},
+      checkin:{date:'',energia:7,sono:7,dor:1,semaforo:'verde'},
+      dailyRoutine:[
+        {time:'08:00',ic:'🥣',name:'Pequeno-almoço',type:'meal',notes:'Aveia + whey'},
+        {time:'13:00',ic:'🍗',name:'Almoço',type:'meal',notes:'Frango + quinoa'},
+        {time:'17:30',ic:'🍌',name:'Pré-treino',type:'meal',notes:'Banana + frutos secos'},
+        {time:'18:30',ic:'💪',name:'Treino',type:'workout',notes:'5x/sem'},
+        {time:'20:30',ic:'🐟',name:'Jantar',type:'meal',notes:'Peixe + batata-doce'},
+        {time:'22:30',ic:'🥛',name:'Ceia',type:'meal',notes:'Skyr + amendoim'},
+      ],
+      photos:[],
+      messages:[
+        {id:'tm1',from:'coach',text:'Olá Tânia! Plano de hipertrofia iniciado. Foco em ganho de massa magra com proteína alta. Próxima avaliação BIA dentro de 4 semanas.',date:new Date(Date.now()-1*86400000).toISOString(),read:false},
+      ],
     }
   }
 });
 
 let state = JSON.parse(localStorage.getItem(LS_KEY) || 'null') || DEFAULT();
 let session = { userId:null, role:null, activeClient:null, tab:null };
+
+/* === Migração de schema · garante que state existente apanha novos clientData/anamneses === */
+function applyMigrations(s){
+  s.schemaVersion = s.schemaVersion || 1;
+  if(s.schemaVersion < 2){
+    const def = DEFAULT();
+    ['u6','u7','u8'].forEach(uid=>{
+      const has = s.clientData && s.clientData[uid] && Array.isArray(s.clientData[uid].avaliacoes) && s.clientData[uid].avaliacoes.length;
+      if(!has){
+        s.clientData = s.clientData || {};
+        s.clientData[uid] = def.clientData[uid];
+      }
+    });
+    s.schemaVersion = 2;
+  }
+  return s;
+}
+state = applyMigrations(state);
 
 function save(){ localStorage.setItem(LS_KEY,JSON.stringify(state)); }
 function reset(){ state=DEFAULT(); save(); }
@@ -3348,11 +3564,13 @@ async function firebaseBoot(){
     const snap = await fs.getDoc(_fbDoc);
     if(snap.exists()){
       _fbSuppress = true;
-      state = snap.data().state || state;
+      state = applyMigrations(snap.data().state || state);
       localStorage.setItem(LS_KEY, JSON.stringify(state));
       _fbSuppress = false;
       const v = document.getElementById('view-app');
       if(v && v.classList.contains('show') && session.tab) selectTab(session.tab);
+      // Se a migração mudou alguma coisa, propaga para a cloud
+      if(state.schemaVersion >= 2){ await fs.setDoc(_fbDoc, { state, ts: Date.now() }); }
     } else {
       await fs.setDoc(_fbDoc, { state, ts: Date.now() });
     }
@@ -3363,7 +3581,7 @@ async function firebaseBoot(){
     fs.onSnapshot(_fbDoc,(d)=>{
       if(!d.metadata.hasPendingWrites && d.exists()){
         _fbSuppress = true;
-        const incoming = d.data().state;
+        const incoming = applyMigrations(d.data().state);
         if(incoming && JSON.stringify(incoming) !== JSON.stringify(state)){
           state = incoming;
           localStorage.setItem(LS_KEY, JSON.stringify(state));
