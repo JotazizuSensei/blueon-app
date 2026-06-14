@@ -786,17 +786,17 @@ const WHATS_PHONE='351915425055';
 
 const DEFAULT = ()=> ({
   users:[
-    {id:'u1',role:'gestor',name:'Coach Blue ON',phone:'911111111',pin:'0000',objective:'Gestão & coaching'},
+    {id:'u1',role:'gestor',name:'Jota Pereira',phone:'912101659',pin:'0000',objective:'Gestão & coaching · Blue ON'},
     {id:'u2',role:'cliente',name:'Sara M.',phone:'922222222',pin:'1234',plan:'PLUS',status:'ativo',joined:'2026-02-10',objective:'Perder 5kg e ganhar força',
       subscription:{plan:'PLUS',price:249,startDate:'2026-04-15',endDate:'2026-07-15',status:'ativo',autoRenew:false,
         payments:[{date:'2026-04-15',amount:249,method:'MBWay',ref:'BLUE-2604',status:'pago'},{date:'2026-01-15',amount:249,method:'MBWay',ref:'BLUE-2301',status:'pago'}]}},
     {id:'u3',role:'cliente',name:'Rui C.',phone:'933333333',pin:'5678',plan:'BASE',status:'ativo',joined:'2026-04-02',objective:'Mais energia e mobilidade',
       subscription:{plan:'BASE',price:186,startDate:'2026-04-02',endDate:'2026-06-08',status:'a-expirar',autoRenew:false,
         payments:[{date:'2026-04-02',amount:186,method:'Multibanco',ref:'BLUE-0204',status:'pago'}]}},
-    {id:'u4',role:'cliente',name:'Joana Azul',phone:'944444444',pin:'0000',plan:'PLUS',status:'ativo',joined:'2026-04-28',objective:'Emagrecimento + definição + reabilitação',
+    {id:'u4',role:'cliente',name:'Joana Rita Góis Martins Azul',phone:'915284114',pin:'0000',plan:'PLUS',status:'ativo',joined:'2026-04-28',objective:'Emagrecimento + Tonificação · 3 meses',
       subscription:{plan:'PLUS',price:249,startDate:'2026-04-28',endDate:'2026-07-28',status:'ativo',autoRenew:false,
         payments:[{date:'2026-04-28',amount:249,method:'MBWay',ref:'BLUE-2804',status:'pago'}]}},
-    {id:'u5',role:'cliente',name:'Camila Azul',phone:'955555555',pin:'0000',plan:'PLUS',status:'ativo',joined:'2026-05-15',objective:'Tonificação, glúteos e controlo lombo-pélvico',
+    {id:'u5',role:'cliente',name:'Camila Azul Marques Pereira',phone:'912101528',pin:'0000',plan:'PLUS',status:'ativo',joined:'2026-05-15',objective:'Tonificação, glúteos e controlo lombo-pélvico',
       subscription:{plan:'PLUS',price:249,startDate:'2026-05-15',endDate:'2026-08-15',status:'ativo',autoRenew:false,
         payments:[{date:'2026-05-15',amount:249,method:'MBWay',ref:'BLUE-1505',status:'pago'}]}},
     {id:'u6',role:'cliente',name:'Edo Santos',phone:'966111111',pin:'0000',plan:'PLUS',status:'ativo',joined:'2026-06-11',objective:'Fisiculturismo · Hipertrofia competitiva · Recomposição corporal',
@@ -921,10 +921,26 @@ const DEFAULT = ()=> ({
       checkin:{date:'2026-05-27',energia:6,sono:6,dor:1,semaforo:'amarelo'},
     },
     u4:{
-      anamnese:{nome:'Joana Azul',idade:44,sexo:'F',altura:160,peso:68.4,patologias:'Dor ombro direito (em reabilitação)',medicacao:'—',parq:'sem alertas',sono:6,sonoH:6,sonoQ:6,stress:6,alimentacao:'Omnívora',objetivos:'Emagrecimento + definição + reabilitação · Mesociclo 4 semanas',exp:'2-5a',contexto:'Ginásio',diasSem:2,minSes:60},
+      anamnese:{
+        nome:'Joana Rita Góis Martins Azul',dn:'1982-03-18',idade:44,sexo:'F',
+        contacto:'915284114',email:'joana_azul@sapo.pt',profissao:'Empresária / Instrutora de Fitness',
+        altura:160,peso:68.4,
+        objetivos:'Emagrecimento + Tonificação · Mesociclo 3 meses',objPrinc:'Perda de peso',prazo:'3 meses',exp:'5+ anos',contexto:'Ginásio',diasSem:5,minSes:60,
+        patologias:'Fadiga crónica · Bexiga e Intestinos Neurogénicos (sequela de meningomielite em 2008)',
+        patHist:'Meningomielite 2008 (resíduo neurológico)',
+        medicacao:'Ditropan (controlo da bexiga)',alergias:'—',
+        dor:'sim',dorLocal:'Ombro (tendinite) · Psoas Ilíaco (tendinite) · Costas (esforço)',dorInt:5,dorQ:'Latejo',dorMov:'sim',
+        parq1:'nao',parq2:'nao',parq3:'nao',parq4:'nao',parq5:'sim',parq6:'nao',parq7:'nao',
+        sonoH:6,sonoQ:3,stress:4,energia:3,
+        alimentacao:'Omnívora',refDia:4,digestao:'Sem queixas',cravings:'Doces 10/10 · Salgados 10/10 · Fritos 3/10 · Fome emocional 10/10',
+        agua:2,cafes:1,alcool:0,tabaco:0,doces:7,atividadeOcas:5,
+        habitosObs:'Modalidades preferidas: Pilates, Zumba, Localizada · Sem doenças cardiovasculares na família · Risco cardiovascular: BAIXO',
+        consNome:'Joana Rita Góis Martins Azul',consData:'2026-04-28',consentido:'sim',
+      },
       avaliacoes:[
-        {date:'2026-04-28',peso:68.4,imc:26.7,abd:92,cint:86,anca:104,bf:30.9,vo2:26,bench1rm:25,squat1rm:50,fc:74,pa:'128/82'},
-        {date:'2026-05-26',peso:67.1,imc:26.2,abd:90,cint:84,anca:103,bf:29.5,vo2:28,bench1rm:27,squat1rm:55,fc:72,pa:'126/80'},
+        {date:'2024-03-11',peso:62,imc:24.2,abd:77,cint:81,anca:98,bf:25.3,vo2:30,bench1rm:30,squat1rm:60,fc:67,pa:'115/85'},
+        {date:'2025-08-01',peso:64.9,imc:25.4,abd:78,cint:86,anca:103,bf:26.7,vo2:28,bench1rm:35,squat1rm:80,fc:77,pa:'115/96'},
+        {date:'2026-04-28',peso:68.4,imc:26.7,abd:86,cint:84,anca:104.5,bf:30.9,vo2:26,bench1rm:40,squat1rm:120,fc:71,pa:'121/85'},
       ],
       nutricao:{tmb:1380,tdee:1900,alvo:1600,macros:{p:120,c:160,g:50},hidrat:2.5,
         refeicoes:[
@@ -2201,6 +2217,7 @@ function renderClienteDetail(){
     {id:'treino',ic:'dumbbell',label:'Treino'},
     {id:'rotina',ic:'clock',label:'Rotina'},
     {id:'recuperacao',ic:'recover',label:'Recuperação'},
+    {id:'progressao',ic:'trending',label:'Progressão'},
     {id:'mensagens',ic:'message',label:'Mensagens'},
     {id:'decisao',ic:'decision',label:'Decisão'},
     {id:'subscricao',ic:'card',label:'Subscrição'},
@@ -2612,6 +2629,62 @@ function renderCliSub(sub){
         <button class="pill" onclick="addRoutinePreset('sleep')">😴 Hora de deitar</button>
       </div></div>
     `;
+  } else if(sub==='progressao'){
+    c.progressionLog = c.progressionLog || [];
+    c.progressionSuggestions = c.progressionSuggestions || [];
+    const sugs = c.progressionSuggestions;
+    const log = c.progressionLog;
+    wrap.innerHTML = `
+      <div class="hero-card">
+        <div class="hctitle">Motor de progressão</div>
+        <div class="hcbig">${sugs.length} ${sugs.length===1?'sugestão pendente':'sugestões pendentes'}</div>
+        <div class="hcsub">Análise das últimas 4 semanas · ${(c.sessions||[]).length} sessões registadas</div>
+      </div>
+      <button class="btn btn-primary" style="width:100%;margin-bottom:12px" onclick="runProgressionEngine('${u.id}')">📊 Calcular sugestões para o próximo bloco</button>
+
+      ${sugs.length===0 ? `<div class="card"><div class="card-body" style="text-align:center;padding:24px;color:var(--muted);font-size:.86rem">Sem sugestões pendentes. Carrega no botão acima para o motor analisar os dados recentes.</div></div>` :
+        sugs.map((s,i)=>{
+          const colMap={subir:'#16a34a',descer:'#dc2626',volume:'#ca8a04',deload:'#3b82f6',nutricao:'#7c3aed'};
+          const col = colMap[s.tipo] || '#5d7493';
+          return `<div class="card" style="margin-bottom:10px;border-left:4px solid ${col}"><div class="card-body" style="padding:14px 16px">
+            <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:8px">
+              <span style="font-size:1.4rem">${s.icon}</span>
+              <div style="flex:1">
+                <div style="font-weight:900;font-size:.95rem;color:var(--blue)">${s.titulo}</div>
+                <div style="font-size:.74rem;color:var(--muted);margin-top:2px">${s.contexto}</div>
+              </div>
+              <span class="tag" style="background:${col}22;color:${col};font-weight:900;font-size:.66rem;text-transform:uppercase;letter-spacing:.04em">${s.tipo}</span>
+            </div>
+            <div style="background:var(--bg);padding:10px 12px;border-radius:11px;font-size:.84rem;color:#3a5278;line-height:1.5;margin-bottom:10px">${s.proposta}</div>
+            <div style="font-size:.72rem;color:var(--muted);margin-bottom:10px"><b>Análise:</b> ${s.raciocinio}</div>
+            <div style="display:flex;gap:6px">
+              <button class="btn btn-primary" style="flex:1;padding:9px;font-size:.82rem" onclick="applyProgression(${i})">✓ Aplicar</button>
+              <button class="pill" style="padding:9px 14px" onclick="dismissProgression(${i})">✗ Ignorar</button>
+            </div>
+          </div></div>`;
+        }).join('')
+      }
+
+      ${log.length>0 ? `
+        <div class="sect-title">Histórico de alterações</div>
+        <div class="card"><div class="card-body" style="padding:8px 14px 12px">
+          ${log.slice().reverse().slice(0,15).map(h=>`
+            <div style="padding:8px 0;border-top:1px solid var(--line);font-size:.82rem">
+              <div style="display:flex;justify-content:space-between;gap:8px">
+                <b style="color:var(--blue)">${h.titulo}</b>
+                <span style="color:var(--muted);font-size:.7rem">${h.date}</span>
+              </div>
+              <div style="font-size:.74rem;color:var(--muted);margin-top:2px">${h.acao}</div>
+            </div>`).join('')}
+        </div></div>` : ''}
+
+      <div class="dbox"><h4>🧠 Regras aplicadas pelo motor</h4>
+      <p><b>Subir carga:</b> RPE médio &lt;7 + 100% séries feitas em 3+ sessões → +2,5-5 kg<br/>
+      <b>Aumentar volume:</b> RPE 7-8 + recuperação >80% → +1 série<br/>
+      <b>Reduzir carga:</b> RPE >8,5 ou recuperação &lt;60% → -10% kg<br/>
+      <b>Deload:</b> 4 semanas no mesmo bloco → semana de descarga -30% volume<br/>
+      <b>Nutrição:</b> Peso a subir + objetivo emagrecer → flag para rever TDEE</p></div>
+    `;
   } else if(sub==='mensagens'){
     const unread = unreadCount(c,'gestor');
     wrap.innerHTML = `
@@ -2838,6 +2911,147 @@ function suggestSuplImage(i){
 function addCompra(){ curNut().compras.push({n:'Novo item',q:'',b:false,img:''}); save(); renderClienteDetail(); }
 function delCompra(i){ curNut().compras.splice(i,1); save(); renderClienteDetail(); }
 function updCompraF(i,k,v){ curNut().compras[i][k] = v; save(); }
+
+/* === Motor de Progressão Semi-Automático (gestor) === */
+function runProgressionEngine(uid){
+  const c = state.clientData[uid];
+  const u = state.users.find(x=>x.id===uid);
+  if(!c){ toast('Cliente sem dados.'); return; }
+  c.progressionSuggestions = c.progressionSuggestions || [];
+
+  const now = Date.now();
+  const sessions30d = (c.sessions||[]).filter(s=> (now - new Date(s.date).getTime()) <= 30*86400000 );
+  const avgRPE = sessions30d.length>0 ? sessions30d.reduce((s,x)=>s+(x.rpe||7),0)/sessions30d.length : null;
+  const sugs = [];
+
+  // Análise por exercício do plano atual
+  const lastAv = (c.avaliacoes||[]).slice(-1)[0] || {};
+  (c.treino?.plano||[]).forEach((dia,di) => {
+    dia.exs.forEach((ex,ei) => {
+      if(!ex.carga || ex.carga===0) return; // só exercícios com carga
+      // exercícios concluídos > 3 vezes nos últimos 30 dias
+      const groups = detectGroups(dia.dia, [ex]);
+      const sessionsForEx = sessions30d.filter(s=> (s.groups||[]).some(g=>groups.includes(g)));
+      if(sessionsForEx.length<2) return; // dados insuficientes
+
+      const rpes = sessionsForEx.map(s=>s.rpe||7);
+      const rpeAvg = rpes.reduce((a,b)=>a+b,0)/rpes.length;
+      const recoveryNow = groups.length>0 ? Math.min(...groups.map(g=>recoveryPct(c,g))) : 100;
+      const ctx = `${dia.dia} · ${ex.nome} · ${sessionsForEx.length} sessões · RPE médio ${rpeAvg.toFixed(1)} · recup. ${recoveryNow}%`;
+
+      // Regra 1: subir carga
+      if(rpeAvg < 7 && recoveryNow > 70){
+        const incr = ex.carga >= 40 ? 5 : 2.5;
+        sugs.push({
+          tipo:'subir', icon:'⬆️',
+          titulo:`${ex.nome} · subir carga`,
+          contexto:ctx,
+          proposta:`Subir de <b>${ex.carga} kg</b> para <b>${ex.carga + incr} kg</b> (+${incr} kg) na próxima sessão.`,
+          raciocinio:`RPE médio ${rpeAvg.toFixed(1)} (&lt;7) com recuperação ${recoveryNow}% — sinal claro de sobre-capacidade.`,
+          target:{di,ei,key:'carga',newValue:ex.carga + incr, oldValue:ex.carga}
+        });
+        return;
+      }
+      // Regra 2: volume +1 série
+      if(rpeAvg >=7 && rpeAvg <=8 && recoveryNow > 80 && ex.sets < 5){
+        sugs.push({
+          tipo:'volume', icon:'➕',
+          titulo:`${ex.nome} · +1 série`,
+          contexto:ctx,
+          proposta:`Manter <b>${ex.carga} kg</b>, somar 1 série: <b>${ex.sets} → ${ex.sets+1}</b>.`,
+          raciocinio:`RPE médio ${rpeAvg.toFixed(1)} (zona ótima 7-8) + recuperação ${recoveryNow}% (excelente).`,
+          target:{di,ei,key:'sets',newValue:ex.sets+1, oldValue:ex.sets}
+        });
+        return;
+      }
+      // Regra 3: deload
+      if(rpeAvg > 8.5 || recoveryNow < 60){
+        const newCarga = Math.round(ex.carga * 0.9 / 2.5) * 2.5;
+        sugs.push({
+          tipo:'descer', icon:'⬇️',
+          titulo:`${ex.nome} · reduzir carga`,
+          contexto:ctx,
+          proposta:`Reduzir de <b>${ex.carga} kg</b> para <b>${newCarga} kg</b> (-10%).`,
+          raciocinio:`RPE médio ${rpeAvg.toFixed(1)} (&gt;8,5) ou recuperação ${recoveryNow}% (&lt;60%) — sinais de sobrecarga.`,
+          target:{di,ei,key:'carga',newValue:newCarga, oldValue:ex.carga}
+        });
+        return;
+      }
+    });
+  });
+
+  // Regra 4: nutrição
+  if((c.avaliacoes||[]).length >= 2){
+    const avs = c.avaliacoes.slice(-3);
+    const dPeso = avs[avs.length-1].peso - avs[0].peso;
+    const obj = (u.objective||'').toLowerCase();
+    if(dPeso > 0.5 && /emagrec|perder peso|definição|cut/.test(obj)){
+      sugs.push({
+        tipo:'nutricao', icon:'🥗',
+        titulo:'Rever nutrição',
+        contexto:`Peso ${avs[0].peso}kg → ${avs[avs.length-1].peso}kg em ${avs.length} avaliações`,
+        proposta:`Reduzir <b>alvo calórico em 100 kcal</b> e subir proteína para <b>1.8 g/kg</b>.`,
+        raciocinio:`Objetivo é emagrecer mas peso subiu ${dPeso.toFixed(1)}kg — défice atual insuficiente.`,
+        target:{nut:true, deltaKcal:-100, proteinPerKg:1.8}
+      });
+    }
+  }
+
+  // Regra 5: alta taxa de falha
+  if(sessions30d.length < 4 && (c.treino?.plano||[]).length>0){
+    sugs.push({
+      tipo:'deload', icon:'⚠️',
+      titulo:'Aderência baixa',
+      contexto:`${sessions30d.length} sessões em 30 dias`,
+      proposta:`Considera reduzir frequência semanal ou simplificar o plano (menos exercícios por sessão).`,
+      raciocinio:`Apenas ${sessions30d.length} sessões registadas em 30 dias — sinal de plano demasiado exigente ou horários incompatíveis.`,
+      target:{flag:'review_plan'}
+    });
+  }
+
+  c.progressionSuggestions = sugs;
+  save();
+  toast(`Motor analisou ${sessions30d.length} sessões · ${sugs.length} sugestões`);
+  renderClienteDetail();
+}
+
+function applyProgression(idx){
+  const c = state.clientData[session.activeClient];
+  const u = state.users.find(x=>x.id===session.activeClient);
+  const s = c.progressionSuggestions[idx];
+  if(!s) return;
+  if(!confirm(`Aplicar: ${s.titulo}?`)) return;
+  // aplica conforme target
+  if(s.target.di!=null && s.target.ei!=null){
+    const ex = c.treino.plano[s.target.di].exs[s.target.ei];
+    ex[s.target.key] = s.target.newValue;
+  } else if(s.target.nut){
+    c.nutricao.alvo = (c.nutricao.alvo||1700) + (s.target.deltaKcal||0);
+    if(s.target.proteinPerKg && c.anamnese?.peso){
+      c.nutricao.macros.p = Math.round(c.anamnese.peso * s.target.proteinPerKg);
+    }
+  }
+  // log
+  c.progressionLog = c.progressionLog || [];
+  c.progressionLog.push({
+    date: new Date().toISOString().slice(0,10),
+    titulo: s.titulo,
+    acao: s.proposta.replace(/<[^>]+>/g,''),
+    cliente: u.name,
+  });
+  c.progressionSuggestions.splice(idx,1);
+  save();
+  toast('Aplicado ✓');
+  renderClienteDetail();
+}
+
+function dismissProgression(idx){
+  const c = state.clientData[session.activeClient];
+  c.progressionSuggestions.splice(idx,1);
+  save();
+  toast('Sugestão ignorada.');
+  renderClienteDetail();
+}
 
 /* === Editor treino (gestor) === */
 function curTreino(){ const c = state.clientData[session.activeClient]; c.treino = c.treino || {plano:[],historico:[]}; return c.treino; }
