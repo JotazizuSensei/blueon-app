@@ -1,6 +1,6 @@
 // Blue ON · Service Worker
 // Estratégia: cache-first para o app shell, network-first com fallback para HTML, cache de imagens externas autorizadas
-const VERSION = 'blueon-v2.3.0-motor-progressao';
+const VERSION = 'blueon-v2.3.1-firebase-key-fix';
 const IMG_HOSTS = ['themealdb.com','www.themealdb.com','images.openfoodfacts.org','static.openfoodfacts.org','wger.de','www.wger.de'];
 const CORE_CACHE = `core-${VERSION}`;
 const RUNTIME_CACHE = `runtime-${VERSION}`;
