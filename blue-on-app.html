@@ -811,6 +811,89 @@ const DEFAULT = ()=> ({
     {id:'p2',name:'Marta Silva',phone:'968765432',plan:'BASE',goal:'Voltar a treinar depois de 2 anos',date:'2026-05-26'},
   ],
   clientData:{
+    u1:{
+      anamnese:{nome:'Jota Pereira',sexo:'M',idade:43,altura:178,peso:82,
+        objetivos:'Hipertrofia + condicionamento · treinar com a Joana às 2ª e 6ª',
+        exp:'Treino sistematizado >15 anos',contexto:'Ginásio · gestão Blue ON',
+        diasSem:5,minSes:75,
+        patologias:'—',medicacao:'—',parq:'sem alertas',
+        alimentacao:'omnívora',sono:7,stress:6,
+        modalidades:'Musculação · cardio · mobilidade',
+        wearable:'Garmin'},
+      avaliacoes:[
+        {date:'2026-05-20',peso:82,imc:25.9,abd:88,cint:84,anca:100,bf:18,bench1rm:90,squat1rm:130,fc:62,pa:'118/78',mm:0,obs:'Autoavaliação · referência inicial'},
+      ],
+      nutricao:{tmb:1850,tdee:2900,alvo:2850,macros:{p:190,c:310,g:85},hidrat:3.5,
+        refeicoes:[
+          {nome:'Pequeno-almoço',hora:'07:30',ic:'🥣',items:'Aveia 80g · Whey 30g · Banana · Manteiga amendoim',p:50,c:90,g:18},
+          {nome:'Almoço',hora:'13:00',ic:'🍗',items:'Frango/carne 200g · Arroz/batata 120g · Vegetais',p:55,c:90,g:18},
+          {nome:'Snack',hora:'17:00',ic:'🥜',items:'Skyr 200g · Frutos secos 25g',p:25,c:20,g:15},
+          {nome:'Jantar',hora:'20:30',ic:'🥩',items:'Peixe/carne 180g · Batata-doce 180g · Salada',p:48,c:75,g:20},
+          {nome:'Ceia',hora:'23:00',ic:'🌙',items:'Iogurte grego 200g · 1 cs amendoim',p:18,c:8,g:8},
+        ],
+        supl:[{nome:'Whey isolado',dose:'30g',hora:'pós-treino',obs:''},
+          {nome:'Creatina mono',dose:'5g',hora:'qualquer',obs:'todos os dias'},
+          {nome:'Ómega 3',dose:'2g EPA+DHA',hora:'almoço',obs:''},
+          {nome:'Magnésio',dose:'300mg',hora:'noite',obs:'sono'}],
+        compras:[{n:'Frango',q:'2 kg',b:false},{n:'Skyr',q:'4 unid',b:false},{n:'Aveia',q:'2 kg',b:false}]},
+      recoveryProfile:{cns:48,legs:72,back:60,chest:60,shoulders:60,arms:48,core:24,cardio:18,mobility:6},
+      sessions:[],
+      treino:{plano:[
+        {dia:'Seg · Pernas + Glúteo + Core · com Joana',exs:[
+          {nome:'Aquecimento geral',ic:'🔥',sets:1,reps:'5-7 min',carga:0,hint:'Bike · ambos'},
+          {nome:'Mobilidade Anca 90/90',ic:'🧘',sets:1,reps:'6/lado',carga:0,hint:'Em conjunto'},
+          {nome:'Agachamento barra',ic:'🦵',sets:4,reps:'8-10',carga:100,hint:'@RPE 8 · Joana faz Smith'},
+          {nome:'Leg Press 45° pés altos',ic:'🦵',sets:4,reps:'10-12',carga:200,hint:'Foco glúteo · Joana 80kg'},
+          {nome:'Hip Thrust com barra',ic:'🪨',sets:4,reps:'12',carga:80,hint:'Apertar no topo · Joana 30kg'},
+          {nome:'Stiff barra',ic:'🪨',sets:3,reps:'10',carga:80,hint:'Posterior · Joana 30kg'},
+          {nome:'Extensão pernas',ic:'⚙️',sets:3,reps:'15',carga:60,hint:'Isolar quadríceps'},
+          {nome:'Prancha + Bird Dog',ic:'🎯',sets:3,reps:'40s + 8/lado',carga:0,hint:'Core integrado'},
+        ]},
+        {dia:'Ter · Peito + Tríceps',exs:[
+          {nome:'Supino plano · barra',ic:'🏋️',sets:4,reps:'6-8',carga:80,hint:'@RPE 8'},
+          {nome:'Supino inclinado · halteres',ic:'💪',sets:4,reps:'8-10',carga:30,hint:'Peitoral superior'},
+          {nome:'Crucifixo polia baixa',ic:'🎯',sets:3,reps:'12-15',carga:14,hint:'Estiramento'},
+          {nome:'Paralelas peso',ic:'⬇️',sets:3,reps:'10',carga:15,hint:'Inclinar tronco'},
+          {nome:'Tríceps polia · corda',ic:'🪢',sets:4,reps:'10-12',carga:32,hint:'Abrir no fim'},
+          {nome:'Tríceps testa halteres',ic:'💪',sets:3,reps:'12',carga:14,hint:'Cotovelos fixos'},
+        ]},
+        {dia:'Qui · Ombros + Trapézio',exs:[
+          {nome:'Press militar barra',ic:'🏋️',sets:4,reps:'6-8',carga:55,hint:'Vertical'},
+          {nome:'Elevações laterais',ic:'🎯',sets:5,reps:'12-15',carga:12,hint:'Cotovelo levemente flectido'},
+          {nome:'Elevação frontal halteres',ic:'⬆️',sets:3,reps:'12',carga:10,hint:''},
+          {nome:'Face Pull',ic:'🪢',sets:4,reps:'15',carga:18,hint:'Ombro posterior · saúde'},
+          {nome:'Encolhimento halteres',ic:'💪',sets:4,reps:'12',carga:38,hint:'Trapézio'},
+        ]},
+        {dia:'Sex · Costas + Posterior + Bíceps · com Joana',exs:[
+          {nome:'Aquecimento geral',ic:'🔥',sets:1,reps:'5-7 min',carga:0,hint:'Bike · ambos'},
+          {nome:'Mobilidade ombro torácica',ic:'🧘',sets:1,reps:'5 reps/lado',carga:0,hint:'Em conjunto · CARs'},
+          {nome:'Levantamento terra',ic:'🪨',sets:4,reps:'5-6',carga:130,hint:'Joana → Stiff 35kg'},
+          {nome:'Lat Pulldown pega larga',ic:'⬇️',sets:4,reps:'10-12',carga:65,hint:'Joana 30kg'},
+          {nome:'Remada baixa cabo',ic:'🚣',sets:4,reps:'10-12',carga:55,hint:'Joana 30kg'},
+          {nome:'Remada cavalinho',ic:'🚣',sets:3,reps:'10',carga:45,hint:'Joana → Remada serrote 12kg'},
+          {nome:'Curl barra',ic:'💪',sets:3,reps:'10',carga:30,hint:'Joana barra W 12kg'},
+          {nome:'Face Pull · finisher',ic:'🪢',sets:3,reps:'15',carga:18,hint:'Ombro posterior · ambos'},
+        ]},
+        {dia:'Sáb · Cardio + Mobilidade',exs:[
+          {nome:'Caminhada inclinada',ic:'🚶',sets:1,reps:'25-30 min',carga:0,hint:'Z2 · 130-140 bpm'},
+          {nome:'Mobilidade global',ic:'🧘',sets:1,reps:'15 min',carga:0,hint:'Anca · ombro · torácica'},
+          {nome:'Core circuito',ic:'🎯',sets:3,reps:'40s on/20s off',carga:0,hint:'Prancha · dead bug · bird dog'},
+        ]},
+      ],historico:[]},
+      checkin:{date:'',energia:8,sono:7,dor:0,semaforo:'verde'},
+      dailyRoutine:[
+        {time:'07:00',ic:'💧',name:'Água',type:'hidrat',notes:'500ml ao acordar'},
+        {time:'07:30',ic:'🥣',name:'Pequeno-almoço',type:'meal',notes:'Aveia + whey'},
+        {time:'13:00',ic:'🍗',name:'Almoço',type:'meal',notes:'Proteína + arroz'},
+        {time:'17:00',ic:'🥜',name:'Snack',type:'meal',notes:'Skyr + amendoins'},
+        {time:'18:30',ic:'💪',name:'Treino',type:'workout',notes:'Plano da semana'},
+        {time:'20:30',ic:'🥩',name:'Jantar',type:'meal',notes:'Proteína + batata-doce'},
+        {time:'23:00',ic:'🌙',name:'Ceia',type:'meal',notes:'Skyr'},
+        {time:'23:30',ic:'😴',name:'Dormir',type:'sleep',notes:'7-8h'},
+      ],
+      photos:[],
+      messages:[],
+    },
     u2:{
       anamnese:{altura:165,peso:71,idade:32,sexo:'F',patologias:'—',medicacao:'—',parq:'sem alertas',sono:7,stress:5,alimentacao:'omnívora',objetivos:'perda 5kg, ganho de força'},
       avaliacoes:[
@@ -959,29 +1042,40 @@ const DEFAULT = ()=> ({
         {date:new Date(Date.now()-78*3600000).toISOString(),type:'hipertrofia',rpe:6,groups:['legs','shoulders','core'],volume:1500,duration:50,notes:'Sessão B · ombro com cuidado'},
       ],
       treino:{plano:[
-        {dia:'Seg · Sessão A',exs:[
-          {nome:'Aquecimento geral',ic:'🔥',sets:1,reps:'5-7 min',carga:0,hint:'Bike ou caminhada inclinada'},
-          {nome:'Estiramento Peitoral no Canto da Parede',ic:'🧘',sets:1,reps:'45s/lado',carga:0,hint:'Foco lado direito (ombro)'},
-          {nome:'Leg Press 45° — Pés LARGOS',ic:'🦵',sets:3,reps:'12',carga:80,hint:'Altura média · @RPE 7',img:'https://wger.de/media/exercise-images/192/Sled-45-degree-leg-press-2.png'},
-          {nome:'Remada Cabo Sentada — Pega larga pronada',ic:'🚣',sets:3,reps:'12',carga:30,hint:'Trapézio médio · @RPE 7',img:'https://wger.de/media/exercise-images/118/Seated-cable-rows-1.png'},
-          {nome:'Hip Thrust com Disco',ic:'🪨',sets:3,reps:'15',carga:30,hint:'Glúteo max · @RPE 7',img:'https://wger.de/media/exercise-images/910/hip-thrust.png'},
-          {nome:'Face Pull com Cabo',ic:'🎯',sets:3,reps:'15',carga:15,hint:'Corda dupla · ombro posterior'},
-          {nome:'Rotação Externa Ombro · Elástico',ic:'💪',sets:3,reps:'15/lado',carga:0,hint:'Cotovelo junto ao tronco · reabilitação'},
-          {nome:'Bird Dog',ic:'🐕',sets:3,reps:'8/lado',carga:0,hint:'Braço + perna opostos · core'},
+        {dia:'Seg · Pernas + Glúteo + Core · com Jota',exs:[
+          {nome:'Aquecimento geral',ic:'🔥',sets:1,reps:'5-7 min',carga:0,hint:'Bike · com Jota'},
+          {nome:'Mobilidade Anca 90/90',ic:'🧘',sets:1,reps:'6/lado',carga:0,hint:'Em conjunto'},
+          {nome:'Smith Machine Squat — pés médios',ic:'🏋️‍♀️',sets:4,reps:'10-12',carga:35,hint:'@RPE 7-8 · Joana puxa · Jota faz Agachamento livre',img:'https://wger.de/media/exercise-images/170/Squats-1.png'},
+          {nome:'Leg Press 45° — pés altos',ic:'🦵',sets:4,reps:'12',carga:80,hint:'Foco glúteo · @RPE 8 · pesado para ela',img:'https://wger.de/media/exercise-images/192/Sled-45-degree-leg-press-2.png'},
+          {nome:'Hip Thrust com barra',ic:'🪨',sets:4,reps:'12',carga:30,hint:'Apertar topo · sobe carga gradual',img:'https://wger.de/media/exercise-images/910/hip-thrust.png'},
+          {nome:'Stiff barra',ic:'🪨',sets:3,reps:'10',carga:30,hint:'Posterior · ATENÇÃO PSOAS · core ativo'},
+          {nome:'Extensão pernas',ic:'⚙️',sets:3,reps:'15',carga:30,hint:'Isolar quadríceps · controlado'},
+          {nome:'Prancha + Bird Dog',ic:'🎯',sets:3,reps:'30s + 8/lado',carga:0,hint:'Core integrado'},
+          {nome:'Rotação Externa Ombro · Elástico',ic:'💪',sets:3,reps:'15/lado',carga:0,hint:'Acessório · saúde ombro direito'},
         ]},
-        {dia:'Qui · Sessão B',exs:[
-          {nome:'Aquecimento geral',ic:'🔥',sets:1,reps:'5-7 min',carga:0,hint:'—'},
-          {nome:'Hip 90/90 Rotação Ativa',ic:'🧘',sets:1,reps:'6 reps/lado',carga:0,hint:'Tempo 3030'},
-          {nome:'Shoulder CARs Bilaterais',ic:'🌀',sets:1,reps:'5 círculos/lado',carga:0,hint:'Muito lento'},
-          {nome:'Smith Machine Squat — Pés MÉDIOS',ic:'🏋️‍♀️',sets:3,reps:'12',carga:35,hint:'@RPE 7',img:'https://wger.de/media/exercise-images/170/Squats-1.png'},
-          {nome:'Lat Pulldown — Pega LARGA pronada',ic:'⬇️',sets:3,reps:'12',carga:30,hint:'Grande dorsal · @RPE 7',img:'https://wger.de/media/exercise-images/119/Wide-grip-lat-pulldown-1.png'},
-          {nome:'Extensão de Quadril em Quadrupede',ic:'🦵',sets:3,reps:'12/lado',carga:0,hint:'Glúteo · @RPE 6'},
-          {nome:'Press de Ombro Suave — Halteres LEVES',ic:'💪',sets:3,reps:'12',carga:5,hint:'Sem dor no ombro direito · @RPE 5'},
-          {nome:'Prancha Frontal',ic:'🎯',sets:3,reps:'30s',carga:0,hint:'Anca alinhada'},
+        {dia:'Qua · Ombro suave + Core',exs:[
+          {nome:'Aquecimento bike',ic:'🔥',sets:1,reps:'5 min',carga:0,hint:''},
+          {nome:'Shoulder CARs',ic:'🌀',sets:1,reps:'5/lado',carga:0,hint:'Muito lento · sem dor'},
+          {nome:'Estiramento peitoral parede',ic:'🧘',sets:1,reps:'45s/lado',carga:0,hint:'Foco ombro direito'},
+          {nome:'Press Ombro · halteres LEVES',ic:'💪',sets:3,reps:'12',carga:5,hint:'@RPE 5 · Sem dor no ombro direito'},
+          {nome:'Elevações laterais · halteres',ic:'🎯',sets:3,reps:'12',carga:4,hint:'Controlado'},
+          {nome:'Face Pull com Cabo',ic:'🪢',sets:3,reps:'15',carga:15,hint:'Ombro posterior · saúde'},
+          {nome:'Prancha lateral',ic:'🎯',sets:3,reps:'25s/lado',carga:0,hint:'Anca alinhada'},
+          {nome:'Dead Bug',ic:'🐛',sets:3,reps:'8/lado',carga:0,hint:'Anti-rotação'},
+        ]},
+        {dia:'Sex · Costas + Posterior + Bíceps · com Jota',exs:[
+          {nome:'Aquecimento geral',ic:'🔥',sets:1,reps:'5-7 min',carga:0,hint:'Bike · com Jota'},
+          {nome:'Mobilidade ombro torácica',ic:'🧘',sets:1,reps:'5/lado',carga:0,hint:'CARs · em conjunto'},
+          {nome:'Stiff barra (no lugar de terra)',ic:'🪨',sets:4,reps:'8-10',carga:35,hint:'Posterior · Jota faz Levantamento Terra'},
+          {nome:'Lat Pulldown — pega larga',ic:'⬇️',sets:4,reps:'10-12',carga:30,hint:'@RPE 7-8 · Jota 65kg',img:'https://wger.de/media/exercise-images/119/Wide-grip-lat-pulldown-1.png'},
+          {nome:'Remada baixa cabo',ic:'🚣',sets:4,reps:'10-12',carga:30,hint:'Pega neutra · Jota 55kg',img:'https://wger.de/media/exercise-images/118/Seated-cable-rows-1.png'},
+          {nome:'Remada serrote halteres',ic:'🚣',sets:3,reps:'12/lado',carga:12,hint:'Joelho apoiado · Jota 45kg cavalinho'},
+          {nome:'Curl barra W',ic:'💪',sets:3,reps:'10',carga:12,hint:'Sem balanço · Jota barra 30kg'},
+          {nome:'Face Pull · finisher',ic:'🪢',sets:3,reps:'15',carga:15,hint:'Ombro posterior · ambos'},
         ]},
       ],historico:[
-        {date:'2026-05-25',exs:'Sessão A',semaforo:'verde',feedback:'Boa execução · ombro sem dor'},
-        {date:'2026-05-22',exs:'Sessão B',semaforo:'amarelo',feedback:'Ombro direito ligeiramente sensível no press'},
+        {date:'2026-05-25',exs:'Pernas + Glúteo',semaforo:'verde',feedback:'Boa execução · ombro sem dor'},
+        {date:'2026-05-22',exs:'Ombro suave',semaforo:'amarelo',feedback:'Ombro direito ligeiramente sensível no press'},
       ]},
       checkin:{date:'2026-05-27',energia:7,sono:6,dor:2,semaforo:'verde'},
       dailyRoutine:[
@@ -1279,6 +1373,25 @@ function applyMigrations(s){
       }
     });
     s.schemaVersion = 2;
+  }
+  if(s.schemaVersion < 3){
+    const def = DEFAULT();
+    s.clientData = s.clientData || {};
+    // Adicionar Jota (u1) como atleta com plano (se ainda não tem)
+    if(!s.clientData.u1 || !s.clientData.u1.treino){
+      s.clientData.u1 = def.clientData.u1;
+    }
+    // Forçar atualização do plano da Joana (2ª e 6ª agora alinhadas com Jota)
+    if(s.clientData.u4){
+      s.clientData.u4.treino = def.clientData.u4.treino;
+    }
+    // Garantir wearables + healthMetrics em todos os clientData
+    Object.keys(s.clientData).forEach(uid=>{
+      const cd = s.clientData[uid];
+      if(!cd.wearables) cd.wearables = {garmin:{connected:false},apple:{connected:false},strava:{connected:false},fitbit:{connected:false},googleFit:{connected:false}};
+      if(!Array.isArray(cd.healthMetrics)) cd.healthMetrics = [];
+    });
+    s.schemaVersion = 3;
   }
   return s;
 }
@@ -2215,6 +2328,166 @@ function renderProg(){
 }
 
 /* ============ CLIENTE: PERFIL ============ */
+/* ============ SAÚDE & DISPOSITIVOS ============ */
+const WEARABLE_SERVICES = [
+  {key:'garmin',name:'Garmin Connect',icon:'⌚',color:'#007cc3',
+    bullets:['Passos, FC repouso, HRV','Stress, Body Battery, sono','VO₂máx, treinos completos'],
+    setupNote:'Ligação OAuth · disponível em breve (requer backend Blue ON)',
+    manual:true},
+  {key:'apple',name:'Apple Watch · Saúde',icon:'',color:'#000',
+    bullets:['Passos, FC, energia ativa','Sono, ECG, SpO₂','Treinos do Apple Fitness'],
+    setupNote:'No iPhone: HealthKit só via app nativa · brevemente como wrapper iOS',
+    manual:true},
+  {key:'strava',name:'Strava',icon:'🚴',color:'#fc4c02',
+    bullets:['Corrida, ciclismo, natação','Distância e ritmo','Treinos do clube'],
+    setupNote:'Ligação OAuth · disponível em breve',
+    manual:true},
+  {key:'fitbit',name:'Fitbit',icon:'🟣',color:'#00B0B9',
+    bullets:['Passos, FC, sono','Zonas ativas','SpO₂ e respiração'],
+    setupNote:'Ligação OAuth · disponível em breve',
+    manual:true},
+  {key:'googleFit',name:'Google Fit / Health Connect',icon:'🟢',color:'#0F9D58',
+    bullets:['Agregador Android','Passos, FC, sono, treino','Compatível Health Connect'],
+    setupNote:'Disponível em breve · necessita backend OAuth',
+    manual:true},
+];
+
+function renderHealthSection(c){
+  if(!c) return '';
+  if(!c.wearables) c.wearables = {garmin:{connected:false},apple:{connected:false},strava:{connected:false},fitbit:{connected:false},googleFit:{connected:false}};
+  if(!Array.isArray(c.healthMetrics)) c.healthMetrics = [];
+  const today = new Date().toISOString().slice(0,10);
+  const todayEntry = c.healthMetrics.find(m=>m.date===today) || {};
+  const last7 = c.healthMetrics.slice(-7);
+
+  const cards = WEARABLE_SERVICES.map(s=>{
+    const w = c.wearables[s.key] || {connected:false};
+    const conn = !!w.connected;
+    return `<div class="card" style="margin-bottom:10px">
+      <div class="card-body" style="padding:14px">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px">
+          <div style="display:flex;align-items:center;gap:10px;min-width:0">
+            <div style="width:38px;height:38px;border-radius:10px;background:${s.color}1a;color:${s.color};display:flex;align-items:center;justify-content:center;font-weight:900;font-size:1.2rem;flex-shrink:0">${s.icon||s.name[0]}</div>
+            <div style="min-width:0">
+              <div style="font-weight:800;color:var(--blue);font-size:.92rem;line-height:1.1">${s.name}</div>
+              <div style="font-size:.68rem;color:var(--muted);margin-top:2px">${conn?'✓ ligado':'Não ligado'}</div>
+            </div>
+          </div>
+          <button class="btn btn-ghost" style="padding:6px 10px;font-size:.75rem;${conn?'background:rgba(0,196,204,.1);color:var(--cyan);border-color:rgba(0,196,204,.3)':''}" onclick="toggleWearable('${s.key}')">${conn?'Desligar':'Ligar'}</button>
+        </div>
+        <ul style="margin:6px 0 0;padding-left:18px;font-size:.74rem;color:var(--muted);line-height:1.45">
+          ${s.bullets.map(b=>`<li>${b}</li>`).join('')}
+        </ul>
+        ${!conn?`<div style="margin-top:8px;padding:8px 10px;background:#fff7ed;border-radius:8px;font-size:.7rem;color:#9a3412">⚠ ${s.setupNote}</div>`:''}
+      </div>
+    </div>`;
+  }).join('');
+
+  const chartMetric = (key,label,unit,color)=>{
+    const vals = last7.map(m=>m[key]).filter(v=>v!=null);
+    if(!vals.length) return `<div style="text-align:center;color:var(--muted);font-size:.72rem;padding:14px 0">Sem ${label.toLowerCase()}</div>`;
+    const min = Math.min(...vals), max = Math.max(...vals), range = Math.max(1,max-min);
+    const w = 280, h = 56, pad = 6;
+    const pts = vals.map((v,i)=>{
+      const x = pad + (i/Math.max(1,vals.length-1))*(w-pad*2);
+      const y = h - pad - ((v-min)/range)*(h-pad*2);
+      return `${x.toFixed(1)},${y.toFixed(1)}`;
+    }).join(' ');
+    const last = vals[vals.length-1];
+    return `<div style="display:flex;align-items:flex-end;justify-content:space-between;gap:10px">
+      <div>
+        <div style="font-size:.66rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em">${label}</div>
+        <div style="font-weight:900;color:${color};font-size:1.2rem;line-height:1">${last}<span style="font-size:.65rem;color:var(--muted);font-weight:700;margin-left:3px">${unit}</span></div>
+      </div>
+      <svg viewBox="0 0 ${w} ${h}" style="width:60%;height:50px"><polyline points="${pts}" fill="none" stroke="${color}" stroke-width="2"/></svg>
+    </div>`;
+  };
+
+  return `
+    <div class="sect-title">Saúde & Dispositivos</div>
+
+    <div class="card" style="overflow:hidden;margin-bottom:12px">
+      <div class="card-body" style="padding:16px 16px 12px">
+        <div style="font-weight:800;color:var(--blue);font-size:.95rem;margin-bottom:4px">📊 Métricas de hoje</div>
+        <div style="font-size:.72rem;color:var(--muted);margin-bottom:14px">Introduz manualmente do teu relógio ou app. Quando ligares um serviço, isto preenche-se sozinho.</div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div><label style="font-size:.66rem">Passos</label><input id="hm-passos" type="number" inputmode="numeric" placeholder="8500" value="${todayEntry.passos||''}"></div>
+          <div><label style="font-size:.66rem">FC Repouso</label><input id="hm-fcRep" type="number" inputmode="numeric" placeholder="62" value="${todayEntry.fcRep||''}"></div>
+          <div><label style="font-size:.66rem">FC Máx (treino)</label><input id="hm-fcMax" type="number" inputmode="numeric" placeholder="172" value="${todayEntry.fcMax||''}"></div>
+          <div><label style="font-size:.66rem">Calorias ativas</label><input id="hm-cal" type="number" inputmode="numeric" placeholder="520" value="${todayEntry.cal||''}"></div>
+          <div><label style="font-size:.66rem">Sono total (h)</label><input id="hm-sono" type="number" step="0.1" inputmode="decimal" placeholder="7.5" value="${todayEntry.sono||''}"></div>
+          <div><label style="font-size:.66rem">Sono profundo (h)</label><input id="hm-sonoProf" type="number" step="0.1" inputmode="decimal" placeholder="1.4" value="${todayEntry.sonoProf||''}"></div>
+          <div><label style="font-size:.66rem">SpO₂ (%)</label><input id="hm-spo2" type="number" inputmode="numeric" placeholder="97" value="${todayEntry.spo2||''}"></div>
+          <div><label style="font-size:.66rem">HRV (ms)</label><input id="hm-hrv" type="number" inputmode="numeric" placeholder="45" value="${todayEntry.hrv||''}"></div>
+        </div>
+        <button class="btn btn-primary" style="width:100%;margin-top:14px" onclick="saveHealthMetrics()">💾 Guardar métricas de hoje</button>
+      </div>
+    </div>
+
+    ${last7.length?`<div class="card" style="margin-bottom:12px"><div class="card-body" style="padding:16px">
+      <div style="font-weight:800;color:var(--blue);font-size:.92rem;margin-bottom:12px">📈 Últimos 7 dias</div>
+      <div style="display:flex;flex-direction:column;gap:14px">
+        ${chartMetric('passos','Passos','','#0ea5e9')}
+        ${chartMetric('fcRep','FC Repouso','bpm','#10b981')}
+        ${chartMetric('sono','Sono','h','#8b5cf6')}
+        ${chartMetric('hrv','HRV','ms','#f59e0b')}
+      </div>
+    </div></div>`:''}
+
+    <div class="card" style="background:linear-gradient(135deg,#f0f9ff,#ecfeff);border:1px solid #bae6fd;margin-bottom:12px">
+      <div class="card-body" style="padding:14px">
+        <div style="font-weight:800;color:var(--blue);font-size:.86rem">🔗 Ligar dispositivos & apps</div>
+        <div style="font-size:.72rem;color:var(--muted);margin-top:4px">Marca como ligado os serviços que usas. A sincronização automática completa exige um backend Blue ON (em desenvolvimento). Por enquanto introduzes os números manualmente.</div>
+      </div>
+    </div>
+
+    ${cards}
+  `;
+}
+
+function toggleWearable(key){
+  const c = state.clientData[session.userId] || state.clientData[session.activeClient];
+  if(!c) return;
+  if(!c.wearables) c.wearables = {};
+  if(!c.wearables[key]) c.wearables[key] = {connected:false};
+  c.wearables[key].connected = !c.wearables[key].connected;
+  if(c.wearables[key].connected){
+    c.wearables[key].linkedAt = new Date().toISOString();
+    toast('Dispositivo marcado como ligado.');
+  } else {
+    toast('Dispositivo desligado.');
+  }
+  save();
+  selectTab(session.tab);
+}
+
+function saveHealthMetrics(){
+  const c = state.clientData[session.userId] || state.clientData[session.activeClient];
+  if(!c) return;
+  if(!Array.isArray(c.healthMetrics)) c.healthMetrics = [];
+  const today = new Date().toISOString().slice(0,10);
+  const num = (id)=>{ const v = document.getElementById(id).value.trim(); return v===''?null:Number(v); };
+  const entry = {
+    date: today,
+    passos: num('hm-passos'),
+    fcRep: num('hm-fcRep'),
+    fcMax: num('hm-fcMax'),
+    cal: num('hm-cal'),
+    sono: num('hm-sono'),
+    sonoProf: num('hm-sonoProf'),
+    spo2: num('hm-spo2'),
+    hrv: num('hm-hrv'),
+  };
+  const idx = c.healthMetrics.findIndex(m=>m.date===today);
+  if(idx>=0) c.healthMetrics[idx] = entry;
+  else c.healthMetrics.push(entry);
+  // Manter só últimos 90 dias
+  c.healthMetrics = c.healthMetrics.slice(-90);
+  save();
+  toast('Métricas guardadas.');
+  selectTab(session.tab);
+}
+
 function renderPerfil(){
   const u = state.users.find(x=>x.id===session.userId);
   const c = state.clientData[session.userId] || state.clientData[session.activeClient];
@@ -2280,6 +2553,8 @@ function renderPerfil(){
       <label>Alterar PIN</label>
       <div style="display:flex;gap:8px"><input type="password" id="prof-pin" placeholder="Novo PIN" maxlength="4" inputmode="numeric"><button class="btn btn-primary" style="padding:11px 18px" onclick="changePin()">Guardar</button></div>
     </div></div>
+
+    ${renderHealthSection(c)}
 
     <div class="sect-title">Mensagens do coach</div>
     <div class="card" style="overflow:hidden">
