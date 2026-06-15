@@ -806,30 +806,22 @@ const WHATS_PHONE='351915425055';
 
 const DEFAULT = ()=> ({
   users:[
-    {id:'u1',role:'gestor',name:'Jota Pereira',phone:'912101659',pin:'0000',objective:'Gestão & coaching · Blue ON'},
-    {id:'u2',role:'cliente',name:'Sara M.',phone:'922222222',pin:'1234',plan:'PLUS',status:'ativo',joined:'2026-02-10',objective:'Perder 5kg e ganhar força',
-      subscription:{plan:'PLUS',price:249,startDate:'2026-04-15',endDate:'2026-07-15',status:'ativo',autoRenew:false,
-        payments:[{date:'2026-04-15',amount:249,method:'MBWay',ref:'BLUE-2604',status:'pago'},{date:'2026-01-15',amount:249,method:'MBWay',ref:'BLUE-2301',status:'pago'}]}},
-    {id:'u3',role:'cliente',name:'Rui C.',phone:'933333333',pin:'5678',plan:'BASE',status:'ativo',joined:'2026-04-02',objective:'Mais energia e mobilidade',
-      subscription:{plan:'BASE',price:186,startDate:'2026-04-02',endDate:'2026-06-08',status:'a-expirar',autoRenew:false,
-        payments:[{date:'2026-04-02',amount:186,method:'Multibanco',ref:'BLUE-0204',status:'pago'}]}},
-    {id:'u4',role:'cliente',name:'Joana Rita Góis Martins Azul',phone:'915284114',pin:'0000',plan:'PLUS',status:'ativo',joined:'2026-04-28',objective:'Emagrecimento + Tonificação · 3 meses',
+    {id:'u1',role:'gestor',name:'Jota Pereira',phone:'912101659',pin:'0000',objective:'Gestão & coaching · Blue ON',gestorTier:'principal'},
+    {id:'u9',role:'gestor',name:'Maggie',phone:'916646916',pin:'0000',objective:'Coach · Atletas de hipertrofia',gestorTier:'assistente',atletas:['u6','u7','u8']},
+    {id:'u4',role:'cliente',name:'Joana Rita Góis Martins Azul',phone:'915284114',pin:'0000',plan:'PLUS',status:'ativo',joined:'2026-04-28',objective:'Emagrecimento + Tonificação · 3 meses',coachId:'u1',
       subscription:{plan:'PLUS',price:249,startDate:'2026-04-28',endDate:'2026-07-28',status:'ativo',autoRenew:false,
         payments:[{date:'2026-04-28',amount:249,method:'MBWay',ref:'BLUE-2804',status:'pago'}]}},
-    {id:'u5',role:'cliente',name:'Camila Azul Marques Pereira',phone:'912101528',pin:'0000',plan:'PLUS',status:'ativo',joined:'2026-05-15',objective:'Tonificação, glúteos e controlo lombo-pélvico',
+    {id:'u5',role:'cliente',name:'Camila Azul Marques Pereira',phone:'912101528',pin:'0000',plan:'PLUS',status:'ativo',joined:'2026-05-15',objective:'Tonificação, glúteos e controlo lombo-pélvico',coachId:'u1',
       subscription:{plan:'PLUS',price:249,startDate:'2026-05-15',endDate:'2026-08-15',status:'ativo',autoRenew:false,
         payments:[{date:'2026-05-15',amount:249,method:'MBWay',ref:'BLUE-1505',status:'pago'}]}},
-    {id:'u6',role:'cliente',name:'Edo Santos',phone:'966111111',pin:'0000',plan:'PLUS',status:'ativo',joined:'2026-06-11',objective:'Fisiculturismo · Hipertrofia competitiva · Recomposição corporal',
+    {id:'u6',role:'cliente',name:'Edo Santos',phone:'966111111',pin:'0000',plan:'PLUS',status:'ativo',joined:'2026-06-11',objective:'Fisiculturismo · Hipertrofia competitiva · Recomposição corporal',coachId:'u9',
       subscription:{plan:'PLUS',price:249,startDate:'2026-06-11',endDate:'2026-09-11',status:'ativo',autoRenew:false,payments:[]}},
-    {id:'u7',role:'cliente',name:'Luís Freire',phone:'966222222',pin:'0000',plan:'BASE',status:'ativo',joined:'2026-06-11',objective:'Perda de gordura com preservação de massa muscular',
+    {id:'u7',role:'cliente',name:'Luís Freire',phone:'966222222',pin:'0000',plan:'BASE',status:'ativo',joined:'2026-06-11',objective:'Perda de gordura com preservação de massa muscular',coachId:'u9',
       subscription:{plan:'BASE',price:186,startDate:'2026-06-11',endDate:'2026-09-11',status:'ativo',autoRenew:false,payments:[]}},
-    {id:'u8',role:'cliente',name:'Tânia Duarte',phone:'966333333',pin:'0000',plan:'PLUS',status:'ativo',joined:'2026-06-11',objective:'Hipertrofia · Ganho de massa muscular',
+    {id:'u8',role:'cliente',name:'Tânia Duarte',phone:'966333333',pin:'0000',plan:'PLUS',status:'ativo',joined:'2026-06-11',objective:'Hipertrofia · Ganho de massa muscular',coachId:'u9',
       subscription:{plan:'PLUS',price:249,startDate:'2026-06-11',endDate:'2026-09-11',status:'ativo',autoRenew:false,payments:[]}},
   ],
-  pending:[
-    {id:'p1',name:'André Lopes',phone:'961234567',plan:'PLUS',goal:'Ganhar massa muscular',date:'2026-05-25'},
-    {id:'p2',name:'Marta Silva',phone:'968765432',plan:'BASE',goal:'Voltar a treinar depois de 2 anos',date:'2026-05-26'},
-  ],
+  pending:[],
   clientData:{
     u1:{
       anamnese:{nome:'Jota Pereira',sexo:'M',idade:43,altura:178,peso:82,
@@ -1032,11 +1024,12 @@ const DEFAULT = ()=> ({
         treinoRotacao:'Mensal · 2x/semana (Seg + Sex) · rotação dentro dos grupos musculares',
         patologias:'Fadiga crónica · Bexiga e Intestinos Neurogénicos (sequela de meningomielite em 2008)',
         patHist:'Meningomielite 2008 (resíduo neurológico)',
-        medicacao:'Ditropan (controlo da bexiga)',alergias:'—',
+        medicacao:'Ditropan (controlo da bexiga)',
+        alergias:'Intolerância ao glúten',restricoes:['gluten'],naoGosta:[],
         dor:'sim',dorLocal:'Ombro (tendinite) · Psoas Ilíaco (tendinite) · Costas (esforço)',dorInt:5,dorQ:'Latejo',dorMov:'sim',
         parq1:'nao',parq2:'nao',parq3:'nao',parq4:'nao',parq5:'sim',parq6:'nao',parq7:'nao',
         sonoH:6,sonoQ:3,stress:4,energia:3,
-        alimentacao:'Omnívora',refDia:4,digestao:'Sem queixas',cravings:'Doces 10/10 · Salgados 10/10 · Fritos 3/10 · Fome emocional 10/10',
+        alimentacao:'Omnívora · SEM GLÚTEN (intolerância)',refDia:4,digestao:'Sem queixas',cravings:'Doces 10/10 · Salgados 10/10 · Fritos 3/10 · Fome emocional 10/10',
         agua:2,cafes:1,alcool:0,tabaco:0,doces:7,atividadeOcas:5,
         habitosObs:'Modalidades preferidas: Pilates, Zumba, Localizada · Sem doenças cardiovasculares na família · Risco cardiovascular: BAIXO',
         consNome:'Joana Rita Góis Martins Azul',consData:'2026-04-28',consentido:'sim',
@@ -1062,32 +1055,55 @@ const DEFAULT = ()=> ({
         {date:new Date(Date.now()-30*3600000).toISOString(),type:'hipertrofia',rpe:7,groups:['legs','core','back'],volume:1800,duration:55,notes:'Sessão A · pernas + costas'},
         {date:new Date(Date.now()-78*3600000).toISOString(),type:'hipertrofia',rpe:6,groups:['legs','shoulders','core'],volume:1500,duration:50,notes:'Sessão B · ombro com cuidado'},
       ],
-      treino:{plano:[
-        {dia:'Seg · Pernas + Glúteo + Core · com Jota',exs:[
-          {nome:'Aquecimento geral',ic:'🔥',sets:1,reps:'5-7 min',carga:0,hint:'Bike · com Jota'},
-          {nome:'Mobilidade Anca 90/90',ic:'🧘',sets:1,reps:'6/lado',carga:0,hint:'Em conjunto'},
-          {nome:'Smith Machine Squat — pés médios',ic:'🏋️‍♀️',sets:4,reps:'10-12',carga:35,hint:'@RPE 7-8 · Joana puxa · Jota faz Agachamento livre',img:'https://wger.de/media/exercise-images/170/Squats-1.png'},
-          {nome:'Leg Press 45° — pés altos',ic:'🦵',sets:4,reps:'12',carga:80,hint:'Foco glúteo · @RPE 8 · pesado para ela',img:'https://wger.de/media/exercise-images/192/Sled-45-degree-leg-press-2.png'},
-          {nome:'Hip Thrust com barra',ic:'🪨',sets:4,reps:'12',carga:30,hint:'Apertar topo · sobe carga gradual',img:'https://wger.de/media/exercise-images/910/hip-thrust.png'},
-          {nome:'Stiff barra',ic:'🪨',sets:3,reps:'10',carga:30,hint:'Posterior · ATENÇÃO PSOAS · core ativo'},
-          {nome:'Extensão pernas',ic:'⚙️',sets:3,reps:'15',carga:30,hint:'Isolar quadríceps · controlado'},
-          {nome:'Prancha + Bird Dog',ic:'🎯',sets:3,reps:'30s + 8/lado',carga:0,hint:'Core integrado'},
-          {nome:'Rotação Externa Ombro · Elástico',ic:'💪',sets:3,reps:'15/lado',carga:0,hint:'Acessório · saúde ombro direito'},
+      treino:{
+        meta:{rotacao:'Mensal A→B→C→D→E→F · 2x/sem (Seg+Sex) · com Jota',duracaoBloco:'4 semanas',foco:'Emagrecimento + tonificação'},
+        plano:[
+          {dia:'Treino A · Pernas anteriores + Glúteo',grupo:'Seg',foco:'Quadríceps + glúteo',exs:[
+            {nome:'Smith Squat pés médios',ic:'🏋️‍♀️',sets:4,reps:'10-12',carga:35,tipo:'trabalho',hint:'Jota faz Agachamento livre 100kg'},
+            {nome:'Leg Press pés altos',ic:'🦵',sets:4,reps:'12',carga:80,tipo:'trabalho',hint:'Foco glúteo · Jota 200kg'},
+            {nome:'Hip Thrust com barra',ic:'🪨',sets:4,reps:'12',carga:30,tipo:'trabalho',hint:'Apertar topo · Jota 80kg'},
+            {nome:'Extensão pernas',ic:'⚙️',sets:3,reps:'15',carga:30,tipo:'trabalho',hint:'Isolar quadríceps'},
+            {nome:'Prancha + Bird Dog',ic:'🎯',sets:3,reps:'30s + 8/lado',carga:0,tipo:'trabalho',hint:'Core integrado'},
+          ]},
+          {dia:'Treino B · Costas + Bíceps',grupo:'Sex',foco:'Dorsal + bíceps',exs:[
+            {nome:'Lat Pulldown pega larga',ic:'⬇️',sets:4,reps:'10-12',carga:30,tipo:'trabalho',hint:'Jota 65kg'},
+            {nome:'Remada baixa cabo',ic:'🚣',sets:4,reps:'10-12',carga:30,tipo:'trabalho',hint:'Pega neutra · Jota 55kg'},
+            {nome:'Remada serrote halteres',ic:'🚣',sets:3,reps:'12/lado',carga:12,tipo:'trabalho',hint:'Joelho apoiado'},
+            {nome:'Curl barra W',ic:'💪',sets:3,reps:'10',carga:12,tipo:'trabalho',hint:'Sem balanço'},
+            {nome:'Face Pull finisher',ic:'🪢',sets:3,reps:'15',carga:15,tipo:'trabalho',hint:'Ombro posterior'},
+          ]},
+          {dia:'Treino C · Posterior + Glúteo',grupo:'Seg',foco:'Posterior coxa + glúteo médio',exs:[
+            {nome:'Stiff barra',ic:'🪨',sets:4,reps:'10',carga:30,tipo:'trabalho',hint:'ATENÇÃO PSOAS · core ativo'},
+            {nome:'Leg Curl deitado',ic:'🦵',sets:4,reps:'12',carga:25,tipo:'trabalho',hint:'Posterior coxa'},
+            {nome:'Hip Thrust unilateral',ic:'🪨',sets:3,reps:'12/perna',carga:10,tipo:'trabalho',hint:'Glúteo isolado'},
+            {nome:'Abdução anca máquina',ic:'🦵',sets:3,reps:'15',carga:40,tipo:'trabalho',hint:'Glúteo médio'},
+            {nome:'Dead Bug',ic:'🐛',sets:3,reps:'8/lado',carga:0,tipo:'trabalho',hint:'Anti-rotação'},
+          ]},
+          {dia:'Treino D · Puxar + Posterior ombro',grupo:'Sex',foco:'Costas média + ombro saúde',exs:[
+            {nome:'Lat Pulldown pega neutra',ic:'⬇️',sets:4,reps:'10',carga:30,tipo:'trabalho',hint:'Adaptação ombro'},
+            {nome:'Remada cavalinho',ic:'🚣',sets:4,reps:'10',carga:25,tipo:'trabalho',hint:'Apoio no peito'},
+            {nome:'Pullover halteres',ic:'🎯',sets:3,reps:'12',carga:8,tipo:'trabalho',hint:'Estiramento dorsal'},
+            {nome:'Rotação externa elástico',ic:'💪',sets:3,reps:'15/lado',carga:0,tipo:'trabalho',hint:'Saúde ombro direito'},
+            {nome:'Face Pull',ic:'🪢',sets:3,reps:'15',carga:15,tipo:'trabalho',hint:'Ombro posterior'},
+          ]},
+          {dia:'Treino E · Glúteo bilateral pesado',grupo:'Seg',foco:'Força bilateral glúteo + core',exs:[
+            {nome:'Hip Thrust barra pesado',ic:'🪨',sets:5,reps:'8',carga:35,tipo:'trabalho',hint:'Carga pesada · pausa 2s topo'},
+            {nome:'Smith Sumo Squat',ic:'🏋️‍♀️',sets:4,reps:'10',carga:35,tipo:'trabalho',hint:'Pés mais abertos · glúteo+adutor'},
+            {nome:'Búlgaro halteres',ic:'🏋️‍♀️',sets:3,reps:'10/perna',carga:10,tipo:'trabalho',hint:'Pé atrás no banco'},
+            {nome:'Glute Bridge solo',ic:'🪨',sets:3,reps:'20',carga:0,tipo:'trabalho',hint:'Apertar 1s no topo'},
+            {nome:'Prancha lateral',ic:'🎯',sets:3,reps:'25s/lado',carga:0,tipo:'trabalho',hint:'Core lateral'},
+          ]},
+          {dia:'Treino F · Costas grossa + Curl',grupo:'Sex',foco:'Espessura costas + bíceps variação',exs:[
+            {nome:'Remada Barra pronada',ic:'🚣',sets:4,reps:'8-10',carga:25,tipo:'trabalho',hint:'Cuidado lombar'},
+            {nome:'Lat Pulldown pega fechada',ic:'⬇️',sets:4,reps:'10',carga:30,tipo:'trabalho',hint:'Pega supina'},
+            {nome:'Remada Polia em T',ic:'🚣',sets:3,reps:'10',carga:20,tipo:'trabalho',hint:'Apoio no peito'},
+            {nome:'Curl Martelo',ic:'💪',sets:3,reps:'12',carga:8,tipo:'trabalho',hint:'Bíceps + braquial'},
+            {nome:'Curl 21s na polia',ic:'💪',sets:2,reps:'21',carga:10,tipo:'trabalho',hint:'7+7+7 · finisher'},
+          ]},
+        ],historico:[
+          {date:'2026-05-25',exs:'Treino A · Pernas+Glúteo',semaforo:'verde',feedback:'Boa execução · ombro sem dor'},
+          {date:'2026-05-22',exs:'Treino B · Costas+Bíceps',semaforo:'amarelo',feedback:'Ombro direito ligeiramente sensível'},
         ]},
-        {dia:'Sex · Costas + Posterior + Bíceps · com Jota',exs:[
-          {nome:'Aquecimento geral',ic:'🔥',sets:1,reps:'5-7 min',carga:0,hint:'Bike · com Jota'},
-          {nome:'Mobilidade ombro torácica',ic:'🧘',sets:1,reps:'5/lado',carga:0,hint:'CARs · em conjunto'},
-          {nome:'Stiff barra (no lugar de terra)',ic:'🪨',sets:4,reps:'8-10',carga:35,hint:'Posterior · Jota faz Levantamento Terra'},
-          {nome:'Lat Pulldown — pega larga',ic:'⬇️',sets:4,reps:'10-12',carga:30,hint:'@RPE 7-8 · Jota 65kg',img:'https://wger.de/media/exercise-images/119/Wide-grip-lat-pulldown-1.png'},
-          {nome:'Remada baixa cabo',ic:'🚣',sets:4,reps:'10-12',carga:30,hint:'Pega neutra · Jota 55kg',img:'https://wger.de/media/exercise-images/118/Seated-cable-rows-1.png'},
-          {nome:'Remada serrote halteres',ic:'🚣',sets:3,reps:'12/lado',carga:12,hint:'Joelho apoiado · Jota 45kg cavalinho'},
-          {nome:'Curl barra W',ic:'💪',sets:3,reps:'10',carga:12,hint:'Sem balanço · Jota barra 30kg'},
-          {nome:'Face Pull · finisher',ic:'🪢',sets:3,reps:'15',carga:15,hint:'Ombro posterior · ambos'},
-        ]},
-      ],historico:[
-        {date:'2026-05-25',exs:'Pernas + Glúteo',semaforo:'verde',feedback:'Boa execução · ombro sem dor'},
-        {date:'2026-05-22',exs:'Ombro suave',semaforo:'amarelo',feedback:'Ombro direito ligeiramente sensível no press'},
-      ]},
       checkin:{date:'2026-05-27',energia:7,sono:6,dor:2,semaforo:'verde'},
       dailyRoutine:[
         {time:'07:30',ic:'💧',name:'Água c/ limão',type:'hidrat',notes:'300ml em jejum'},
@@ -1105,18 +1121,20 @@ const DEFAULT = ()=> ({
       ],
     },
     u5:{
-      anamnese:{nome:'Camila Azul',sexo:'F',objetivos:'Tonificação, glúteos, core e controlo lombo-pélvico',exp:'<6 meses',contexto:'Ginásio',diasSem:3,minSes:50,patologias:'—',medicacao:'—',parq:'sem alertas'},
+      anamnese:{nome:'Camila Azul',sexo:'F',objetivos:'Tonificação, glúteos, core e controlo lombo-pélvico',exp:'<6 meses',contexto:'Ginásio',diasSem:3,minSes:50,patologias:'—',medicacao:'—',parq:'sem alertas',
+        restricoes:[],naoGosta:['banana'],alergias:'—',
+        treinoRotacao:'Mensal · 3x/semana · rotação dentro dos grupos musculares'},
       avaliacoes:[
         {date:'2026-05-15',peso:62,imc:23.5,abd:78,cint:74,anca:98,bf:25,vo2:32,bench1rm:20,squat1rm:40,fc:70,pa:'118/76'},
       ],
       nutricao:{tmb:1320,tdee:2000,alvo:1850,macros:{p:115,c:200,g:55},hidrat:2.5,
         refeicoes:[
-          {nome:'Pequeno-almoço',hora:'08:00',ic:'🥣',items:'Iogurte skyr 200g · Granola 40g · Banana',p:25,c:55,g:8,img:'https://www.themealdb.com/images/ingredients/Greek Yogurt-Small.png'},
-          {nome:'Almoço',hora:'13:00',ic:'🥗',items:'Frango 150g · Quinoa 70g · Salada · Azeite',p:40,c:55,g:14,img:'https://www.themealdb.com/images/ingredients/Chicken Breast-Small.png'},
-          {nome:'Snack pré-treino',hora:'16:30',ic:'🍌',items:'Banana + barra proteica',p:18,c:40,g:6,img:'https://www.themealdb.com/images/ingredients/Banana-Small.png'},
-          {nome:'Jantar',hora:'20:30',ic:'🍽️',items:'Atum 130g · Batata-doce 150g · Brócolos',p:32,c:50,g:12,img:'https://www.themealdb.com/images/ingredients/Tuna-Small.png'},
+          {nome:'Pequeno-almoço',hora:'08:00',ic:'🥣',items:'Iogurte skyr 200g · Granola 40g · Mirtilos · Maçã',p:25,c:55,g:8},
+          {nome:'Almoço',hora:'13:00',ic:'🥗',items:'Frango 150g · Quinoa 70g · Salada · Azeite',p:40,c:55,g:14},
+          {nome:'Snack pré-treino',hora:'16:30',ic:'🍎',items:'Maçã + barra proteica',p:18,c:40,g:6},
+          {nome:'Jantar',hora:'20:30',ic:'🍽️',items:'Atum 130g · Batata-doce 150g · Brócolos',p:32,c:50,g:12},
         ],
-        supl:[{nome:'Whey protein',dose:'25g',hora:'pós-treino',obs:'',img:'https://www.themealdb.com/images/ingredients/Whey Protein-Small.png'},
+        supl:[{nome:'Whey protein',dose:'25g',hora:'pós-treino',obs:''},
           {nome:'Creatina mono',dose:'5g',hora:'qualquer',obs:'todos os dias'}],
         compras:[{n:'Frango',q:'1 kg',b:false},{n:'Atum em lata',q:'6 unid',b:false},{n:'Quinoa',q:'500 g',b:true},{n:'Iogurte skyr',q:'4 unid',b:false}]},
       recoveryProfile:{cns:48,legs:48,back:48,chest:60,shoulders:60,arms:36,core:24,cardio:18,mobility:6},
@@ -1124,40 +1142,61 @@ const DEFAULT = ()=> ({
         {date:new Date(Date.now()-18*3600000).toISOString(),type:'hipertrofia',rpe:7,groups:['legs','core'],volume:1600,duration:50,notes:'Glúteos + core'},
         {date:new Date(Date.now()-66*3600000).toISOString(),type:'hipertrofia',rpe:7,groups:['legs','back'],volume:1500,duration:45,notes:'Pernas + costas'},
       ],
-      treino:{plano:[
-        {dia:'Seg · Glúteos + Core',exs:[
-          {nome:'Air Bike',ic:'🚴',sets:1,reps:'5 min',carga:0,hint:'Aquecimento'},
-          {nome:'90/90 Hip Flow',ic:'🧘',sets:1,reps:'6/lado',carga:0,hint:'Mobilidade da anca'},
-          {nome:'Leg Press',ic:'🦵',sets:3,reps:'10-12',carga:60,hint:'Foco glúteo',img:'https://wger.de/media/exercise-images/192/Sled-45-degree-leg-press-2.png'},
-          {nome:'Hip Thrust com barra',ic:'🪨',sets:4,reps:'12',carga:30,hint:'Travar glúteo no topo',img:'https://wger.de/media/exercise-images/910/hip-thrust.png'},
-          {nome:'Búlgaro com halteres',ic:'🏋️‍♀️',sets:3,reps:'10/perna',carga:8,hint:'Pé atrás no banco'},
-          {nome:'Abdução de anca · máquina',ic:'🦵',sets:3,reps:'15',carga:30,hint:'Glúteo médio'},
-          {nome:'Prancha Lateral',ic:'🎯',sets:3,reps:'30s/lado',carga:0,hint:'Controlo lombo-pélvico'},
+      treino:{
+        meta:{rotacao:'Mensal A→B→C→D→E→F · 3x/sem (Seg+Qua+Sex)',duracaoBloco:'4 semanas',foco:'Tonificação + glúteo + lombo-pélvico'},
+        plano:[
+          {dia:'Treino A · Glúteo + Core',grupo:'Seg',foco:'Glúteo max + estabilidade',exs:[
+            {nome:'Leg Press pés altos',ic:'🦵',sets:3,reps:'10-12',carga:60,tipo:'trabalho',hint:'Foco glúteo'},
+            {nome:'Hip Thrust barra',ic:'🪨',sets:4,reps:'12',carga:30,tipo:'trabalho',hint:'Travar topo'},
+            {nome:'Búlgaro halteres',ic:'🏋️‍♀️',sets:3,reps:'10/perna',carga:8,tipo:'trabalho',hint:'Pé atrás'},
+            {nome:'Abdução de anca máquina',ic:'🦵',sets:3,reps:'15',carga:30,tipo:'trabalho',hint:'Glúteo médio'},
+            {nome:'Prancha Lateral',ic:'🎯',sets:3,reps:'30s/lado',carga:0,tipo:'trabalho',hint:'Lombo-pélvico'},
+          ]},
+          {dia:'Treino B · Costas + Posterior',grupo:'Qua',foco:'Cadeia posterior + dorsal',exs:[
+            {nome:'Lat Pulldown pega larga',ic:'⬇️',sets:3,reps:'12',carga:25,tipo:'trabalho',hint:''},
+            {nome:'Remada baixa',ic:'🚣',sets:3,reps:'12',carga:25,tipo:'trabalho',hint:'Cotovelos junto'},
+            {nome:'Stiff halteres',ic:'🪨',sets:3,reps:'12',carga:12,tipo:'trabalho',hint:'Posterior coxa'},
+            {nome:'Face Pull',ic:'🎯',sets:3,reps:'15',carga:12,tipo:'trabalho',hint:'Ombro posterior'},
+            {nome:'Bird Dog',ic:'🐕',sets:3,reps:'8/lado',carga:0,tipo:'trabalho',hint:'Anti-extensão'},
+          ]},
+          {dia:'Treino C · Full Glúteo',grupo:'Sex',foco:'Glúteo bilateral + unilateral',exs:[
+            {nome:'Agachamento Smith pés à frente',ic:'🏋️‍♀️',sets:4,reps:'10',carga:30,tipo:'trabalho',hint:''},
+            {nome:'Hip Thrust unilateral',ic:'🪨',sets:3,reps:'12/perna',carga:0,tipo:'trabalho',hint:'Pé no banco'},
+            {nome:'Glute Kickback cabo',ic:'🦵',sets:3,reps:'12/lado',carga:10,tipo:'trabalho',hint:'Controlo'},
+            {nome:'Step-up halteres',ic:'🏋️‍♀️',sets:3,reps:'10/perna',carga:6,tipo:'trabalho',hint:'Banco médio'},
+            {nome:'Dead Bug',ic:'🐛',sets:3,reps:'8/lado',carga:0,tipo:'trabalho',hint:'Anti-rotação'},
+          ]},
+          {dia:'Treino D · Quadríceps + Core',grupo:'Seg',foco:'Quadríceps + core estabilidade',exs:[
+            {nome:'Smith Squat pés à frente',ic:'🏋️‍♀️',sets:4,reps:'10',carga:30,tipo:'trabalho',hint:'Quadríceps'},
+            {nome:'Hack Machine',ic:'🦵',sets:3,reps:'12',carga:25,tipo:'trabalho',hint:''},
+            {nome:'Extensão pernas',ic:'⚙️',sets:3,reps:'15',carga:25,tipo:'trabalho',hint:'Pico contração'},
+            {nome:'Hollow Hold',ic:'🎯',sets:3,reps:'25s',carga:0,tipo:'trabalho',hint:'Core anterior'},
+            {nome:'Prancha Frontal',ic:'🎯',sets:3,reps:'40s',carga:0,tipo:'trabalho',hint:'Glúteo apertado'},
+          ]},
+          {dia:'Treino E · Costas + Bíceps',grupo:'Qua',foco:'Espessura dorsal + braço',exs:[
+            {nome:'Pulldown pega neutra',ic:'⬇️',sets:4,reps:'10',carga:25,tipo:'trabalho',hint:''},
+            {nome:'Remada Polia em T',ic:'🚣',sets:3,reps:'12',carga:20,tipo:'trabalho',hint:'Apoio peito'},
+            {nome:'Curl alterno halteres',ic:'💪',sets:3,reps:'10/lado',carga:5,tipo:'trabalho',hint:''},
+            {nome:'Curl Martelo',ic:'💪',sets:3,reps:'12',carga:5,tipo:'trabalho',hint:'Braquial'},
+            {nome:'Face Pull',ic:'🪢',sets:3,reps:'15',carga:12,tipo:'trabalho',hint:''},
+          ]},
+          {dia:'Treino F · Posterior + Glúteo médio',grupo:'Sex',foco:'Posterior coxa + glúteo médio',exs:[
+            {nome:'Stiff barra',ic:'🪨',sets:4,reps:'10',carga:25,tipo:'trabalho',hint:'Foco posterior'},
+            {nome:'Leg Curl deitado',ic:'🦵',sets:4,reps:'12',carga:20,tipo:'trabalho',hint:''},
+            {nome:'Clamshell elástico',ic:'🦵',sets:3,reps:'15/lado',carga:0,tipo:'trabalho',hint:'Glúteo médio · ativação'},
+            {nome:'Glute Bridge solo',ic:'🪨',sets:3,reps:'15',carga:0,tipo:'trabalho',hint:'Apertar topo'},
+            {nome:'Pallof Press',ic:'🎯',sets:3,reps:'10/lado',carga:10,tipo:'trabalho',hint:'Anti-rotação'},
+          ]},
+        ],historico:[
+          {date:'2026-05-25',exs:'Treino A · Glúteo + Core',semaforo:'verde',feedback:'Boa sessão'},
+          {date:'2026-05-23',exs:'Treino B · Costas + Posterior',semaforo:'verde',feedback:'Cargas a subir'},
         ]},
-        {dia:'Qua · Costas + Posterior',exs:[
-          {nome:'Cat-Camel + Extensão Torácica',ic:'🌀',sets:1,reps:'8',carga:0,hint:'Mobilidade'},
-          {nome:'Lat Pulldown',ic:'⬇️',sets:3,reps:'12',carga:25,hint:'Pega larga'},
-          {nome:'Remada baixa',ic:'🚣',sets:3,reps:'12',carga:25,hint:'Cotovelos junto ao corpo'},
-          {nome:'Stiff com halteres',ic:'🪨',sets:3,reps:'12',carga:12,hint:'Posterior coxa'},
-          {nome:'Face Pull',ic:'🎯',sets:3,reps:'15',carga:12,hint:'Ombro posterior'},
-        ]},
-        {dia:'Sex · Full glúteo',exs:[
-          {nome:'Caminhada inclinada',ic:'🚶',sets:1,reps:'8 min',carga:0,hint:'Inclinação 8%'},
-          {nome:'Agachamento Smith',ic:'🏋️‍♀️',sets:4,reps:'10',carga:30,hint:'Pés à frente'},
-          {nome:'Hip Thrust unilateral',ic:'🪨',sets:3,reps:'12/perna',carga:0,hint:'Pé apoiado no banco'},
-          {nome:'Glute Kickback · cabo',ic:'🦵',sets:3,reps:'12/lado',carga:10,hint:'Controlo'},
-          {nome:'Dead Bug',ic:'🐛',sets:3,reps:'8/lado',carga:0,hint:'Core anti-rotação'},
-        ]},
-      ],historico:[
-        {date:'2026-05-25',exs:'Glúteos + Core',semaforo:'verde',feedback:'Boa sessão'},
-        {date:'2026-05-23',exs:'Costas + Posterior',semaforo:'verde',feedback:'Cargas a subir'},
-      ]},
       checkin:{date:'2026-05-27',energia:8,sono:7,dor:0,semaforo:'verde'},
       dailyRoutine:[
         {time:'07:30',ic:'💧',name:'Água',type:'hidrat',notes:'500ml'},
         {time:'08:00',ic:'🥣',name:'Pequeno-almoço',type:'meal',notes:'Skyr + granola + banana'},
         {time:'13:00',ic:'🥗',name:'Almoço',type:'meal',notes:'Frango + quinoa'},
-        {time:'16:30',ic:'🍌',name:'Pré-treino',type:'meal',notes:'Banana + barra'},
+        {time:'16:30',ic:'🍎',name:'Pré-treino',type:'meal',notes:'Maçã + barra'},
         {time:'18:00',ic:'💪',name:'Treino',type:'workout',notes:'Glúteos / costas / full glúteo'},
         {time:'20:30',ic:'🍽️',name:'Jantar',type:'meal',notes:'Atum + batata-doce'},
         {time:'23:00',ic:'😴',name:'Dormir',type:'sleep',notes:'7h'},
@@ -1168,72 +1207,108 @@ const DEFAULT = ()=> ({
       ],
     },
     u6:{
-      anamnese:{nome:'Edo Santos',sexo:'M',dn:'',idade:20,altura:187,peso:95.7,
-        objetivos:'Fisiculturismo / Hipertrofia competitiva',objetivos2:'Recomposição corporal · simetria',
-        exp:'Musculação · preparação física',contexto:'Ginásio',diasSem:5,minSes:75,
+      anamnese:{nome:'Edo Santos',sexo:'M',idade:20,altura:187,peso:95.7,
+        objetivos:'Fisiculturismo / Hipertrofia competitiva',objPrinc:'Recomposição corporal · simetria',
+        focoMaggie:'Recomposição Corporal',
+        exp:'Musculação · preparação física',contexto:'Ginásio',diasSem:5,minSes:45,
+        treinoRotacao:'Mensal · 5x/semana · A→B→C→D→E (treinos Maggie)',
         patologias:'Problema osteoarticular (PAR-Q+ Q5: Sim)',medicacao:'—',
         parq:'1 alerta · Osteoarticular',
         modalidades:'Musculação · cardio controlado',
         pa:'125/61',fc:73,
-        alimentacao:'omnivora',sono:7,stress:4},
+        alimentacao:'omnívora',restricoes:[],naoGosta:[],alergias:'—',
+        sono:7,stress:4,
+        // Dados nutricionais Maggie
+        tbm:2186, neat:1.2, ged:2623, gedAf:2892, defice:0.5, reducaoSemanal:478.5},
       avaliacoes:[
-        {date:'2026-06-05',peso:95.7,imc:27.4,abd:99,cint:87,anca:114,bf:14.9,bench1rm:80,squat1rm:120,fc:73,pa:'125/61',mm:77.4,mo:4,gv:2,agua:60,mb:2186,idMet:12,braco:40,coxa:60,gemeo:43},
+        {date:'2026-06-05',peso:95.7,imc:27.4,abd:99,cint:87,anca:114,bf:14.9,bench1rm:80,squat1rm:120,fc:73,pa:'125/61',mm:77.4,mo:4,gv:2,agua:60,mb:2186,idMet:12,braco:40,coxa:60,gemeo:43,ffmi:22.1,whr:0.763},
       ],
-      nutricao:{tmb:2186,tdee:3280,alvo:3450,macros:{p:230,c:380,g:90},hidrat:3.5,
+      nutricao:{tmb:2186,tdee:2892,alvo:2366,macros:{p:211,c:249,g:48},hidrat:3.5,
         refeicoes:[
-          {nome:'Pequeno-almoço',hora:'07:30',ic:'🥣',items:'Aveia 80g · Whey 30g · Banana · Manteiga amendoim 20g',p:50,c:90,g:18},
-          {nome:'Almoço',hora:'13:00',ic:'🍗',items:'Frango 220g · Arroz 100g · Brócolos · Azeite',p:60,c:90,g:18},
-          {nome:'Pré-treino',hora:'17:00',ic:'🍌',items:'Aveia 60g · Banana · Whey 25g',p:35,c:80,g:8},
-          {nome:'Pós-treino',hora:'19:30',ic:'💪',items:'Whey 30g + Dextrose 30g',p:30,c:35,g:2},
-          {nome:'Jantar',hora:'21:00',ic:'🥩',items:'Carne magra 200g · Batata-doce 200g · Salada',p:55,c:85,g:22},
+          {nome:'REFEIÇÃO 1',hora:'08:15',ic:'🥚',items:'2 fatias pão integral · 3 ovos inteiros · 100 ml claras · 150g papaia · 2g sal',p:35,c:42,g:8},
+          {nome:'REFEIÇÃO 2',hora:'11:00',ic:'🍓',items:'50g creme de arroz · 35g whey ISO · 120g morangos',p:35,c:42,g:8},
+          {nome:'REFEIÇÃO 3',hora:'13:00',ic:'🍗',items:'100g arroz cozido · 120g peito frango/peru · 120g vegetais cozinhados · 100g abacaxi · 1g sal',p:35,c:42,g:8},
+          {nome:'REFEIÇÃO 4',hora:'17:00',ic:'🐟',items:'100g arroz cozido · 100g frango ou 150g peixe · 100g vegetais · 5g azeite extra-virgem · 2g sal',p:35,c:42,g:8},
+          {nome:'REFEIÇÃO 5',hora:'21:00',ic:'🥦',items:'120g batata inglesa cozinhada · 180g peixe magro (pescada/panga) · 120g vegetais · 5g azeite extra-virgem · 1g sal',p:35,c:42,g:8},
+          {nome:'REFEIÇÃO 6',hora:'23:00',ic:'🌙',items:'40g creme de arroz · 35g whey ISO',p:35,c:42,g:8},
         ],
-        supl:[{nome:'Whey isolado',dose:'30g',hora:'pós-treino',obs:''},
-          {nome:'Creatina mono',dose:'5g',hora:'qualquer',obs:'todos os dias'},
-          {nome:'Multivitamínico',dose:'1 comp',hora:'manhã',obs:''}],
-        compras:[{n:'Frango',q:'3 kg',b:false},{n:'Carne magra',q:'2 kg',b:false},{n:'Aveia',q:'2 kg',b:false}]},
+        supl:[
+          {nome:'Whey Protein Iso',dose:'35g',hora:'R2 + R6',obs:'Conforme descrito no plano'},
+          {nome:'Glutamina',dose:'10g',hora:'após R1',obs:''},
+          {nome:'Calibration',dose:'2 cáps',hora:'antes R1',obs:''},
+          {nome:'Brutal Anadrol',dose:'2+1 cáps',hora:'após R1 e R3',obs:''},
+          {nome:'Recharge',dose:'1 cáps',hora:'após R1, R3, R5',obs:''},
+          {nome:'Stage',dose:'2 cáps',hora:'após R1',obs:''},
+          {nome:'MK7',dose:'1 cáps',hora:'após R5',obs:''},
+          {nome:'Super Digestive',dose:'1 cáps',hora:'após R1 e R5',obs:''},
+          {nome:'Bisglicinato Magnésio',dose:'1 cáps',hora:'após R1 e R6',obs:''},
+          {nome:'Escape',dose:'2 cáps',hora:'após R5',obs:''},
+        ],
+        compras:[{n:'Pão integral',q:'1 pacote',b:false},{n:'Ovos',q:'30 unid',b:false},{n:'Peito frango',q:'2 kg',b:false},{n:'Pescada/panga',q:'1.5 kg',b:false},{n:'Arroz',q:'1 kg',b:false},{n:'Creme de arroz',q:'500g',b:false},{n:'Morangos',q:'500g',b:false},{n:'Papaia',q:'1',b:false},{n:'Abacaxi',q:'1',b:false}]},
       recoveryProfile:{cns:48,legs:72,back:72,chest:72,shoulders:60,arms:48,core:24,cardio:18,mobility:6},
       sessions:[],
-      treino:{plano:[
-        {dia:'Seg · Peito + Tríceps',exs:[
-          {nome:'Supino plano · barra',ic:'🏋️',sets:4,reps:'6-8',carga:80,hint:'Foco peitoral'},
-          {nome:'Supino inclinado · halteres',ic:'💪',sets:4,reps:'8-10',carga:32,hint:'Peitoral superior'},
-          {nome:'Crucifixo polia baixa',ic:'🎯',sets:3,reps:'12-15',carga:14,hint:'Estiramento'},
-          {nome:'Paralelas peso',ic:'⬇️',sets:3,reps:'10',carga:20,hint:'Inclinar tronco'},
-          {nome:'Tríceps polia · corda',ic:'🪢',sets:4,reps:'10-12',carga:30,hint:'Abrir no fim'},
-        ]},
-        {dia:'Ter · Costas + Bíceps',exs:[
-          {nome:'Levantamento terra · sumô',ic:'🪨',sets:4,reps:'5',carga:140,hint:'Técnica'},
-          {nome:'Remada barra',ic:'🚣',sets:4,reps:'8',carga:80,hint:'Peito sobre a barra'},
-          {nome:'Lat Pulldown pega larga',ic:'⬇️',sets:3,reps:'10-12',carga:65,hint:'Cotovelos para baixo'},
-          {nome:'Curl barra W',ic:'💪',sets:4,reps:'10',carga:30,hint:'Sem balanço'},
-        ]},
-        {dia:'Qui · Pernas',exs:[
-          {nome:'Agachamento barra alta',ic:'🦵',sets:5,reps:'5-6',carga:120,hint:'Profundo'},
-          {nome:'Leg Press',ic:'🦵',sets:4,reps:'10-12',carga:200,hint:'ROM completo'},
-          {nome:'Stiff',ic:'🪨',sets:4,reps:'10',carga:90,hint:'Posterior'},
-          {nome:'Extensão de pernas',ic:'⚙️',sets:3,reps:'15',carga:60,hint:'Isolar quadríceps'},
-          {nome:'Gémeos em pé',ic:'🦵',sets:5,reps:'15',carga:90,hint:'Pico'},
-        ]},
-        {dia:'Sex · Ombros + Trapézio',exs:[
-          {nome:'Press militar · barra',ic:'🏋️',sets:4,reps:'6-8',carga:55,hint:'Vertical'},
-          {nome:'Elevações laterais',ic:'🎯',sets:4,reps:'12-15',carga:12,hint:'Cotovelo um nada flectido'},
-          {nome:'Face Pull',ic:'🪢',sets:3,reps:'15',carga:18,hint:'Ombro posterior'},
-          {nome:'Encolhimento halteres',ic:'💪',sets:4,reps:'12',carga:38,hint:'Trapézio'},
-        ]},
-      ],historico:[]},
+      treino:{
+        meta:{rotacao:'A→B→C→D→E (5x/sem)',duracaoBloco:'4 semanas',foco:'Recomposição Corporal'},
+        plano:[
+          {dia:'Treino A · Lower 1',foco:'Correção assimetrias/desequilíbrios',exs:[
+            {nome:'Cadeira Adutora',ic:'🦵',sets:4,reps:'15, 15, 12, 12',descanso:'60s',carga:0,hint:'—'},
+            {nome:'Leg Extension · Unilateral',ic:'⚙️',sets:3,reps:'15/15/15/15',descanso:'60s',carga:31,hint:'15 reps perna esq c/ 31kg + 12 reps perna dta'},
+            {nome:'Leg Curl Sentado · Unilateral',ic:'🦵',sets:3,reps:'15/15/15/15',descanso:'60s',carga:40,hint:'15 reps perna esq c/ 40kg + 12 reps perna dta'},
+            {nome:'Hack Machine · Unilateral',ic:'🏋️',sets:3,reps:'15/15/15/15',descanso:'60s',carga:3,hint:'15 reps perna esq c/ 3kg + 12 reps perna dta'},
+            {nome:'Leg Press · Unilateral',ic:'🦵',sets:3,reps:'15/15/15/15',descanso:'60s',carga:24,hint:'15 reps perna esq c/ 24kg + 12 reps perna dta'},
+            {nome:'Elíptica',ic:'🚴',sets:1,reps:'30 min',descanso:'—',carga:0,hint:'Percepção de esforço a 6/10'},
+          ]},
+          {dia:'Treino B · Upper 1',foco:'Peito · Costas · Ombros · Tríceps',exs:[
+            {nome:'Supino Inclinado na Smith',ic:'🏋️',sets:4,reps:'15, 15, 12, 10',descanso:'60s',carga:0,hint:'Progressão de carga · mov controlado'},
+            {nome:'Crucifixo na Máquina',ic:'🎯',sets:4,reps:'12, 12, 10, 10',descanso:'60s',carga:0,hint:'Pico de contração de 1s'},
+            {nome:'Remada Curvada Pronada',ic:'🚣',sets:4,reps:'12, 12, 10, 8',descanso:'60s',carga:0,hint:'Progressão de carga · mov controlado'},
+            {nome:'Puxada Alta Pronada Aberta',ic:'⬇️',sets:4,reps:'12, 12, 10, 10',descanso:'60s',carga:0,hint:''},
+            {nome:'Desenvolvimento na Máquina',ic:'💪',sets:4,reps:'12, 12, 10, 8',descanso:'60s',carga:0,hint:'Pico de contração de 1s'},
+            {nome:'Elevação Frontal no Cabo',ic:'⬆️',sets:3,reps:'12, 12, 12',descanso:'60s',carga:0,hint:''},
+            {nome:'Tríceps Puley c/ corda em pé',ic:'🪢',sets:3,reps:'12, 12, 10',descanso:'60s',carga:0,hint:''},
+            {nome:'Tríceps Testa na polia c/ cabo',ic:'🪢',sets:3,reps:'12, 12, 10',descanso:'60s',carga:0,hint:''},
+            {nome:'Escada',ic:'🚶',sets:1,reps:'20 min',descanso:'—',carga:0,hint:'Percepção de esforço a 6/10'},
+          ]},
+          {dia:'Treino C · Cardio + ABS + Gémeos',foco:'Conditioning + core + panturrilhas',exs:[
+            {nome:'Gémeos Sentado',ic:'🦵',sets:4,reps:'20, 20, 15, 15',descanso:'60s',carga:0,hint:''},
+            {nome:'Gémeos em Pé',ic:'🦵',sets:4,reps:'15, 15, 12, 12',descanso:'60s',carga:0,hint:'Pico de contração de 1s'},
+            {nome:'Abdominal Crunch',ic:'🎯',sets:4,reps:'20, 20, 20, 20',descanso:'60s',carga:0,hint:''},
+            {nome:'Abdominal Canivete sentado',ic:'🎯',sets:4,reps:'20, 20, 20, 20',descanso:'60s',carga:0,hint:''},
+            {nome:'HIIT na Passadeira',ic:'🏃',sets:1,reps:'15-20 min',descanso:'—',carga:0,hint:'5 min vel.5 + alternar 30s sprint / 60s caminhada'},
+          ]},
+          {dia:'Treino D · Lower 2',foco:'Pernas · ênfase abdutores e curl',exs:[
+            {nome:'Cadeira Abdutora',ic:'🦵',sets:4,reps:'15, 15, 12, 12',descanso:'60s',carga:0,hint:''},
+            {nome:'Leg Curl Deitado · Unilateral',ic:'🦵',sets:3,reps:'15/15/15/15',descanso:'60s',carga:11,hint:'15 reps esq c/ 11kg + 12 reps dta'},
+            {nome:'Hack Machine · Unilateral',ic:'🏋️',sets:3,reps:'15/15/15/15',descanso:'60s',carga:3,hint:'15 reps esq c/ 3kg + 12 reps dta'},
+            {nome:'Leg Press · Unilateral',ic:'🦵',sets:3,reps:'15/15/15/15',descanso:'60s',carga:24,hint:'15 reps esq c/ 24kg + 12 reps dta'},
+            {nome:'Leg Extension',ic:'⚙️',sets:3,reps:'15/15/15/15',descanso:'60s',carga:31,hint:'15 reps esq c/ 31kg + 12 reps dta'},
+            {nome:'Elíptica ou Bike',ic:'🚴',sets:1,reps:'30 min',descanso:'—',carga:0,hint:'Percepção 6/10'},
+          ]},
+          {dia:'Treino E · Upper 2',foco:'Costas · Peito · Ombros · Bíceps',exs:[
+            {nome:'Puxada Alta c/ Triângulo',ic:'⬇️',sets:4,reps:'12, 12, 10, 10',descanso:'60s',carga:0,hint:''},
+            {nome:'Remada Unilateral c/ Halter',ic:'🚣',sets:4,reps:'12, 12, 10, 10',descanso:'60s',carga:0,hint:'Progressão de carga · mov controlado'},
+            {nome:'Supino Plano na Smith',ic:'🏋️',sets:4,reps:'15, 12, 12, 10',descanso:'60s',carga:0,hint:'Progressão de carga · mov controlado'},
+            {nome:'Aberturas Inclinadas na polia',ic:'🎯',sets:4,reps:'12, 12, 10, 10',descanso:'60s',carga:0,hint:'Pico de contração 1s'},
+            {nome:'Elevação Lateral c/ Halteres',ic:'⬆️',sets:4,reps:'15, 15, 12, 12',descanso:'60s',carga:0,hint:''},
+            {nome:'Posterior Ombro c/ Halteres',ic:'🎯',sets:4,reps:'15, 15, 12, 12',descanso:'60s',carga:0,hint:''},
+            {nome:'Rosca Direta no cabo',ic:'💪',sets:3,reps:'12, 12, 10',descanso:'60s',carga:0,hint:''},
+            {nome:'Rosca Martelo c/ Halter',ic:'💪',sets:3,reps:'12, 12, 10',descanso:'60s',carga:0,hint:''},
+            {nome:'Escada',ic:'🚶',sets:1,reps:'20 min',descanso:'—',carga:0,hint:'Percepção 6/10'},
+          ]},
+        ],historico:[]},
       checkin:{date:'',energia:7,sono:7,dor:1,semaforo:'verde'},
       dailyRoutine:[
-        {time:'07:30',ic:'🥣',name:'Pequeno-almoço',type:'meal',notes:'Aveia + whey'},
-        {time:'13:00',ic:'🍗',name:'Almoço',type:'meal',notes:'Frango + arroz'},
-        {time:'17:00',ic:'🍌',name:'Pré-treino',type:'meal',notes:'Aveia + banana'},
-        {time:'18:00',ic:'💪',name:'Treino',type:'workout',notes:'Hipertrofia'},
-        {time:'19:30',ic:'💧',name:'Pós-treino',type:'meal',notes:'Whey + dextrose'},
-        {time:'21:00',ic:'🥩',name:'Jantar',type:'meal',notes:'Carne + batata-doce'},
-        {time:'23:30',ic:'😴',name:'Dormir',type:'sleep',notes:'7-8h'},
+        {time:'08:15',ic:'🥚',name:'Refeição 1',type:'meal',notes:'Pão + ovos + claras + papaia'},
+        {time:'11:00',ic:'🍓',name:'Refeição 2',type:'meal',notes:'Creme arroz + whey + morangos'},
+        {time:'13:00',ic:'🍗',name:'Refeição 3',type:'meal',notes:'Arroz + frango + vegetais'},
+        {time:'17:00',ic:'🐟',name:'Refeição 4',type:'meal',notes:'Arroz + frango/peixe + vegetais'},
+        {time:'18:30',ic:'💪',name:'Treino',type:'workout',notes:'45 min musculação · plano A-E'},
+        {time:'21:00',ic:'🥦',name:'Refeição 5',type:'meal',notes:'Batata + peixe magro + vegetais'},
+        {time:'23:00',ic:'🌙',name:'Refeição 6',type:'meal',notes:'Creme arroz + whey'},
       ],
       photos:[],
       messages:[
-        {id:'em1',from:'coach',text:'Olá Edo! Mesociclo de hipertrofia iniciado. Foco em volume controlado e técnica nas séries pesadas.',date:new Date(Date.now()-3*86400000).toISOString(),read:false},
+        {id:'em1',from:'coach',text:'Olá Edo! Mesociclo recomposição corporal iniciado. 4 semanas no bloco A→E. Foco em técnica e progressão controlada.',from2:'Maggie',date:new Date(Date.now()-3*86400000).toISOString(),read:false},
       ],
     },
     u7:{
@@ -1415,6 +1490,59 @@ function applyMigrations(s){
       }
     }
     s.schemaVersion = 4;
+  }
+  if(s.schemaVersion < 5){
+    const def = DEFAULT();
+    // Remover users demo Sara (u2) e Rui (u3) e pedidos pendentes
+    if(Array.isArray(s.users)){
+      s.users = s.users.filter(u=>u.id!=='u2' && u.id!=='u3');
+    }
+    if(s.clientData){ delete s.clientData.u2; delete s.clientData.u3; }
+    s.pending = [];
+    // Adicionar Maggie como gestora (u9) se não existir
+    if(!s.users.find(u=>u.id==='u9')){
+      const maggie = def.users.find(u=>u.id==='u9');
+      if(maggie) s.users.push(maggie);
+    }
+    // Adicionar gestorTier ao Jota e definir coachId nos clientes
+    const jota = s.users.find(u=>u.id==='u1');
+    if(jota) jota.gestorTier = 'principal';
+    s.users.forEach(u=>{
+      if(u.role!=='cliente') return;
+      if(['u4','u5'].includes(u.id)) u.coachId='u1';
+      if(['u6','u7','u8'].includes(u.id)) u.coachId='u9';
+    });
+    // Forçar update do Edo, Joana (restrições) e Camila (sem banana)
+    if(s.clientData){
+      if(s.clientData.u6) s.clientData.u6 = def.clientData.u6;
+      if(s.clientData.u4 && s.clientData.u4.anamnese){
+        s.clientData.u4.anamnese.alergias = 'Intolerância ao glúten';
+        s.clientData.u4.anamnese.restricoes = ['gluten'];
+        s.clientData.u4.anamnese.naoGosta = s.clientData.u4.anamnese.naoGosta || [];
+        s.clientData.u4.anamnese.alimentacao = 'Omnívora · SEM GLÚTEN (intolerância)';
+      }
+      if(s.clientData.u5 && s.clientData.u5.anamnese){
+        s.clientData.u5.anamnese.naoGosta = ['banana'];
+        s.clientData.u5.anamnese.restricoes = s.clientData.u5.anamnese.restricoes || [];
+        s.clientData.u5.anamnese.treinoRotacao = s.clientData.u5.anamnese.treinoRotacao || 'Mensal · 3x/semana · rotação dentro dos grupos musculares';
+        // Substituir banana nas refeições da Camila
+        if(s.clientData.u5.nutricao && Array.isArray(s.clientData.u5.nutricao.refeicoes)){
+          s.clientData.u5.nutricao.refeicoes = s.clientData.u5.nutricao.refeicoes.map(r=>{
+            const items = (r.items||'').replace(/banana/gi,'maçã');
+            const ic = r.ic === '🍌' ? '🍎' : r.ic;
+            return {...r, items, ic};
+          });
+        }
+        if(Array.isArray(s.clientData.u5.dailyRoutine)){
+          s.clientData.u5.dailyRoutine = s.clientData.u5.dailyRoutine.map(d=>{
+            const notes = (d.notes||'').replace(/banana/gi,'maçã');
+            const ic = d.ic === '🍌' ? '🍎' : d.ic;
+            return {...d, notes, ic};
+          });
+        }
+      }
+    }
+    s.schemaVersion = 5;
   }
   return s;
 }
@@ -2356,24 +2484,66 @@ const WEARABLE_SERVICES = [
   {key:'garmin',name:'Garmin Connect',icon:'⌚',color:'#007cc3',
     bullets:['Passos, FC repouso, HRV','Stress, Body Battery, sono','VO₂máx, treinos completos'],
     setupNote:'Ligação OAuth · disponível em breve (requer backend Blue ON)',
+    guia:[
+      '1. No telemóvel, abre **Garmin Connect** e faz login com a tua conta.',
+      '2. No menu (☰) → **Mais → Conta** → toma nota do email da Garmin.',
+      '3. Quando o backend Blue ON estiver pronto, vais aceder a `/connect/garmin` e autorizar acesso aos dados (OAuth 2.0 com o Health API da Garmin).',
+      '4. A partir daí, as últimas 24h sincronizam automaticamente todas as horas — passos, sono, FC repouso, HRV, Body Battery e treinos completos.',
+      'Enquanto isso: introduz manualmente os valores que vês no Garmin Connect → Estatísticas.'
+    ],
     manual:true},
-  {key:'apple',name:'Apple Watch · Saúde',icon:'',color:'#000',
+  {key:'apple',name:'Apple Watch · Saúde',icon:'⌚',color:'#000',
     bullets:['Passos, FC, energia ativa','Sono, ECG, SpO₂','Treinos do Apple Fitness'],
     setupNote:'No iPhone: HealthKit só via app nativa · brevemente como wrapper iOS',
+    guia:[
+      '1. No iPhone, abre **Saúde** (ícone branco com coração rosa).',
+      '2. Vai a **Resumo → Toca no nome** (canto superior direito) → **Apps → Outros**.',
+      '3. Quando lançarmos o wrapper iOS da Blue ON, vai aparecer aqui — ativas tudo (passos, FC, sono, treinos).',
+      '4. Os dados deixam de ser introduzidos à mão e sincronizam em background.',
+      'Por agora: depois do treino abre o **Treinos** no Apple Watch e copia FC máx + calorias para a app.'
+    ],
     manual:true},
   {key:'strava',name:'Strava',icon:'🚴',color:'#fc4c02',
     bullets:['Corrida, ciclismo, natação','Distância e ritmo','Treinos do clube'],
     setupNote:'Ligação OAuth · disponível em breve',
+    guia:[
+      '1. Confirma que tens conta em https://www.strava.com (gratuita).',
+      '2. No telemóvel, regista cada sessão de cardio no Strava (corrida, bike, caminhada).',
+      '3. Quando o backend Blue ON estiver pronto, vais autorizar Strava no perfil — `/connect/strava` (OAuth 2.0).',
+      '4. A partir daí, cada atividade sincroniza com a app — distância, ritmo, FC média, calorias.',
+      'Enquanto isso: cola o link da atividade Strava no campo de Notas do treino.'
+    ],
     manual:true},
-  {key:'fitbit',name:'Fitbit',icon:'🟣',color:'#00B0B9',
+  {key:'fitbit',name:'Fitbit',icon:'⌚',color:'#00B0B9',
     bullets:['Passos, FC, sono','Zonas ativas','SpO₂ e respiração'],
     setupNote:'Ligação OAuth · disponível em breve',
+    guia:[
+      '1. Abre a app **Fitbit** no telemóvel.',
+      '2. Vai a **Hoje → Toca na tua foto → Definições da conta**.',
+      '3. Quando o Blue ON tiver integração ativa, vais usar `/connect/fitbit` para autorizar (Fitbit Web API).',
+      '4. Sincronizam-se passos, sono, FC repouso, SpO₂ e zonas cardio.',
+      'Por agora: dia a dia, abre **Fitbit → Hoje** e copia os números principais.'
+    ],
     manual:true},
   {key:'googleFit',name:'Google Fit / Health Connect',icon:'🟢',color:'#0F9D58',
     bullets:['Agregador Android','Passos, FC, sono, treino','Compatível Health Connect'],
     setupNote:'Disponível em breve · necessita backend OAuth',
+    guia:[
+      '1. Em Android, garante que tens o **Health Connect** instalado (Definições → Apps).',
+      '2. Liga todos os teus apps de saúde ao Health Connect (Samsung Health, Fitbit, Garmin, Polar, etc.).',
+      '3. Quando o Blue ON tiver integração ativa, vais autorizar `/connect/google-fit` (OAuth).',
+      '4. Os dados de todas as fontes aparecem agregados aqui automaticamente.',
+      'Por agora: usa o Health Connect como hub e copia os números principais.'
+    ],
     manual:true},
 ];
+
+function formatGuideText(g){
+  // **bold** → <b>bold</b>, `code` → <code>code</code>
+  const boldRe = /\*\*(.*?)\*\*/g;
+  const codeRe = new RegExp('`(.*?)`','g');
+  return g.replace(boldRe,'<b>$1</b>').replace(codeRe,'<code style="background:#dbeafe;padding:1px 6px;border-radius:4px;font-size:.85em">$1</code>');
+}
 
 function renderHealthSection(c){
   if(!c) return '';
@@ -2386,6 +2556,7 @@ function renderHealthSection(c){
   const cards = WEARABLE_SERVICES.map(s=>{
     const w = c.wearables[s.key] || {connected:false};
     const conn = !!w.connected;
+    const open = w._showGuide;
     return `<div class="card" style="margin-bottom:10px">
       <div class="card-body" style="padding:14px">
         <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px">
@@ -2401,10 +2572,33 @@ function renderHealthSection(c){
         <ul style="margin:6px 0 0;padding-left:18px;font-size:.74rem;color:var(--muted);line-height:1.45">
           ${s.bullets.map(b=>`<li>${b}</li>`).join('')}
         </ul>
-        ${!conn?`<div style="margin-top:8px;padding:8px 10px;background:#fff7ed;border-radius:8px;font-size:.7rem;color:#9a3412">⚠ ${s.setupNote}</div>`:''}
+        <button class="btn btn-ghost" style="margin-top:8px;width:100%;padding:7px 10px;font-size:.75rem;color:var(--blue);border-color:var(--line)" onclick="toggleWearableGuide('${s.key}')">${open?'▲ Esconder guia':'▼ Como configurar'}</button>
+        ${open?`<div style="margin-top:8px;padding:12px;background:#f0f9ff;border-radius:8px;font-size:.78rem;color:#1e3a8a;line-height:1.55">
+          <ol style="margin:0;padding-left:18px">${s.guia.map(g=>`<li style="margin-bottom:6px">${formatGuideText(g)}</li>`).join('')}</ol>
+        </div>`:''}
+        ${!conn && !open?`<div style="margin-top:8px;padding:8px 10px;background:#fff7ed;border-radius:8px;font-size:.7rem;color:#9a3412">⚠ ${s.setupNote}</div>`:''}
       </div>
     </div>`;
   }).join('');
+
+  // Auto-semáforo
+  const auto = computeAutoSemaforo(c);
+  const semColors = {verde:['#10b981','#d1fae5','🟢'],amarelo:['#f59e0b','#fef3c7','🟡'],laranja:['#f97316','#ffedd5','🟠'],vermelho:['#dc2626','#fee2e2','🔴']};
+  const autoBlock = auto ? (()=>{
+    const [color,bg,ic] = semColors[auto.sem]||semColors.verde;
+    return `<div class="card" style="background:${bg};border:1px solid ${color}33;margin-bottom:12px">
+      <div class="card-body" style="padding:14px">
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:6px">
+          <div style="font-size:1.5rem">${ic}</div>
+          <div>
+            <div style="font-weight:800;color:${color};font-size:.95rem">Semáforo automático: ${auto.sem.toUpperCase()}</div>
+            <div style="font-size:.7rem;color:var(--muted);text-transform:uppercase;letter-spacing:.04em">Baseado nas tuas métricas dos últimos 7 dias</div>
+          </div>
+        </div>
+        <div style="font-size:.78rem;color:#334155;line-height:1.5">${auto.sugestao}</div>
+      </div>
+    </div>`;
+  })() : '';
 
   const chartMetric = (key,label,unit,color)=>{
     const vals = last7.map(m=>m[key]).filter(v=>v!=null);
@@ -2428,6 +2622,8 @@ function renderHealthSection(c){
 
   return `
     <div class="sect-title">Saúde & Dispositivos</div>
+
+    ${autoBlock}
 
     <div class="card" style="overflow:hidden;margin-bottom:12px">
       <div class="card-body" style="padding:16px 16px 12px">
@@ -2481,6 +2677,16 @@ function toggleWearable(key){
     toast('Dispositivo desligado.');
   }
   save();
+  selectTab(session.tab);
+}
+
+function toggleWearableGuide(key){
+  const c = state.clientData[session.userId] || state.clientData[session.activeClient];
+  if(!c) return;
+  if(!c.wearables) c.wearables = {};
+  if(!c.wearables[key]) c.wearables[key] = {connected:false};
+  c.wearables[key]._showGuide = !c.wearables[key]._showGuide;
+  // Não persistir o flag visual no Firebase
   selectTab(session.tab);
 }
 
@@ -2607,9 +2813,26 @@ function changePin(){
   document.getElementById('prof-pin').value='';
 }
 
+/* ============ HIERARQUIA DE COACHES ============ */
+// Jota (u1) vê todos os clientes. Maggie (u9) só vê os do seu coachId.
+function myClients(){
+  const me = state.users.find(u=>u.id===session.userId);
+  if(!me || me.role!=='gestor') return [];
+  const all = state.users.filter(u=>u.role==='cliente');
+  if(me.gestorTier==='principal') return all;
+  return all.filter(c=>c.coachId===me.id);
+}
+function canEditClient(clientId){
+  const me = state.users.find(u=>u.id===session.userId);
+  if(!me || me.role!=='gestor') return false;
+  if(me.gestorTier==='principal') return true;
+  const c = state.users.find(u=>u.id===clientId);
+  return c && c.coachId===me.id;
+}
+
 /* ============ GESTOR: CARTEIRA ============ */
 function renderCarteira(){
-  const clients = state.users.filter(u=>u.role==='cliente');
+  const clients = myClients();
   document.getElementById('p-carteira').innerHTML = `
     <div class="hero-card">
       <div class="hctitle">Carteira ativa</div>
@@ -3580,7 +3803,7 @@ function addAval(){ toast('Em breve: formulário completo de avaliação (50+ ca
 
 /* ============ GESTOR: DASHBOARD ============ */
 function renderDash(){
-  const clients = state.users.filter(u=>u.role==='cliente');
+  const clients = myClients();
   const ativos = clients.filter(c=>c.status==='ativo').length;
   const mrr = clients.filter(c=>c.status==='ativo').reduce((s,c)=>{
     const v={ONE:23,BASE:62,PLUS:83,PREMIUM:110}[c.plan]||0; return s+v;
@@ -3681,14 +3904,28 @@ function toast(msg){
   clearTimeout(toastTimer); toastTimer = setTimeout(()=>t.classList.remove('show'),2200);
 }
 
+/* ============ ROTAÇÃO DE TREINOS A→F ============ */
+function getTodaysSession(c){
+  if(!c || !c.treino || !c.treino.plano.length) return null;
+  const today = new Date();
+  const wd = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'][today.getDay()];
+  const plano = c.treino.plano;
+  const todayPlans = plano.filter(p=>p.grupo===wd);
+  if(todayPlans.length===0){
+    return plano.find(p=>p.dia.startsWith(wd)) || null;
+  }
+  const start = new Date(today.getFullYear(),0,1);
+  const weekNum = Math.floor((today - start) / (7*86400000));
+  const idx = weekNum % todayPlans.length;
+  return todayPlans[idx];
+}
+
 /* ============ WORKOUT IN-SESSION ============ */
 let ws = { day:null, exIdx:0, setIdx:0, t0:0, restT:0, restInt:null, clockInt:null };
 function startWorkout(){
   const c = state.clientData[session.activeClient || session.userId];
-  const today = new Date(), wd = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'][today.getDay()];
-  const d = c.treino.plano.find(p=>p.dia.startsWith(wd)) || c.treino.plano[0];
+  const d = getTodaysSession(c);
   if(!d){ toast('Sem plano para hoje.'); return; }
-  // Auto-ajuste baseado na heterocronia
   const groups = detectGroups(d.dia, d.exs);
   const states = groups.map(g => ({k:g,pct:recoveryPct(c,g)})).filter(s=>s.pct<70);
   if(states.length>0){
@@ -3710,7 +3947,6 @@ function proceedWorkout(adjPct, dayName){
   closeModal();
   const c = state.clientData[session.activeClient || session.userId];
   const d = c.treino.plano.find(p=>p.dia===dayName) || c.treino.plano[0];
-  // Aplicar ajuste à carga (apenas na sessão, sem persistir)
   if(adjPct!==0){
     d._sessionAdj = adjPct;
     d.exs.forEach(e=>{ if(e.carga) e._adjCarga = Math.round(e.carga*(1+adjPct/100)); });
@@ -3724,41 +3960,79 @@ function proceedWorkout(adjPct, dayName){
   document.getElementById('wsBg').classList.add('show');
   renderWsEx();
 }
+function setTypeFor(e, sIdx, total){
+  if(total >= 4){ if(sIdx===0) return 'aq'; if(sIdx===1) return 'prep'; return 'trab'; }
+  if(total === 3){ if(sIdx===0) return 'prep'; return 'trab'; }
+  return 'trab';
+}
+function setTypeLabel(t){ return t==='aq'?'🔥 Aquecimento':t==='prep'?'🎯 Preparação':'💪 Trabalho'; }
+function setTypeColor(t){ return t==='aq'?'#f59e0b':t==='prep'?'#0ea5e9':'#00C4CC'; }
+function suggestCarga(e, sIdx, total){
+  const target = e._adjCarga || e.carga || 0;
+  if(!target) return 0;
+  const type = setTypeFor(e, sIdx, total);
+  if(type==='aq') return Math.round(target*0.5);
+  if(type==='prep') return Math.round(target*0.75);
+  return target;
+}
 function renderWsEx(){
   const d = ws.day, e = d.exs[ws.exIdx];
   const total = d.exs.length;
   document.getElementById('wsExNum').textContent = `Exercício ${ws.exIdx+1} / ${total}`;
   document.getElementById('wsPbar').style.width = ((ws.exIdx+1)/total*100)+'%';
   document.getElementById('wsCard').innerHTML = `
-    ${e.img?`<img class="ws-img-real" src="${e.img}" alt="${e.nome}" onerror="this.outerHTML='<div class=\\'ws-img\\'>${e.ic}</div>'">`:`<div class="ws-img">${e.ic}</div>`}
+    <div class="ws-img">${e.ic||'💪'}</div>
     <div class="ws-ex">${e.nome}</div>
-    <div class="ws-meta"><span>${e.sets} × ${e.reps}</span>${e.carga?`<span>${e._adjCarga||e.carga} kg${e._adjCarga?' (ajustado)':''}</span>`:''}<span>Descanso 90s</span></div>
+    <div class="ws-meta"><span>${e.sets} × ${e.reps}</span>${e.carga?`<span>${e._adjCarga||e.carga} kg${e._adjCarga?' (ajustado)':''}</span>`:''}<span>Descanso ${e.descanso||'90s'}</span></div>
     <div class="ws-sets">
-      ${Array.from({length:e.sets}).map((_,s)=>`
-        <div class="ws-set-row">
-          <div class="ws-set-n ${ws.checks[ws.exIdx+'-'+s]?'done':''}" id="wsn-${s}">${s+1}</div>
-          <input placeholder="${e.reps}" inputmode="numeric">
-          <input placeholder="${e.carga||'-'} kg" inputmode="numeric">
-          <button class="ws-set-c ${ws.checks[ws.exIdx+'-'+s]?'done':''}" onclick="wsToggleSet(${s})">✓</button>
-        </div>`).join('')}
+      ${Array.from({length:e.sets}).map((_,s)=>{
+        const k = ws.exIdx+'-'+s;
+        const rec = ws.checks[k];
+        const t = setTypeFor(e, s, e.sets);
+        const sugC = suggestCarga(e, s, e.sets);
+        return `
+        <div class="ws-set-row" style="border-left:3px solid ${setTypeColor(t)}">
+          <div class="ws-set-n ${rec?'done':''}" id="wsn-${s}">${s+1}</div>
+          <div style="display:flex;flex-direction:column;gap:2px;flex:1">
+            <div style="font-size:.62rem;font-weight:700;color:${setTypeColor(t)};text-transform:uppercase;letter-spacing:.04em">${setTypeLabel(t)}</div>
+            <div style="display:flex;gap:6px">
+              <input id="ws-r-${s}" placeholder="${e.reps}" inputmode="numeric" value="${rec?.reps||''}" style="width:60px">
+              <input id="ws-c-${s}" placeholder="${sugC||'-'} kg" inputmode="numeric" value="${rec?.carga||''}" style="width:70px">
+              <input id="ws-rpe-${s}" placeholder="RPE" inputmode="numeric" value="${rec?.rpe||''}" style="width:50px" maxlength="2">
+            </div>
+          </div>
+          <button class="ws-set-c ${rec?'done':''}" onclick="wsToggleSet(${s})">✓</button>
+        </div>`;
+      }).join('')}
     </div>
     ${e.hint?`<div style="margin-top:14px;padding:10px 12px;background:rgba(0,196,204,.12);border-left:3px solid var(--cyan);border-radius:0 10px 10px 0;font-size:.8rem;color:#cfeef0">💡 ${e.hint}</div>`:''}
   `;
 }
 function wsToggleSet(s){
   const k = ws.exIdx+'-'+s;
-  ws.checks[k] = !ws.checks[k];
-  document.getElementById('wsn-'+s).classList.toggle('done', ws.checks[k]);
-  event.currentTarget.classList.toggle('done', ws.checks[k]);
-  if(ws.checks[k]) startRest();
+  const e = ws.day.exs[ws.exIdx];
+  if(ws.checks[k]){
+    delete ws.checks[k];
+    document.getElementById('wsn-'+s).classList.remove('done');
+    event.currentTarget.classList.remove('done');
+    return;
+  }
+  const reps = document.getElementById('ws-r-'+s)?.value.trim() || e.reps;
+  const carga = +(document.getElementById('ws-c-'+s)?.value.trim() || suggestCarga(e, s, e.sets));
+  const rpe = +(document.getElementById('ws-rpe-'+s)?.value.trim() || 7);
+  const tipo = setTypeFor(e, s, e.sets);
+  ws.checks[k] = {reps, carga, rpe, tipo, ex:e.nome};
+  document.getElementById('wsn-'+s).classList.add('done');
+  event.currentTarget.classList.add('done');
+  startRest(+(e.descanso||'90').replace(/[^0-9]/g,'') || 90);
 }
 function nextEx(){
   if(ws.exIdx >= ws.day.exs.length-1){ finishWorkout(); return; }
   ws.exIdx++; renderWsEx();
 }
 function prevEx(){ if(ws.exIdx>0){ ws.exIdx--; renderWsEx(); } }
-function startRest(){
-  ws.restT = 90;
+function startRest(seconds){
+  ws.restT = seconds || 90;
   document.getElementById('wsRestN').textContent = ws.restT;
   document.getElementById('wsRest').classList.add('show');
   clearInterval(ws.restInt);
@@ -3795,7 +4069,6 @@ function finishWorkout(){
   const c = state.clientData[session.activeClient || session.userId];
   const dur = Math.floor((Date.now()-ws.t0)/60000);
   ws._dur = dur;
-  // Pedir RPE antes de gravar
   modal(`<h3>Sessão concluída · ${dur} min</h3>
     <p class="sub">Como foi a sessão? Esta info alimenta o motor de heterocronia para a próxima.</p>
     <label>RPE (esforço percebido 1-10)</label>
@@ -3818,13 +4091,55 @@ function saveFinishedWorkout(){
   const groups = detectGroups(ws.day.dia, ws.day.exs);
   if(rpe>=7 && (groups.includes('legs')||groups.includes('back')||groups.includes('chest'))) groups.push('cns');
   const type = detectType(ws.day.exs);
-  const volume = ws.day.exs.reduce((s,e)=>s + (e.sets*parseReps(e.reps)*(e.carga||0)),0);
+  const seriesLog = Object.entries(ws.checks).map(([k,v])=>{
+    const [exIdx, sIdx] = k.split('-').map(Number);
+    const ex = ws.day.exs[exIdx];
+    return {ex:ex?.nome||v.ex, sIdx, reps:v.reps, carga:v.carga, rpe:v.rpe, tipo:v.tipo};
+  });
+  const trabSeries = seriesLog.filter(s=>s.tipo==='trab');
+  const volumeReal = trabSeries.reduce((acc,s)=>acc + (Number(s.reps.toString().match(/\d+/)?.[0])||0)*(s.carga||0), 0);
+  const volume = volumeReal || ws.day.exs.reduce((s,e)=>s + (e.sets*parseReps(e.reps)*(e.carga||0)),0);
   c.sessions = c.sessions || [];
-  c.sessions.unshift({date:new Date().toISOString(),type,rpe,groups:[...new Set(groups)],volume,duration:ws._dur,notes:note||ws.day.dia});
-  c.treino.historico.unshift({date:new Date().toISOString().slice(0,10),exs:ws.day.dia.split('·')[1].trim(),semaforo:sem,feedback:note||`${type} · RPE ${rpe} · ${ws._dur} min`});
+  c.sessions.unshift({
+    date:new Date().toISOString(), treino: ws.day.dia,
+    type, rpe, groups:[...new Set(groups)],
+    volume, duration:ws._dur, seriesLog,
+    setsComp: seriesLog.length,
+    setsTotal: ws.day.exs.reduce((s,e)=>s+e.sets,0),
+    notes:note||ws.day.dia
+  });
+  c.sessions = c.sessions.slice(0,60);
+  c.treino.historico.unshift({date:new Date().toISOString().slice(0,10),exs:ws.day.dia,semaforo:sem,feedback:note||`${type} · RPE ${rpe} · ${ws._dur} min · ${seriesLog.length}/${ws.day.exs.reduce((s,e)=>s+e.sets,0)} séries`});
   c.streak = (c.streak||0)+1;
+  c.checkin = c.checkin || {};
+  c.checkin.semaforo = sem;
+  c.checkin.date = new Date().toISOString().slice(0,10);
   save(); closeModal(); exitWorkout();
-  toast(`Sessão registada · RPE ${rpe}`);
+  toast(`Sessão registada · ${seriesLog.length} séries · RPE ${rpe}`);
+}
+
+/* ============ AUTO-SEMÁFORO BASEADO EM MÉTRICAS ============ */
+function computeAutoSemaforo(c){
+  if(!c || !Array.isArray(c.healthMetrics) || !c.healthMetrics.length) return null;
+  const last = c.healthMetrics[c.healthMetrics.length-1];
+  const recent = c.healthMetrics.slice(-7);
+  const avg = (key)=>{
+    const vals = recent.map(m=>m[key]).filter(v=>v!=null);
+    return vals.length ? vals.reduce((a,b)=>a+b,0)/vals.length : null;
+  };
+  const flags = [];
+  if(last.sono!=null && last.sono < 6) flags.push('sono baixo');
+  const fcAvg = avg('fcRep');
+  if(last.fcRep!=null && fcAvg && last.fcRep > fcAvg*1.1) flags.push('FC repouso elevada');
+  const hrvAvg = avg('hrv');
+  if(last.hrv!=null && hrvAvg && last.hrv < hrvAvg*0.85) flags.push('HRV baixa');
+  if(last.sonoProf!=null && last.sonoProf < 1) flags.push('sono profundo baixo');
+  if(last.spo2!=null && last.spo2 < 95) flags.push('SpO₂ baixa');
+  const n = flags.length;
+  if(n===0) return {sem:'verde',flags,sugestao:'Pronto para treinar a 100%.'};
+  if(n===1) return {sem:'amarelo',flags,sugestao:`${flags.join(', ')} — reduzir 5-10% da carga.`};
+  if(n===2) return {sem:'laranja',flags,sugestao:`${flags.join(', ')} — sessão técnica, -15% carga ou -1 série.`};
+  return {sem:'vermelho',flags,sugestao:`${flags.join(', ')} — DESCANSAR ou só mobilidade.`};
 }
 function exitWorkout(){
   clearInterval(ws.clockInt); clearInterval(ws.restInt);
@@ -3855,7 +4170,7 @@ function getBadges(c,u){
 let _fbReady = false;
 let _fbDoc = null;
 let _fbSaveTimer = null;
-let _fbSuppress = false; // evitar loop quando aplicamos snapshot remoto
+let _fbSuppress = false;
 
 const FIREBASE_CONFIG = {
   apiKey: "AIzaSyA7eZY_OeTvWi9sVycxwM6BD-Gl_zz4LUo",
@@ -3878,8 +4193,6 @@ async function firebaseBoot(){
     const db = fs.getFirestore(app);
     await auth.signInAnonymously(a);
     _fbDoc = fs.doc(db,'pwa_state','main');
-
-    // 1ª leitura: se há state na cloud, substitui o local; senão grava o nosso
     const snap = await fs.getDoc(_fbDoc);
     if(snap.exists()){
       _fbSuppress = true;
@@ -3888,15 +4201,12 @@ async function firebaseBoot(){
       _fbSuppress = false;
       const v = document.getElementById('view-app');
       if(v && v.classList.contains('show') && session.tab) selectTab(session.tab);
-      // Se a migração mudou alguma coisa, propaga para a cloud
       if(state.schemaVersion >= 2){ await fs.setDoc(_fbDoc, { state, ts: Date.now() }); }
     } else {
       await fs.setDoc(_fbDoc, { state, ts: Date.now() });
     }
     _fbReady = true;
     showSyncBadge('🟢 sync cloud');
-
-    // Listener em tempo real
     fs.onSnapshot(_fbDoc,(d)=>{
       if(!d.metadata.hasPendingWrites && d.exists()){
         _fbSuppress = true;
@@ -3910,8 +4220,6 @@ async function firebaseBoot(){
         _fbSuppress = false;
       }
     });
-
-    // Substitui save() para também escrever na cloud (debounced)
     window.__origSave = save;
     save = function(){
       window.__origSave();
@@ -3939,14 +4247,12 @@ function showSyncBadge(txt){
   b.textContent = txt;
 }
 
-/* Service Worker */
 if('serviceWorker' in navigator){
   window.addEventListener('load',()=>{
     navigator.serviceWorker.register('sw.js').catch(()=>{});
   });
 }
 
-/* PWA install prompt */
 let deferredInstall = null;
 window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
@@ -3971,22 +4277,15 @@ window.addEventListener('appinstalled', () => {
 });
 
 /* ============ GATE de acesso ao espaço Blue ON ============ */
-// Hash SHA-256 da senha actual (default: "blueon"). Editar no Perfil do Gestor.
-const GATE_HASH_DEFAULT = '7a6d29ab834a3ecb5f26316612ac2983f6e1c594e45b7518885b91727d0dafa8'; // sha256("blueon")
+const GATE_HASH_DEFAULT = '7a6d29ab834a3ecb5f26316612ac2983f6e1c594e45b7518885b91727d0dafa8';
 async function sha256(text){
   const data = new TextEncoder().encode(text);
   const buf = await crypto.subtle.digest('SHA-256', data);
   return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('');
 }
-function gateEnabled(){
-  return localStorage.getItem('blueon_gate_disabled') !== '1';
-}
-function gatePassed(){
-  return localStorage.getItem('blueon_gate_ok') === '1';
-}
-function getGateHash(){
-  return localStorage.getItem('blueon_gate_hash') || GATE_HASH_DEFAULT;
-}
+function gateEnabled(){ return localStorage.getItem('blueon_gate_disabled') !== '1'; }
+function gatePassed(){ return localStorage.getItem('blueon_gate_ok') === '1'; }
+function getGateHash(){ return localStorage.getItem('blueon_gate_hash') || GATE_HASH_DEFAULT; }
 async function checkGate(){
   const v = (document.getElementById('gate-pwd').value||'').trim();
   if(!v){ document.getElementById('gate-err').textContent='Introduz a senha.'; return; }
