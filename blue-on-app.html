@@ -775,9 +775,12 @@ a{color:var(--cyan);text-decoration:none}
     <div class="ws-pmeta"><span id="wsExNum">0/0</span><span id="wsTime">00:00</span></div>
   </div>
   <div class="ws-mid"><div class="ws-card" id="wsCard"></div></div>
-  <div class="ws-foot">
-    <button class="ws-skip" onclick="prevEx()">← Anterior</button>
-    <button class="ws-next" onclick="nextEx()">Próximo →</button>
+  <div class="ws-foot" style="display:flex;flex-direction:column;gap:6px">
+    <div style="display:flex;gap:8px">
+      <button class="ws-skip" style="flex:1" onclick="prevEx()">← Anterior</button>
+      <button class="ws-next" style="flex:1" onclick="nextEx()">Próximo →</button>
+    </div>
+    <button class="ws-next" style="width:100%;background:#10b981;color:#fff;font-weight:900" onclick="finishWorkout()">✓ Concluir treino · registar sessão</button>
   </div>
   <div class="ws-rest" id="wsRest">
     <div class="rl">Descanso</div>
@@ -851,7 +854,7 @@ const DEFAULT = ()=> ({
   pending:[],
   clientData:{
     u1:{
-      anamnese:{nome:'Jota Pereira',sexo:'M',idade:43,altura:178,peso:82,
+      anamnese:{nome:'Jota Pereira',sexo:'M',idade:45,altura:178,peso:74,
         objetivos:'Hipertrofia + Funcional · Protocolo Bluefitness 4x/sem',
         exp:'Treino sistematizado >15 anos',contexto:'Ginásio · gestão Blue ON',
         diasSem:5,minSes:75,
@@ -1658,6 +1661,25 @@ function applyMigrations(s){
     });
     s.schemaVersion = 6;
   }
+  if(s.schemaVersion < 7){
+    // Correções pontuais que devem propagar para TODOS os atletas
+    const def = DEFAULT();
+    // Jota: peso 74 (não 82), idade 45 (não 43) — corrigido no perfil
+    if(s.clientData && s.clientData.u1 && s.clientData.u1.anamnese){
+      s.clientData.u1.anamnese.peso = 74;
+      s.clientData.u1.anamnese.idade = 45;
+      s.clientData.u1.anamnese.objetivos = 'Hipertrofia + Funcional · Protocolo Bluefitness 4x/sem';
+    }
+    // Forçar refresh do plano do Jota se for o antigo (sem A/B/C/D)
+    if(s.clientData && s.clientData.u1 && def.clientData.u1){
+      const planoJ = s.clientData.u1.treino?.plano || [];
+      const hasOldPlan = planoJ.some(d=>/Seg ·|com Joana/i.test(d.dia||''));
+      if(hasOldPlan){
+        s.clientData.u1.treino = def.clientData.u1.treino;
+      }
+    }
+    s.schemaVersion = 7;
+  }
   // SANITIZAÇÃO FINAL: remover undefined recursivamente (Firestore rejeita undefined)
   function sanitize(o){
     if(o === undefined) return null;
@@ -2342,11 +2364,20 @@ function renderTreino(){
   const c = state.clientData[session.activeClient || session.userId];
   if(!c){ document.getElementById('p-treino').innerHTML = empty(); return; }
   const activeIdx = session._exDay ?? 0;
+  // Detectar dia da semana atual para destacar treino de hoje
+  const todaySession = getTodaysSession(c);
+  const todayIdx = todaySession ? c.treino.plano.findIndex(d=>d===todaySession) : -1;
+  const meta = c.treino.meta || {};
   document.getElementById('p-treino').innerHTML = `
     <div class="card">
-      <div class="card-head"><h2>Plano semanal</h2></div>
-      <div style="padding:0 12px 4px"><div class="pills">
-        ${c.treino.plano.map((d,i)=>`<button class="pill ${i===activeIdx?'active':''}" onclick="setDay(${i})">${d.dia}</button>`).join('')}
+      <div class="card-head"><h2>Plano semanal · ${c.treino.plano.length} dias</h2></div>
+      <div class="card-body" style="padding-top:0">
+        ${meta.rotacao?`<div style="font-size:.74rem;color:var(--muted);margin-bottom:8px">🔁 ${meta.rotacao}</div>`:''}
+        ${meta.foco?`<div style="font-size:.74rem;color:var(--muted);margin-bottom:8px">🎯 ${meta.foco}</div>`:''}
+        ${todayIdx>=0?`<button class="btn btn-primary" style="width:100%;margin-bottom:8px" onclick="setDay(${todayIdx});scrollTo({top:document.getElementById('trDayContent').offsetTop-80,behavior:'smooth'})">▶ Treino de hoje · ${todaySession.dia}</button>`:''}
+      </div>
+      <div style="padding:0 12px 12px"><div class="pills" style="flex-wrap:wrap;gap:6px">
+        ${c.treino.plano.map((d,i)=>`<button class="pill ${i===activeIdx?'active':''}" style="${i===todayIdx?'border:2px solid var(--cyan)':''}" onclick="setDay(${i})">${i===todayIdx?'📍 ':''}${d.dia.replace(/^Treino \w+ · /,'').slice(0,30)}</button>`).join('')}
       </div></div>
     </div>
     <div id="trDayContent"></div>
