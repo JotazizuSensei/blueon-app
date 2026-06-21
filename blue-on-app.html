@@ -1601,6 +1601,56 @@ function applyMigrations(s){
     }
     s.schemaVersion = 5;
   }
+  if(s.schemaVersion < 6){
+    const def = DEFAULT();
+    // Atualizar telefones e emails REAIS
+    const phoneUpdates = {
+      'u6': {phone:'915779847'},
+      'u7': {phone:'915430635', email:'luisoaresfreire@gmail.com'},
+      'u8': {phone:'911914246', email:'tduarte.carmo@gmail.com'},
+    };
+    (s.users||[]).forEach(u=>{
+      const upd = phoneUpdates[u.id];
+      if(upd){
+        u.phone = upd.phone;
+        if(upd.email) u.email = upd.email;
+      }
+    });
+    // Forçar update de TUDO o que é planos/treino/nutrição para todos os clientes ativos
+    s.clientData = s.clientData || {};
+    ['u1','u4','u5','u6','u7','u8'].forEach(uid=>{
+      if(def.clientData[uid]){
+        // Manter avaliações + sessions + healthMetrics + photos + messages (são acumulativos do user)
+        const old = s.clientData[uid] || {};
+        const novo = def.clientData[uid];
+        s.clientData[uid] = {
+          ...novo,
+          // Preservar tudo o que o utilizador acumulou
+          avaliacoes: (old.avaliacoes && old.avaliacoes.length) ? old.avaliacoes : novo.avaliacoes,
+          sessions: old.sessions || [],
+          healthMetrics: old.healthMetrics || [],
+          photos: old.photos || [],
+          wearables: old.wearables || novo.wearables,
+          progressionSuggestions: old.progressionSuggestions || [],
+          progressionLog: old.progressionLog || [],
+          messages: (old.messages && old.messages.length) ? old.messages : novo.messages,
+          checkin: old.checkin || novo.checkin,
+          streak: old.streak || 0,
+          // Forçar update do TREINO (este é o ponto principal — tira repetições, mete A/B/C/D Jota, A-F Joana etc)
+          treino: novo.treino,
+          // Forçar update da NUTRIÇÃO (refeições reais Edo, restrições Joana, etc)
+          nutricao: novo.nutricao,
+          // Forçar update da ROTINA DIÁRIA
+          dailyRoutine: novo.dailyRoutine,
+          // Anamnese: manter o que o user editou + completar com defaults se faltar campos
+          anamnese: {...(novo.anamnese||{}), ...(old.anamnese||{})},
+          // Recovery profile
+          recoveryProfile: old.recoveryProfile || novo.recoveryProfile,
+        };
+      }
+    });
+    s.schemaVersion = 6;
+  }
   return s;
 }
 state = applyMigrations(state);
