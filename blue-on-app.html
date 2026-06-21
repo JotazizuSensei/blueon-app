@@ -2966,9 +2966,37 @@ function renderPerfil(){
 
 function returnToGestor(){
   session.role='gestor';
-  const g = state.users.find(u=>u.role==='gestor');
-  session.userId=g.id; session._returnAsGestor=false;
-  buildHeader(); buildNav(); selectTab('cliente');
+  const u = state.users.find(x=>x.id===session.userId);
+  // Se o utilizador atual já é gestor (caso enterAsAthlete), manter o mesmo userId
+  if(u && u.role==='gestor'){
+    // Sem mudança de userId
+  } else {
+    // Buscar o gestor que voltava
+    const g = state.users.find(x=>x.id===session._gestorReturnId) || state.users.find(x=>x.role==='gestor');
+    if(g) session.userId = g.id;
+  }
+  session._returnAsGestor=false;
+  session._gestorReturnId=null;
+  session.activeClient=null;
+  buildHeader(); buildNav(); selectTab('coach');
+  toast('Voltaste ao modo gestor.');
+}
+
+function enterAsAthlete(){
+  // Permite ao gestor entrar no próprio clientData como se fosse atleta
+  const u = state.users.find(x=>x.id===session.userId);
+  if(!u || u.role!=='gestor'){ return; }
+  if(!state.clientData[u.id]){
+    toast('Não tens dados de atleta ainda.');
+    return;
+  }
+  session._gestorReturnId = u.id;
+  session._returnAsGestor = true;
+  session.role = 'cliente';
+  session.activeClient = u.id;
+  // Não mudamos userId — continuamos a ser o utilizador, mas em modo cliente
+  buildHeader(); buildNav(); selectTab('hoje');
+  toast('Modo atleta · Definições → Voltar quando quiseres');
 }
 
 function changePin(){
@@ -4354,12 +4382,29 @@ function renderDash(){
 /* ============ GESTOR: COACH (settings) ============ */
 function renderCoach(){
   const u = state.users.find(x=>x.id===session.userId);
+  const hasOwnData = state.clientData && state.clientData[u.id];
   document.getElementById('p-coach').innerHTML = `
     <div class="card"><div class="card-body" style="text-align:center;padding:22px">
       <div class="clist-av" style="width:74px;height:74px;font-size:1.6rem;margin:0 auto 10px">${initials(u.name)}</div>
       <div style="font-weight:900;font-size:1.05rem;color:var(--blue)">${u.name}</div>
       <div style="font-size:.78rem;color:var(--muted)">Gestor · ${u.phone}</div>
     </div></div>
+
+    ${hasOwnData ? `
+      <div class="sect-title">O MEU TREINO (modo atleta)</div>
+      <div class="card" style="background:linear-gradient(135deg,#071B3A,#0d2e5c);border:0;color:#fff;overflow:hidden">
+        <div class="card-body" style="padding:18px 20px;color:#fff">
+          <div style="display:flex;align-items:center;gap:12px;margin-bottom:10px">
+            <div style="font-size:1.8rem">🏋️</div>
+            <div style="min-width:0">
+              <div style="font-weight:900;font-size:1rem;color:#fff;line-height:1.15">Ver/treinar o meu plano</div>
+              <div style="font-size:.72rem;color:#a7bdda;margin-top:2px">Entra no perfil de atleta para ver Hoje, Treino, Nutrição, Progresso e Perfil</div>
+            </div>
+          </div>
+          <button class="btn btn-primary" style="width:100%;background:var(--cyan);color:#071B3A" onclick="enterAsAthlete()">▶ Entrar como atleta</button>
+        </div>
+      </div>` : ''}
+
     <div class="sect-title">DADOS DA EMPRESA</div>
     <div class="card"><div class="card-body">
       <label>WhatsApp Blue ON</label><input value="${WHATS_PHONE}" readonly>
