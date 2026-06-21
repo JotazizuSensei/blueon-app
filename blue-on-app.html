@@ -1647,11 +1647,30 @@ function applyMigrations(s){
           // Recovery profile
           recoveryProfile: old.recoveryProfile || novo.recoveryProfile,
         };
+        // Garantir SEMPRE wearables como objeto (Firestore não aceita undefined)
+        const defW = {garmin:{connected:false},apple:{connected:false},strava:{connected:false},fitbit:{connected:false},googleFit:{connected:false}};
+        if(!s.clientData[uid].wearables || typeof s.clientData[uid].wearables !== 'object'){
+          s.clientData[uid].wearables = defW;
+        }
+        // healthMetrics array sempre
+        if(!Array.isArray(s.clientData[uid].healthMetrics)) s.clientData[uid].healthMetrics = [];
       }
     });
     s.schemaVersion = 6;
   }
-  return s;
+  // SANITIZAÇÃO FINAL: remover undefined recursivamente (Firestore rejeita undefined)
+  function sanitize(o){
+    if(o === undefined) return null;
+    if(o === null || typeof o !== 'object') return o;
+    if(Array.isArray(o)) return o.map(sanitize).filter(v=>v!==undefined);
+    const out = {};
+    for(const k of Object.keys(o)){
+      const v = sanitize(o[k]);
+      if(v !== undefined) out[k] = v;
+    }
+    return out;
+  }
+  return sanitize(s);
 }
 state = applyMigrations(state);
 
