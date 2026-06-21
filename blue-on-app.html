@@ -3661,26 +3661,39 @@ function renderCliSub(sub){
       <button class="btn btn-primary" style="width:100%;margin-bottom:12px" onclick="runProgressionEngine('${u.id}')">📊 Calcular sugestões para o próximo bloco</button>
 
       ${sugs.length===0 ? `<div class="card"><div class="card-body" style="text-align:center;padding:24px;color:var(--muted);font-size:.86rem">Sem sugestões pendentes. Carrega no botão acima para o motor analisar os dados recentes.</div></div>` :
-        sugs.map((s,i)=>{
-          const colMap={subir:'#16a34a',descer:'#dc2626',volume:'#ca8a04',deload:'#3b82f6',nutricao:'#7c3aed'};
-          const col = colMap[s.tipo] || '#5d7493';
-          return `<div class="card" style="margin-bottom:10px;border-left:4px solid ${col}"><div class="card-body" style="padding:14px 16px">
-            <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:8px">
-              <span style="font-size:1.4rem">${s.icon}</span>
-              <div style="flex:1">
-                <div style="font-weight:900;font-size:.95rem;color:var(--blue)">${s.titulo}</div>
-                <div style="font-size:.74rem;color:var(--muted);margin-top:2px">${s.contexto}</div>
-              </div>
-              <span class="tag" style="background:${col}22;color:${col};font-weight:900;font-size:.66rem;text-transform:uppercase;letter-spacing:.04em">${s.tipo}</span>
-            </div>
-            <div style="background:var(--bg);padding:10px 12px;border-radius:11px;font-size:.84rem;color:#3a5278;line-height:1.5;margin-bottom:10px">${s.proposta}</div>
-            <div style="font-size:.72rem;color:var(--muted);margin-bottom:10px"><b>Análise:</b> ${s.raciocinio}</div>
-            <div style="display:flex;gap:6px">
-              <button class="btn btn-primary" style="flex:1;padding:9px;font-size:.82rem" onclick="applyProgression(${i})">✓ Aplicar</button>
-              <button class="pill" style="padding:9px 14px" onclick="dismissProgression(${i})">✗ Ignorar</button>
-            </div>
-          </div></div>`;
-        }).join('')
+        (()=>{
+          // Agrupar por categoria
+          const grupos = {};
+          sugs.forEach((s,i)=>{
+            const cat = s.categoria || (s.tipo==='subir'||s.tipo==='descer'||s.tipo==='volume'?'treino':s.tipo);
+            grupos[cat] = grupos[cat] || [];
+            grupos[cat].push({...s, _i:i});
+          });
+          const colMap={treino:'#16a34a',subir:'#16a34a',descer:'#dc2626',volume:'#ca8a04',deload:'#3b82f6',nutricao:'#7c3aed','nutrição':'#7c3aed',suplementação:'#ec4899',recuperação:'#0ea5e9',avaliações:'#f59e0b',aderência:'#6366f1'};
+          const labels={treino:'🏋️ Treino','nutrição':'🥗 Nutrição',suplementação:'💊 Suplementação',recuperação:'😴 Recuperação',avaliações:'📏 Avaliações',aderência:'📅 Aderência'};
+          return Object.entries(grupos).map(([cat, items])=>`
+            <div class="sect-title" style="margin-top:14px">${labels[cat]||cat.toUpperCase()} <span style="color:var(--muted);font-weight:600">· ${items.length}</span></div>
+            ${items.map(s=>{
+              const col = colMap[s.categoria] || colMap[s.tipo] || '#5d7493';
+              return `<div class="card" style="margin-bottom:10px;border-left:4px solid ${col}"><div class="card-body" style="padding:14px 16px">
+                <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:8px">
+                  <span style="font-size:1.4rem">${s.icon}</span>
+                  <div style="flex:1">
+                    <div style="font-weight:900;font-size:.95rem;color:var(--blue)">${s.titulo}</div>
+                    <div style="font-size:.74rem;color:var(--muted);margin-top:2px">${s.contexto}</div>
+                  </div>
+                  <span class="tag" style="background:${col}22;color:${col};font-weight:900;font-size:.66rem;text-transform:uppercase;letter-spacing:.04em">${s.tipo}</span>
+                </div>
+                <div style="background:var(--bg);padding:10px 12px;border-radius:11px;font-size:.84rem;color:#3a5278;line-height:1.5;margin-bottom:10px">${s.proposta}</div>
+                <div style="font-size:.72rem;color:var(--muted);margin-bottom:10px"><b>Análise:</b> ${s.raciocinio}</div>
+                <div style="display:flex;gap:6px">
+                  <button class="btn btn-primary" style="flex:1;padding:9px;font-size:.82rem" onclick="applyProgression(${s._i})">✓ Aplicar</button>
+                  <button class="pill" style="padding:9px 14px" onclick="dismissProgression(${s._i})">✗ Ignorar</button>
+                </div>
+              </div></div>`;
+            }).join('')}
+          `).join('');
+        })()
       }
 
       ${log.length>0 ? `
@@ -4018,13 +4031,140 @@ function runProgressionEngine(uid){
   // Regra 5: alta taxa de falha
   if(sessions30d.length < 4 && (c.treino?.plano||[]).length>0){
     sugs.push({
-      tipo:'deload', icon:'⚠️',
+      tipo:'deload', icon:'⚠️', categoria:'aderência',
       titulo:'Aderência baixa',
       contexto:`${sessions30d.length} sessões em 30 dias`,
       proposta:`Considera reduzir frequência semanal ou simplificar o plano (menos exercícios por sessão).`,
       raciocinio:`Apenas ${sessions30d.length} sessões registadas em 30 dias — sinal de plano demasiado exigente ou horários incompatíveis.`,
       target:{flag:'review_plan'}
     });
+  }
+
+  // Regra 6: Recuperação comprometida via health metrics
+  const auto = (typeof computeAutoSemaforo === 'function') ? computeAutoSemaforo(c) : null;
+  if(auto && (auto.sem==='laranja' || auto.sem==='vermelho')){
+    sugs.push({
+      tipo:'recovery', icon:auto.sem==='vermelho'?'🔴':'🟠', categoria:'recuperação',
+      titulo:`Recuperação comprometida (${auto.sem})`,
+      contexto:`Métricas: ${auto.flags.join(', ')}`,
+      proposta:auto.sugestao,
+      raciocinio:`Auto-semáforo: ${auto.flags.length} sinal(is) de fadiga acumulada nas últimas 7 medições.`,
+      target:{flag:'rest_day'}
+    });
+  }
+
+  // Regra 7: Sono persistente baixo
+  if(Array.isArray(c.healthMetrics) && c.healthMetrics.length >= 5){
+    const recentSono = c.healthMetrics.slice(-7).map(m=>m.sono).filter(v=>v!=null);
+    if(recentSono.length>=3){
+      const avgSono = recentSono.reduce((a,b)=>a+b,0)/recentSono.length;
+      if(avgSono < 6.5){
+        sugs.push({
+          tipo:'sono', icon:'😴', categoria:'recuperação',
+          titulo:'Sono insuficiente',
+          contexto:`Média ${avgSono.toFixed(1)}h/noite nos últimos ${recentSono.length} dias`,
+          proposta:`Falar com cliente sobre <b>higiene de sono</b> · considerar magnésio bisglicinato 300mg ao jantar · reduzir cafés após 14h.`,
+          raciocinio:`Sono &lt;7h sustentado prejudica recuperação, síntese proteica e progressão. Prioridade nº1 antes de subir cargas.`,
+          target:{flag:'sleep_coaching'}
+        });
+      }
+    }
+  }
+
+  // Regra 8: Estagnação peso/composição (3 avaliações sem mudança significativa)
+  if((c.avaliacoes||[]).length >= 3){
+    const last3 = c.avaliacoes.slice(-3);
+    const dPeso = Math.abs(last3[2].peso - last3[0].peso);
+    const dBF = last3.every(a=>a.bf!=null) ? Math.abs(last3[2].bf - last3[0].bf) : null;
+    const obj = (u.objective||'').toLowerCase();
+    const wantsChange = /emagrec|perda|cut|hipertrof|ganho|massa/.test(obj);
+    if(dPeso < 0.5 && (dBF==null || dBF<0.5) && wantsChange){
+      sugs.push({
+        tipo:'estagnacao', icon:'📊', categoria:'avaliações',
+        titulo:'Plateau detetado',
+        contexto:`3 avaliações · Δpeso ${dPeso.toFixed(1)}kg${dBF!=null?` · ΔBF ${dBF.toFixed(1)}%`:''}`,
+        proposta:`Considera mudar bloco de treino (rotação A→B), <b>refeed</b> de 1-2 dias, ou ajustar ±200 kcal conforme objetivo.`,
+        raciocinio:`3 avaliações sem mudança significativa enquanto o objetivo é mudar. O corpo adaptou-se — precisa de novo estímulo.`,
+        target:{flag:'change_block'}
+      });
+    }
+  }
+
+  // Regra 9: Macros desalinhados com objetivo
+  if(c.nutricao && c.nutricao.macros && c.anamnese?.peso){
+    const p = c.nutricao.macros.p;
+    const peso = c.anamnese.peso;
+    const ppk = p/peso;
+    const obj = (u.objective||'').toLowerCase();
+    if(/hipertrof|ganho.*massa|fisicultur|cultur/.test(obj) && ppk < 1.8){
+      sugs.push({
+        tipo:'nutricao', icon:'🥩', categoria:'nutrição',
+        titulo:'Proteína sub-óptima para hipertrofia',
+        contexto:`${p}g/dia (${ppk.toFixed(2)}g/kg) · objetivo: hipertrofia`,
+        proposta:`Subir proteína para <b>${Math.round(peso*2)}g/dia</b> (2 g/kg).`,
+        raciocinio:`Hipertrofia ideal com 1.8-2.2 g/kg de proteína. Está em ${ppk.toFixed(2)} g/kg.`,
+        target:{nut:true, proteinPerKg:2.0}
+      });
+    }
+    if(/emagrec|perda|cut|definição/.test(obj) && ppk < 1.6){
+      sugs.push({
+        tipo:'nutricao', icon:'🥩', categoria:'nutrição',
+        titulo:'Proteína baixa para preservar massa em défice',
+        contexto:`${p}g/dia (${ppk.toFixed(2)}g/kg) · objetivo: emagrecimento`,
+        proposta:`Subir proteína para <b>${Math.round(peso*1.8)}g/dia</b> (1.8 g/kg) para preservar massa muscular.`,
+        raciocinio:`Em défice, proteína &gt;1.6 g/kg é o que preserva massa magra. Está em ${ppk.toFixed(2)} g/kg.`,
+        target:{nut:true, proteinPerKg:1.8}
+      });
+    }
+  }
+
+  // Regra 10: Suplementação vazia ou básica conforme objetivo
+  if(!c.nutricao?.supl || c.nutricao.supl.length<2){
+    const obj = (u.objective||'').toLowerCase();
+    const basicos = ['Whey protein (25-30g pós-treino)', 'Creatina monohidratada (5g/dia)'];
+    if(/hipertrof|ganho|cultur/.test(obj)) basicos.push('Ómega 3 (2g EPA+DHA · almoço)');
+    if(/emagrec|cut/.test(obj)) basicos.push('Multivitamínico (manhã)');
+    sugs.push({
+      tipo:'suplementacao', icon:'💊', categoria:'suplementação',
+      titulo:'Suplementação básica em falta',
+      contexto:`${c.nutricao?.supl?.length || 0} suplementos definidos`,
+      proposta:`Adicionar: ${basicos.map(s=>'<b>'+s+'</b>').join(' · ')}`,
+      raciocinio:`Stack mínimo evidenciado para o objetivo. Custo-benefício alto.`,
+      target:{flag:'add_supl'}
+    });
+  }
+
+  // Regra 11: Última avaliação há mais de 30 dias
+  if((c.avaliacoes||[]).length>0){
+    const last = c.avaliacoes[c.avaliacoes.length-1];
+    const daysSince = Math.floor((now - new Date(last.date).getTime())/86400000);
+    if(daysSince > 30){
+      sugs.push({
+        tipo:'avaliacao', icon:'📏', categoria:'avaliações',
+        titulo:'Avaliação em atraso',
+        contexto:`Última avaliação há ${daysSince} dias`,
+        proposta:`Agendar nova avaliação corporal — peso, perímetros, bioimpedância se disponível.`,
+        raciocinio:`Avaliações regulares (cada 4 semanas) são essenciais para monitorizar progresso e ajustar plano.`,
+        target:{flag:'schedule_eval'}
+      });
+    }
+  }
+
+  // Regra 12: Hidratação baixa registada
+  if(Array.isArray(c.healthMetrics) && c.nutricao?.hidrat){
+    // Sem tracking direto de água; usar peso e clima como proxy. Recomendação geral se peso > 80kg e hidrat < 3L
+    const peso = c.anamnese?.peso || 70;
+    const alvoAgua = peso >= 80 ? 3.5 : peso >= 60 ? 3 : 2.5;
+    if(c.nutricao.hidrat < alvoAgua){
+      sugs.push({
+        tipo:'hidratacao', icon:'💧', categoria:'nutrição',
+        titulo:'Hidratação abaixo do recomendado',
+        contexto:`Alvo atual ${c.nutricao.hidrat}L · sugerido ${alvoAgua}L`,
+        proposta:`Subir alvo de hidratação para <b>${alvoAgua}L/dia</b>.`,
+        raciocinio:`Para ${peso}kg, a referência mínima é ${alvoAgua}L. Em treino intenso, soma-se 0.5L extra.`,
+        target:{nut:true, hidrat:alvoAgua}
+      });
+    }
   }
 
   c.progressionSuggestions = sugs;
@@ -4044,16 +4184,37 @@ function applyProgression(idx){
     const ex = c.treino.plano[s.target.di].exs[s.target.ei];
     ex[s.target.key] = s.target.newValue;
   } else if(s.target.nut){
-    c.nutricao.alvo = (c.nutricao.alvo||1700) + (s.target.deltaKcal||0);
+    if(s.target.deltaKcal != null) c.nutricao.alvo = (c.nutricao.alvo||1700) + s.target.deltaKcal;
     if(s.target.proteinPerKg && c.anamnese?.peso){
       c.nutricao.macros.p = Math.round(c.anamnese.peso * s.target.proteinPerKg);
     }
+    if(s.target.hidrat != null){
+      c.nutricao.hidrat = s.target.hidrat;
+    }
+  } else if(s.target.flag === 'add_supl'){
+    // Suplementação básica conforme objetivo
+    const obj = (u.objective||'').toLowerCase();
+    c.nutricao = c.nutricao || {refeicoes:[],supl:[],compras:[]};
+    c.nutricao.supl = c.nutricao.supl || [];
+    const add = (nome, dose, hora, obs)=>{
+      if(!c.nutricao.supl.find(x=>x.nome===nome)){
+        c.nutricao.supl.push({nome,dose,hora,obs:obs||''});
+      }
+    };
+    add('Whey protein','25-30g','pós-treino','');
+    add('Creatina monohidratada','5g','qualquer hora','todos os dias');
+    if(/hipertrof|ganho|cultur/.test(obj)) add('Ómega 3','2g EPA+DHA','almoço','');
+    if(/emagrec|cut/.test(obj)) add('Multivitamínico','1 comp','manhã','');
+  } else if(s.target.flag === 'rest_day' || s.target.flag === 'sleep_coaching' || s.target.flag === 'change_block' || s.target.flag === 'review_plan' || s.target.flag === 'schedule_eval'){
+    // Estes são flags informativos; o gestor decide o que fazer. Apenas regista.
+    toast('Recomendação assinalada como vista. Ação manual necessária.');
   }
   // log
   c.progressionLog = c.progressionLog || [];
   c.progressionLog.push({
     date: new Date().toISOString().slice(0,10),
     titulo: s.titulo,
+    categoria: s.categoria || s.tipo,
     acao: s.proposta.replace(/<[^>]+>/g,''),
     cliente: u.name,
   });
