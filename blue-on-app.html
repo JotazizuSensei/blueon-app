@@ -610,6 +610,7 @@ a{color:var(--cyan);text-decoration:none}
   <div class="auth-divider">ou</div>
   <button class="btn btn-ghost" onclick="show('view-subscribe')">Subscrever um plano</button>
   <button class="btn btn-ghost" style="margin-top:10px" onclick="show('view-howto')">Como funciona?</button>
+  <button class="btn btn-ghost" style="margin-top:10px;background:rgba(0,196,204,.12);border-color:rgba(0,196,204,.35);color:var(--cyan)" onclick="showInstallHelp()">📲 Instalar a app no telemóvel</button>
   <div class="auth-hint">
     Acesso só após validação da equipa Blue ON.
   </div>
@@ -1160,13 +1161,12 @@ const DEFAULT = ()=> ({
       ],
     },
     u5:{
-      anamnese:{nome:'Camila Azul',sexo:'F',objetivos:'Tonificação, glúteos, core e controlo lombo-pélvico',exp:'<6 meses',contexto:'Ginásio',diasSem:3,minSes:50,patologias:'—',medicacao:'—',parq:'sem alertas',
+      anamnese:{nome:'Camila Azul Marques Pereira',sexo:'F',idade:null,altura:null,peso:null,objetivos:'Tonificação / Glúteos',objPrinc:'Tonificação, glúteos, core e controlo lombo-pélvico',exp:'<6 meses',contexto:'Ginásio',diasSem:3,minSes:50,patologias:'—',medicacao:'—',parq:'sem alertas',pendente:'Falta avaliação inicial · peso, altura, idade, % MG, perímetros',
         restricoes:[],naoGosta:['banana'],alergias:'—',
         treinoRotacao:'Mensal · 3x/semana · rotação dentro dos grupos musculares'},
-      avaliacoes:[
-        {date:'2026-05-15',peso:62,imc:23.5,abd:78,cint:74,anca:98,bf:25,vo2:32,bench1rm:20,squat1rm:40,fc:70,pa:'118/76'},
-      ],
-      nutricao:{tmb:1320,tdee:2000,alvo:1850,macros:{p:115,c:200,g:55},hidrat:2.5,
+      avaliacoes:[],
+      nutricao:{tmb:null,tdee:null,alvo:null,macros:{p:null,c:null,g:null},hidrat:2.5,
+        nota:'Plano nutricional pendente · aguarda 1ª avaliação corporal',
         refeicoes:[
           {nome:'Pequeno-almoço',hora:'08:00',ic:'🥣',items:'Iogurte skyr 200g · Granola 40g · Mirtilos · Maçã',p:25,c:55,g:8},
           {nome:'Almoço',hora:'13:00',ic:'🥗',items:'Frango 150g · Quinoa 70g · Salada · Azeite',p:40,c:55,g:14},
@@ -4860,10 +4860,55 @@ if('serviceWorker' in navigator){
   });
 }
 
+function showInstallHelp(){
+  // Se beforeinstallprompt disponível (Chrome Android), usa-o
+  if(window.deferredInstall || deferredInstall){
+    const d = window.deferredInstall || deferredInstall;
+    d.prompt();
+    d.userChoice.then(()=>{ window.deferredInstall = null; deferredInstall = null; });
+    return;
+  }
+  // Caso contrário, abre modal com instruções manuais
+  const ua = navigator.userAgent.toLowerCase();
+  const isIOS = /iphone|ipad|ipod/.test(ua);
+  const isInStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+  if(isInStandalone){
+    alert('A app já está instalada neste dispositivo.');
+    return;
+  }
+  const inSafari = isIOS && (ua.includes('safari') && !ua.includes('crios') && !ua.includes('fxios'));
+  let html;
+  if(isIOS){
+    html = `<h3 style="margin:0 0 12px;color:var(--blue)">📱 Instalar no iPhone</h3>
+      ${!inSafari?`<div class="dbox warn"><h4>⚠ Abre primeiro no SAFARI</h4><p>Em iPhone, só o Safari permite instalar PWAs. Copia o link e abre-o no Safari para continuar.</p></div>`:''}
+      <ol style="padding-left:20px;line-height:1.7;color:#3a5278">
+        <li>Toca no botão <b>Partilhar</b> (caixa com seta para cima ↑) na barra inferior do Safari.</li>
+        <li>Desliza a lista e escolhe <b>"Adicionar ao Ecrã Principal"</b>.</li>
+        <li>Confirma o nome <b>"Blue ON"</b> e toca <b>Adicionar</b>.</li>
+        <li>O ícone Blue ON aparece no teu ecrã principal, como qualquer app.</li>
+      </ol>
+      <button class="btn btn-primary" style="width:100%;margin-top:14px" onclick="closeModal()">Já está, obrigado</button>`;
+  } else {
+    html = `<h3 style="margin:0 0 12px;color:var(--blue)">🤖 Instalar no Android</h3>
+      <ol style="padding-left:20px;line-height:1.7;color:#3a5278">
+        <li>Abre o menu do Chrome (3 pontinhos no canto superior direito).</li>
+        <li>Toca em <b>"Instalar app"</b> ou <b>"Adicionar ao ecrã principal"</b>.</li>
+        <li>Confirma o nome <b>"Blue ON"</b> e toca <b>Instalar</b>.</li>
+        <li>O ícone Blue ON aparece no teu ecrã principal, como qualquer app.</li>
+      </ol>
+      <div style="margin-top:12px;padding:10px 12px;background:#fff7ed;border-radius:8px;font-size:.78rem;color:#9a3412">
+        ⚠ Se usares Samsung Internet, Firefox ou outro browser, o Chrome é o mais fiável para instalar PWAs.
+      </div>
+      <button class="btn btn-primary" style="width:100%;margin-top:14px" onclick="closeModal()">Já está, obrigado</button>`;
+  }
+  modal(html);
+}
+
 let deferredInstall = null;
 window.addEventListener('beforeinstallprompt', (e) => {
   e.preventDefault();
   deferredInstall = e;
+  window.deferredInstall = e;
   if(!document.getElementById('pwaInstall')){
     const b = document.createElement('button');
     b.id = 'pwaInstall';
