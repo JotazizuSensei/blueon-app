@@ -1,6 +1,6 @@
 // Blue ON · Service Worker
 // Estratégia: cache-first para o app shell, network-first com fallback para HTML, cache de imagens externas autorizadas
-const VERSION = 'blueon-v3.0.4-concluir-treino-migracao7-propaga-todos';
+const VERSION = 'blueon-v3.1.0-bluefitness-literal-icones-iniciar';
 const IMG_HOSTS = ['themealdb.com','www.themealdb.com','images.openfoodfacts.org','static.openfoodfacts.org','wger.de','www.wger.de'];
 const CORE_CACHE = `core-${VERSION}`;
 const RUNTIME_CACHE = `runtime-${VERSION}`;

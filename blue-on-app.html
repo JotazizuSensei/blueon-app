@@ -881,49 +881,54 @@ const DEFAULT = ()=> ({
       recoveryProfile:{cns:48,legs:72,back:60,chest:60,shoulders:60,arms:48,core:24,cardio:18,mobility:6},
       sessions:[],
       treino:{
-        meta:{rotacao:'A/B/C/D · 4x/sem · Bluefitness protocol',foco:'Hipertrofia + Funcional',duracaoBloco:'4 semanas',intensidade:'RPE 8-9'},
+        meta:{rotacao:'A/B/C/D · 4x/sem · Protocolo Bluefitness',foco:'Hipertrofia + Funcional',duracaoBloco:'4 semanas',intensidade:'RPE 8-9'},
         plano:[
-          {dia:'Sessão A · Posterior Chain + Push Horizontal + KB Flow',grupo:'Seg',foco:'Full Body · cadeia posterior + peito + core anti-extensão',exs:[
-            {nome:'Aquecimento Bike/Remo',ic:'🔥',sets:1,reps:'5-7 min',carga:0,tipo:'aq',hint:'Ritmo moderado + mobilização articular'},
-            {nome:'Rotação Torácica Quadrupede',ic:'🧘',sets:2,reps:'8/lado',carga:0,tipo:'aq',hint:'Mão na nuca · anca quieta · T:3030'},
-            {nome:"World's Greatest Stretch",ic:'🧘',sets:2,reps:'6/lado',carga:0,tipo:'aq',hint:'Avanço baixo · flui entre posições'},
-            {nome:'Romanian Deadlift (RDL) barra',ic:'🪨',sets:4,reps:'5',carga:100,tipo:'trab',hint:'@RPE 9 · dobradiça anca · T:3010 · 2:30 desc'},
-            {nome:'Press Supino halteres',ic:'🏋️',sets:4,reps:'6-8',carga:34,tipo:'trab',hint:'@RPE 8-9 · omoplatas retraídas · T:3110 · 2:00 desc'},
-            {nome:'Pull-Up c/ Anilha (peso)',ic:'⬇️',sets:4,reps:'5-6',carga:16,tipo:'trab',hint:'@RPE 9 · BW+12-20kg · T:3011 · 2:30 desc'},
-            {nome:'Complex KB: Swing→Snatch→Press',ic:'⚡',sets:3,reps:'5+5+5/lado',carga:22,tipo:'trab',hint:'Não pousa entre fases · 20-24kg'},
-            {nome:'Goblet Squat + Rotação Torácica',ic:'🦵',sets:3,reps:'10',carga:30,tipo:'trab',hint:'Cotovelo toca chão alternado · T:2020 · 90s desc'},
-            {nome:'Farmer Walk Unilateral KB',ic:'🚶',sets:3,reps:'40m/lado',carga:24,tipo:'trab',hint:'Ombros nivelados · core fechado'},
-            {nome:'Pallof Press',ic:'🎯',sets:3,reps:'10/lado',carga:15,tipo:'trab',hint:'Anti-rotação · braços estendidos'},
+          {dia:'Sessão A · Full Body Posterior Chain + Push Horizontal + KB Flow + Core Anti-extensão',grupo:'Seg',foco:'SEGUNDA',exs:[
+            {nome:'Aquecimento Geral (5-7 min)',ic:'🔥',sets:1,reps:'5-7 min',carga:0,tipo:'aq',hint:'Bicicleta ou remo ergómetro (ritmo moderado) + mobilização articular: pescoço, ombros, anca, tornozelos em círculos progressivos'},
+            {nome:'M1 · Rotação Torácica em Quadrupede',ic:'🧘',sets:2,reps:'8/lado',carga:0,tipo:'aq',descanso:'30s',hint:'Mão na nuca, cotovelo aponta para o teto. Anca QUIETA. Pausa no fim da amplitude · T:3030'},
+            {nome:"M2 · World's Greatest Stretch",ic:'🧘',sets:2,reps:'6/lado',carga:0,tipo:'aq',descanso:'30s',hint:'Avanço baixo → mão interna no chão → outro braço ao teto. Flui entre posições · T:3030'},
+            {nome:'1 · Romanian Deadlift (RDL) com Barra',ic:'🪨',sets:4,reps:'5',carga:100,tipo:'trab',descanso:'2:30',hint:'@RPE 9 · 95-110 kg · T:3010 · Barra rente às pernas. Dobradiça NA anca — não na coluna. Costas planas. Foco: Isquiotibiais, Glúteo, Eretores'},
+            {nome:'2 · Press Supino com Halteres',ic:'🏋️',sets:4,reps:'6-8',carga:34,tipo:'trab',descanso:'2:00',hint:'@RPE 8-9 · 30-36 kg/lado · T:3110 · Omoplatas retraídas. Cotovelos ~50° do tronco. Sem bounce. Foco: Peitoral, Deltóide Ant., Tríceps'},
+            {nome:'3 · Pull-Up com Anilha',ic:'⬇️',sets:4,reps:'5-6',carga:16,tipo:'trab',descanso:'2:30',hint:'@RPE 9 · BW+12-20 kg · T:3011 · Depressão escapular. Peito à barra. Sem kipping. Pega pronada. Foco: Grande Dorsal, Bíceps'},
+            {nome:'4 · Complex KB Duplo: Swing → Snatch → Press',ic:'⚡',sets:3,reps:'5+5+5/lado',carga:22,tipo:'trab',descanso:'2:00',hint:'20-24 kg · 1 complexo = 5 swings → 5 snatches → 5 press. Não pousa o KB entre fases. Foco na transição. Foco: Full Body, Potência, Deltóide, Core'},
+            {nome:'5 · Goblet Squat + Rotação Torácica',ic:'🦵',sets:3,reps:'10',carga:30,tipo:'trab',descanso:'90s',hint:'28-32 kg · T:2020 · Na posição mais baixa solta uma mão e rota o tronco — cotovelo aponta ao teto. Alternado rep a rep. Profundidade total. Foco: Quadricípite, Adutores, Torácica'},
+            {nome:'6 · Farmers Walk Unilateral (KB)',ic:'🚶',sets:3,reps:'25m/lado',carga:34,tipo:'trab',descanso:'90s',hint:'32-36 kg · Ombros nivelados — NÃO inclinas. Core fechado. Passos deliberados. Foco: Core Anti-lateral, Trapézio, Agarre'},
+            {nome:'7 · Ab Wheel Rollout',ic:'🎯',sets:3,reps:'8-10',carga:0,tipo:'trab',descanso:'90s',hint:'BW · T:3030 · Comprime o umbigo ANTES de avançar. Sem hiperlordose. Mesma velocidade na descida e subida. Foco: Core Anterior, Grande Dorsal'},
           ]},
-          {dia:'Sessão B · Quadríceps + Vertical Pull + Carry',grupo:'Ter',foco:'Pernas frontais + costas largura + carries',exs:[
-            {nome:'Aquecimento Bike',ic:'🔥',sets:1,reps:'5 min',carga:0,tipo:'aq',hint:'Z2 leve'},
-            {nome:'Mobilidade Anca 90/90',ic:'🧘',sets:2,reps:'6/lado',carga:0,tipo:'aq',hint:'Tempo lento'},
-            {nome:'Back Squat alto',ic:'🦵',sets:4,reps:'6-8',carga:110,tipo:'trab',hint:'@RPE 8 · profundo · barra alta'},
-            {nome:'Bulgarian Split Squat halteres',ic:'🏋️',sets:3,reps:'8/perna',carga:24,tipo:'trab',hint:'Pé atrás banco · controlado'},
-            {nome:'Pulldown pega supina pesado',ic:'⬇️',sets:4,reps:'8-10',carga:70,tipo:'trab',hint:'@RPE 8 · cotovelos para baixo'},
-            {nome:'Leg Extension drop set',ic:'⚙️',sets:3,reps:'12+8+6',carga:60,tipo:'trab',hint:'Drop set · -20% por drop'},
-            {nome:'Suitcase Carry KB',ic:'🚶',sets:3,reps:'30m/lado',carga:28,tipo:'trab',hint:'Tronco vertical · não inclinar'},
-            {nome:'Dead Bug carga',ic:'🐛',sets:3,reps:'8/lado',carga:6,tipo:'trab',hint:'Halter braço · controlo lombar'},
+          {dia:'Sessão B · Full Body Vertical Pull/Push · Front Squat · TGU · Unilateral Posterior',grupo:'Ter',foco:'TERÇA',exs:[
+            {nome:'Aquecimento Geral (5-7 min)',ic:'🔥',sets:1,reps:'5-7 min',carga:0,tipo:'aq',hint:'Remo ergómetro + mobilização: arm swings, leg swings, hip circles, cat-cow em quadrupede'},
+            {nome:'M1 · Shoulder Dislocates com Bastão',ic:'🧘',sets:2,reps:'10',carga:0,tipo:'aq',descanso:'30s',hint:'T:4040 · Braços esticados. Passa de frente para trás por cima da cabeça. Amplitude progressiva — nunca força'},
+            {nome:'M2 · Hip 90/90 Rotação Ativa',ic:'🧘',sets:2,reps:'6/lado',carga:0,tipo:'aq',descanso:'30s',hint:'T:3030 · Sentado com pernas a 90°. Rota a anca anterior para o chão. Contrai glúteo. Anca posterior não levanta'},
+            {nome:'1 · Front Squat com Barra',ic:'🦵',sets:4,reps:'4-5',carga:85,tipo:'trab',descanso:'3:00',hint:'@RPE 9 · 75-95 kg · T:3010 · Pega cruzada ou rack frontal — cotovelos altos. Torácica ALTA. Joelhos seguem pés. Profundidade total. Foco: Quadricípite, Core, Torácica'},
+            {nome:'2 · Overhead Press com Barra (em pé)',ic:'🏋️',sets:4,reps:'4-6',carga:63,tipo:'trab',descanso:'2:30',hint:'@RPE 8-9 · 58-68 kg · T:3011 · Core e glúteos ativados. Barra perto da face. Sem hiperextensão lombar. Bloqueia no topo. Foco: Deltóide, Tríceps, Trapézio, Core'},
+            {nome:'3 · Remada Pendlay com Barra',ic:'🚣',sets:4,reps:'5',carga:90,tipo:'trab',descanso:'2:30',hint:'@RPE 9 · 85-100 kg · T:X011 · Barra parte do CHÃO em cada rep. Tronco paralelo ao chão. Puxão explosivo — cotovelos passam as costas. Foco: Grande Dorsal, Romboides, Bíceps'},
+            {nome:'4 · Turkish Get-Up (TGU)',ic:'⚡',sets:3,reps:'3/lado',carga:24,tipo:'trab',descanso:'2:00',hint:'22-26 kg · Lento · 7 fases distintas — cada uma com pausa e controlo. Olhos no KB. Mobilidade funcional em movimento. Foco: Full Body, Estab. Ombro, Core, Anca'},
+            {nome:'5 · Single-Leg RDL + Row com KB',ic:'🦵',sets:3,reps:'8/lado',carga:20,tipo:'trab',descanso:'90s',hint:'18-22 kg · T:3010 · No hip hinge unilateral: enquanto tronco desce, puxa o KB em remada. Pélvis nivelada. Foco: Isquiotibiais, Glúteo, Grande Dorsal'},
+            {nome:'6 · Copenhagen Plank',ic:'🎯',sets:3,reps:'25-35s/lado',carga:0,tipo:'trab',descanso:'90s',hint:'BW · Apoio na face lateral do tornozelo. Eleva a anca — alinhamento cabeça-anca-tornozelo. Perna de baixo levantada. Foco: Adutores, Core Lateral, Glúteo Médio'},
+            {nome:'7 · Bear Crawl com Colete/Saco de Lastro',ic:'🐻',sets:3,reps:'15-20m',carga:7,tipo:'trab',descanso:'90s',hint:'5-10 kg · Joelhos a 5 cm do chão. Mão oposta ao pé em simultâneo. NÃO rota as ancas. Ritmo lento. Foco: Core, Ombros, Quadricípite, Coordenação'},
           ]},
-          {dia:'Sessão C · Posterior coxa + Push Vertical + Anti-rotação',grupo:'Qui',foco:'Isquiotibiais + ombro + core',exs:[
-            {nome:'Aquecimento Remo',ic:'🔥',sets:1,reps:'5 min',carga:0,tipo:'aq',hint:'Ritmo moderado'},
-            {nome:'CARs Ombro',ic:'🌀',sets:2,reps:'5/lado',carga:0,tipo:'aq',hint:'Articulação completa lenta'},
-            {nome:'Trap Bar Deadlift',ic:'🪨',sets:4,reps:'5',carga:120,tipo:'trab',hint:'@RPE 8-9 · costas planas · 2:30 desc'},
-            {nome:'Z Press / Z Squat (KB ou Halt)',ic:'🏋️',sets:4,reps:'6-8',carga:22,tipo:'trab',hint:'Sentado pernas estendidas · core duro'},
-            {nome:'Nordic Curl (assistido)',ic:'🦵',sets:3,reps:'5-8',carga:0,tipo:'trab',hint:'Banda elástica se preciso · controlo excêntrico'},
-            {nome:'Single-Arm Landmine Press',ic:'💪',sets:3,reps:'8/lado',carga:20,tipo:'trab',hint:'Press unilateral · core anti-rotação'},
-            {nome:'Pallof Press dinâmico',ic:'🎯',sets:3,reps:'10/lado',carga:18,tipo:'trab',hint:'Resistir à rotação · 3s out'},
-            {nome:'Side Plank + Reach',ic:'🎯',sets:3,reps:'8/lado',carga:0,tipo:'trab',hint:'Anca alta · mão passa por baixo'},
+          {dia:'Sessão C · Full Body Power · Unilateral · KB Complex · Core Dinâmico',grupo:'Qui',foco:'QUINTA',exs:[
+            {nome:'Aquecimento Geral (5-7 min)',ic:'🔥',sets:1,reps:'5-7 min',carga:0,tipo:'aq',hint:'Saltar à corda 3 min (ritmo moderado) + mobilização dinâmica: arm swings, leg swings, hip circles'},
+            {nome:'M1 · Ankle CARs + Elevação de Calcâneo',ic:'🌀',sets:2,reps:'10+10/lado',carga:0,tipo:'aq',hint:'Lento · Descalço. Círculos completos nos dois sentidos. Depois 10 elevações com pausa 2s no topo. Sem compensação no joelho'},
+            {nome:'M2 · Halo com Kettlebell',ic:'🌀',sets:2,reps:'6/lado',carga:0,tipo:'aq',descanso:'30s',hint:'T:3030 · KB ao peito, passa ao redor da cabeça rente à nuca. Anca QUIETA. Tensão nos estabilizadores do ombro'},
+            {nome:'1 · Complex KB: Clean + Front Squat + Press (unilateral)',ic:'⚡',sets:4,reps:'5/lado',carga:25,tipo:'trab',descanso:'2:30',hint:'22-28 kg · Flow · 1 rep = Clean → Front Squat → Press. 5 reps com um lado, muda. Sem pausas. Foco: Full Body, Potência, Deltóide, Quad, Core'},
+            {nome:'2 · Agachamento Búlgaro com Halteres',ic:'🏋️',sets:4,reps:'6/lado',carga:28,tipo:'trab',descanso:'2:00',hint:'@RPE 8-9 · 26-30 kg/lado · T:3011 · Pé posterior no banco. Joelho anterior não passa >2 cm do pé. Descida lenta — sente o glúteo. Foco: Quadricípite, Glúteo, Estabilizadores'},
+            {nome:'3 · Dip em Paralelas com Peso',ic:'⬇️',sets:3,reps:'6-8',carga:16,tipo:'trab',descanso:'2:00',hint:'@RPE 8-9 · BW+12-20 kg · T:3011 · Tronco ~30° inclinado para peitoral. Cotovelos sem flare excessivo. Desce até ombros abaixo dos cotovelos. Foco: Peitoral Inf., Tríceps, Deltóide Ant.'},
+            {nome:'4 · KB Snatch Unilateral',ic:'⚡',sets:3,reps:'8/lado',carga:24,tipo:'trab',descanso:'2:00',hint:'22-26 kg · Explosivo · Swing curto → punho roda no topo (NÃO bate no pulso). Cotovelo completamente bloqueado no topo. Foco: Full Body, Potência, Deltóide, Core'},
+            {nome:'5 · Renegade Row com Halteres',ic:'🚣',sets:3,reps:'6/lado',carga:24,tipo:'trab',descanso:'90s',hint:'22-26 kg · T:2012 · Posição de prancha com halteres. Puxão sem rotar o tronco. Pés largos. Cotovelo rente ao tronco. Foco: Core Anti-rotação, Grande Dorsal, Tríceps'},
+            {nome:'6 · Dragon Flag Excêntrico',ic:'🎯',sets:3,reps:'5 lentos',carga:0,tipo:'trab',descanso:'2:00',hint:'BW · T:6000 · Desce em 6 segundos. Corpo rígido como prancha — não dobra na anca. Agarra o banco firmemente. Sobe com ajuda se necessário. Foco: Core Completo, Latíssimos, Iliopsoas'},
           ]},
-          {dia:'Sessão D · Glúteo + Horizontal Pull + Conditioning',grupo:'Sex',foco:'Glúteo + costas espessura + condicionamento',exs:[
-            {nome:'Aquecimento Air Bike',ic:'🔥',sets:1,reps:'5 min',carga:0,tipo:'aq',hint:'Crescente'},
-            {nome:"Hip Airplanes",ic:'🧘',sets:2,reps:'6/lado',carga:0,tipo:'aq',hint:'Equilíbrio + glúteo médio'},
-            {nome:'Hip Thrust barra pesado',ic:'🪨',sets:4,reps:'6-8',carga:120,tipo:'trab',hint:'@RPE 9 · pausa 2s topo'},
-            {nome:'Pendlay Row',ic:'🚣',sets:4,reps:'6-8',carga:80,tipo:'trab',hint:'Barra ao chão entre reps · explosivo'},
-            {nome:'Single-Leg RDL halteres',ic:'🦵',sets:3,reps:'8/perna',carga:20,tipo:'trab',hint:'Glúteo + propriocepção'},
-            {nome:'Chest-Supported Row halteres',ic:'🚣',sets:3,reps:'10-12',carga:22,tipo:'trab',hint:'Banco inclinado · cotovelos altos'},
-            {nome:'Conditioning EMOM 10 min',ic:'⚡',sets:1,reps:'10 min',carga:24,tipo:'trab',hint:'KB: 10 swings + 5 burpees/min · alternado'},
-            {nome:'Loaded Carry Cross-Body',ic:'🚶',sets:3,reps:'30m/lado',carga:28,tipo:'trab',hint:'KB rack + suitcase contralateral'},
+          {dia:'Sessão D · Full Body Deadlift Pesado · KB Swing Duplo · Windmill · Potência · Core Lateral',grupo:'Sex',foco:'SEXTA/SÁBADO',exs:[
+            {nome:'Aquecimento Geral (5 min)',ic:'🔥',sets:1,reps:'5 min',carga:0,tipo:'aq',hint:'Remo ergómetro 3 min + mobilização: cat-cow, thoracic rotation em quadrupede, hip circles'},
+            {nome:'M1 · Pigeon Pose Ativo (com contração de glúteo)',ic:'🧘',sets:2,reps:'45s/lado',carga:0,tipo:'aq',descanso:'30s',hint:'Ativo = contrai o glúteo da perna de frente DURANTE o alongamento. Não só deixas cair — isso muda tudo'},
+            {nome:'M2 · Rotação de Tronco com KB',ic:'🌀',sets:2,reps:'8/lado',carga:0,tipo:'aq',descanso:'30s',hint:'T:2020 · Pés largos, KB ao peito, rota o tronco — ancas QUIETAS. Controla descida ao mesmo ritmo da subida'},
+            {nome:'1 · Deadlift Convencional',ic:'🪨',sets:4,reps:'3-4',carga:125,tipo:'trab',descanso:'3:00',hint:'@RPE 9 · 115-135 kg · T:3011 · "Afasta o chão" com os pés. Barra rente ao corpo do início ao fim. Bloqueia sem hiperextensão. Foco: Glúteo, Isquiotibiais, Eretores, Trapézio'},
+            {nome:'2 · Double KB Swing',ic:'⚡',sets:4,reps:'15',carga:24,tipo:'trab',descanso:'2:00',hint:'@RPE 8-9 · 22-26 kg/KB · T:X010 · Potência DA ANCA — não dos braços. A bacia dispara à frente como uma mola. Costas planas. Foco: Glúteo, Isquiotibiais, Core, Deltóide Post.'},
+            {nome:'3 · Ring Row / TRX Row',ic:'🚣',sets:4,reps:'8-10',carga:0,tipo:'trab',descanso:'90s',hint:'@RPE 8 · BW · T:3011 · Quanto mais horizontal = mais difícil. Traz o peito às argolas. Escápulas retraídas no topo. Foco: Romboides, Grande Dorsal, Bíceps, Core'},
+            {nome:'4 · Windmill com Kettlebell',ic:'🌀',sets:3,reps:'5/lado',carga:24,tipo:'trab',descanso:'90s',hint:'22-26 kg · T:4040 · KB no braço de CIMA, olhos no KB sempre. Pé de fora vira 45°. Desce lentamente pela linha do oblíquo. Foco: Oblíquos, Core Lateral, Estab. Ombro'},
+            {nome:'5 · Agachamento com Salto + Aterragem Tripé',ic:'🦘',sets:3,reps:'8',carga:0,tipo:'trab',descanso:'2:00',hint:'BW / colete 5 kg · Descida 2s, explosão máxima. Aterragem silenciosa — amortece calcanhar → planta → ponta. Pausa 1s. Foco: Potência Quad., Glúteo, Reativo'},
+            {nome:'6 · Suitcase Carry com KB',ic:'🚶',sets:3,reps:'25m/lado',carga:33,tipo:'trab',descanso:'90s',hint:'30-36 kg · Peso a um lado — ombros e ancas NIVELADOS. Não inclinas. Passos deliberados. Foco: Core Anti-lateral, Trapézio, Agarre'},
+            {nome:'7 · Pallof Press com Cabo ou Banda',ic:'🎯',sets:3,reps:'12/lado',carga:0,tipo:'trab',descanso:'90s',hint:'Resistência média · T:2020 · Corpo perpendicular ao cabo. Empurra para a frente — o cabo quer te puxar para o lado. Controla. Foco: Core Anti-rotação'},
           ]},
         ],historico:[]},
       checkin:{date:'',energia:8,sono:7,dor:0,semaforo:'verde'},
@@ -1680,6 +1685,14 @@ function applyMigrations(s){
     }
     s.schemaVersion = 7;
   }
+  if(s.schemaVersion < 8){
+    // Forçar plano Bluefitness LITERAL para o Jota (sem invenções)
+    const def = DEFAULT();
+    if(s.clientData && s.clientData.u1 && def.clientData.u1){
+      s.clientData.u1.treino = def.clientData.u1.treino;
+    }
+    s.schemaVersion = 8;
+  }
   // SANITIZAÇÃO FINAL: remover undefined recursivamente (Firestore rejeita undefined)
   function sanitize(o){
     if(o === undefined) return null;
@@ -2364,6 +2377,13 @@ function renderTreino(){
   const c = state.clientData[session.activeClient || session.userId];
   if(!c){ document.getElementById('p-treino').innerHTML = empty(); return; }
   const activeIdx = session._exDay ?? 0;
+  // Botão Iniciar Treino sempre visível
+  setTimeout(()=>{
+    const wrap = document.getElementById('p-treino');
+    if(wrap && !wrap.querySelector('#btn-start-workout-tab')){
+      // Será adicionado abaixo no innerHTML
+    }
+  },50);
   // Detectar dia da semana atual para destacar treino de hoje
   const todaySession = getTodaysSession(c);
   const todayIdx = todaySession ? c.treino.plano.findIndex(d=>d===todaySession) : -1;
@@ -2374,7 +2394,10 @@ function renderTreino(){
       <div class="card-body" style="padding-top:0">
         ${meta.rotacao?`<div style="font-size:.74rem;color:var(--muted);margin-bottom:8px">🔁 ${meta.rotacao}</div>`:''}
         ${meta.foco?`<div style="font-size:.74rem;color:var(--muted);margin-bottom:8px">🎯 ${meta.foco}</div>`:''}
-        ${todayIdx>=0?`<button class="btn btn-primary" style="width:100%;margin-bottom:8px" onclick="setDay(${todayIdx});scrollTo({top:document.getElementById('trDayContent').offsetTop-80,behavior:'smooth'})">▶ Treino de hoje · ${todaySession.dia}</button>`:''}
+        ${todayIdx>=0?`<button class="btn btn-primary" style="width:100%;margin-bottom:8px;background:linear-gradient(135deg,#10b981,#00C4CC);font-weight:900;padding:14px;font-size:.95rem" onclick="startWorkout()">▶ INICIAR TREINO DE HOJE · ${todaySession.dia.split('·')[0].trim()}</button>`:`<div style="text-align:center;color:var(--muted);font-size:.78rem;padding:8px">Sem treino marcado para hoje. Vê os outros dias abaixo.</div>`}
+        <div style="display:flex;gap:8px;margin-bottom:8px">
+          <button class="btn btn-ghost" style="flex:1;padding:10px;font-size:.8rem" onclick="startWorkout()">▶ Iniciar este treino</button>
+        </div>
       </div>
       <div style="padding:0 12px 12px"><div class="pills" style="flex-wrap:wrap;gap:6px">
         ${c.treino.plano.map((d,i)=>`<button class="pill ${i===activeIdx?'active':''}" style="${i===todayIdx?'border:2px solid var(--cyan)':''}" onclick="setDay(${i})">${i===todayIdx?'📍 ':''}${d.dia.replace(/^Treino \w+ · /,'').slice(0,30)}</button>`).join('')}
