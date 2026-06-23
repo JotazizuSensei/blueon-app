@@ -1058,26 +1058,39 @@ const DEFAULT = ()=> ({
     u4:{
       anamnese:{
         nome:'Joana Rita Góis Martins Azul',dn:'1982-03-18',idade:44,sexo:'F',
-        contacto:'915284114',email:'joana_azul@sapo.pt',profissao:'Empresária / Instrutora de Fitness',
+        contacto:'915284114',email:'joana.azul@sport.pt',profissao:'Instrutora Fitness / Empresária',
         altura:160,peso:68.4,
-        objetivos:'Emagrecimento + Tonificação · Mesociclo 3 meses',objPrinc:'Perda de peso',prazo:'3 meses',exp:'5+ anos',contexto:'Ginásio',diasSem:2,minSes:60,
+        objetivos:'Emagrecimento / Tonificação',objPrinc:'Emagrecimento / Tonificação',objSec:'Condição Física Geral',prazo:'3 meses',exp:'Muita — 20 anos / Instrutora Fitness',contexto:'Ginásio',diasSem:2,minSes:60,
+        modalidades:'Pilates / Zumba / Localizada',
         treinoRotacao:'Mensal · 2x/semana (Seg + Sex) · rotação dentro dos grupos musculares',
-        patologias:'Fadiga crónica · Bexiga e Intestinos Neurogénicos (sequela de meningomielite em 2008)',
+        patologias:'Fadiga crónica · Bexiga Neurogénica (sequela de meningomielite em 2008)',
         patHist:'Meningomielite 2008 (resíduo neurológico)',
         medicacao:'Ditropan (controlo da bexiga)',
         alergias:'Intolerância ao glúten',restricoes:['gluten'],naoGosta:[],
-        dor:'sim',dorLocal:'Ombro (tendinite) · Psoas Ilíaco (tendinite) · Costas (esforço)',dorInt:5,dorQ:'Latejo',dorMov:'sim',
-        parq1:'nao',parq2:'nao',parq3:'nao',parq4:'nao',parq5:'sim',parq6:'nao',parq7:'nao',
+        dor:'sim',dorLocal:'Ombro (tendinite) · Psoas Ilíaco (tendinite) · Escápula',dorInt:5,dorQ:'Latejo',dorMov:'sim',
+        parq1:'nao',parq2:'nao',parq3:'nao',parq4:'nao',parq5:'sim',parq6:'nao',parq7:'nao',parqObs:'Q5: Tendinite ombro e psoas (controlada) · Q6: não medic mas Ditropan p/ bexiga',
+        pa:'121/85',fc:71,
+        sonoScore:'20/30',cravingsScore:'48/70',
         sonoH:6,sonoQ:3,stress:4,energia:3,
         alimentacao:'Omnívora · SEM GLÚTEN (intolerância)',refDia:4,digestao:'Sem queixas',cravings:'Doces 10/10 · Salgados 10/10 · Fritos 3/10 · Fome emocional 10/10',
         agua:2,cafes:1,alcool:0,tabaco:0,doces:7,atividadeOcas:5,
         habitosObs:'Modalidades preferidas: Pilates, Zumba, Localizada · Sem doenças cardiovasculares na família · Risco cardiovascular: BAIXO',
         consNome:'Joana Rita Góis Martins Azul',consData:'2026-04-28',consentido:'sim',
+        // Dados Cardiorrespiratórios (Gellish + Rockport)
+        fcMaxGellish:206.2,fcRepouso:71,vo2Rockport:33.1,rockportTempo:'15:47',rockportFCFinal:125,
+        // Core (McGill) - 28/04/2026
+        mcGillFlexor:144.6,mcGillExtensor:70.6,mcGillSideD:63.6,mcGillSideE:63.6,
+        // Mobilidade
+        backScratchD:1.39,backScratchE:1.11,aslrD:3,aslrE:3,abdMax:40,
+        // Push-up
+        pushUp:32,
+        // 1RM estimado (Epley)
+        oneRMLegPress:160,oneRMChestPress:53.3,oneRMRemadaBaixa:44.3,
       },
       avaliacoes:[
-        {date:'2024-03-11',peso:62,imc:24.2,abd:77,cint:81,anca:98,bf:25.3,vo2:30,bench1rm:30,squat1rm:60,fc:67,pa:'115/85'},
-        {date:'2025-08-01',peso:64.9,imc:25.4,abd:78,cint:86,anca:103,bf:26.7,vo2:28,bench1rm:35,squat1rm:80,fc:77,pa:'115/96'},
-        {date:'2026-04-28',peso:68.4,imc:26.7,abd:86,cint:84,anca:104.5,bf:30.9,vo2:26,bench1rm:40,squat1rm:120,fc:71,pa:'121/85'},
+        {date:'2024-03-11',peso:62,imc:24.2,bf:23.3,mg:14.45,mm:43.9,mo:2.4,agua:56.2,gv:4,obs:'1ª BIA'},
+        {date:'2025-08-01',peso:64.9,imc:25.4,bf:26.7,mg:17.33,mm:45.2,mo:2.4,agua:55.4,gv:4,mb:2557,idMet:28,obs:'2ª BIA'},
+        {date:'2026-04-28',peso:68.4,imc:26.7,abd:86,cint:84,anca:104.5,bf:30.9,mg:21.13,mm:44.9,mo:2.4,agua:52.1,gv:6,mb:2567,idMet:38,whr:0.804,ffmi:17.5,bench1rm:53.3,legPress1rm:160,remadaBaixa1rm:44.3,fc:71,pa:'121/85',vo2:33.1,obs:'3ª BIA · push-up 32 · McGill flex 144.6s · GV Muito Alto'},
       ],
       nutricao:{tmb:1380,tdee:1900,alvo:1600,macros:{p:120,c:160,g:50},hidrat:2.5,
         refeicoes:[
@@ -1424,15 +1437,24 @@ const DEFAULT = ()=> ({
     },
     u8:{
       anamnese:{nome:'Tânia Duarte',sexo:'F',dn:'1979-04-08',idade:47,altura:161,peso:58,
-        email:'tduarte.carmo@gmail.com',
-        objetivos:'Hipertrofia / Ganho de Massa Muscular',objetivos2:'Perder massa gorda teimosa',
+        email:'tduarte.carmo@gmail.com',profissao:'Mista',
+        objetivos:'Hipertrofia / Ganho de Massa Muscular',objPrinc:'Hipertrofia / Ganho de Massa Muscular',objSec:'Perder massa gorda teimosa 😁',
         exp:'Musculação',contexto:'Ginásio',diasSem:5,minSes:60,
         patologias:'Problema osteoarticular (PAR-Q+ Q5: Sim)',medicacao:'—',
+        parq1:'nao',parq2:'nao',parq3:'nao',parq4:'nao',parq5:'sim',parq6:'nao',parq7:'nao',
         parq:'1 alerta · Osteoarticular',
         modalidades:'Musculação',
-        alimentacao:'omnivora',sono:7,stress:5},
+        // Sono/Stress/Energia (0-5)
+        sonoQ:3,energiaAcordar:4,energiaDia:2,stress:1,gestaoStress:2,recuperacao:4,scoreSEE:16,
+        // Cravings (0-10)
+        cravingDoces:3,cravingSalgados:4,fomeEmocional:2,
+        alimentacao:'omnivora',sono:7,
+        // Fórmulas
+        fcMaxGellish:174,
+        // BIA não realizada
+        bia:'não realizada'},
       avaliacoes:[
-        {date:'2026-05-09',peso:58,imc:22.4,abd:0,cint:81,anca:94,bf:0,fc:0,pa:'',braco:29,coxa:93,gemeo:37,pescoco:35,obs:'BIA não realizada'},
+        {date:'2026-05-09',peso:58,imc:22.4,whr:0.862,cint:81,anca:94,braco:29,coxa:93,gemeo:37,pescoco:35,fcMax:174,obs:'1ª AVAL · BIA não realizada · Push-up + McGill pendentes · WHR risco elevado'},
       ],
       nutricao:{tmb:1300,tdee:2000,alvo:2150,macros:{p:130,c:230,g:65},hidrat:2.5,
         refeicoes:[
@@ -1692,6 +1714,19 @@ function applyMigrations(s){
       s.clientData.u1.treino = def.clientData.u1.treino;
     }
     s.schemaVersion = 8;
+  }
+  if(s.schemaVersion < 9){
+    // Forçar refresh anamnese+avaliações completas Joana (BIBLIA 2026), Tânia (BIBLIA), Camila (sem fake)
+    const def = DEFAULT();
+    if(s.clientData){
+      ['u4','u5','u8'].forEach(uid=>{
+        if(s.clientData[uid] && def.clientData[uid]){
+          s.clientData[uid].anamnese = def.clientData[uid].anamnese;
+          s.clientData[uid].avaliacoes = def.clientData[uid].avaliacoes;
+        }
+      });
+    }
+    s.schemaVersion = 9;
   }
   // SANITIZAÇÃO FINAL: remover undefined recursivamente (Firestore rejeita undefined)
   function sanitize(o){
@@ -4927,6 +4962,7 @@ window.addEventListener('appinstalled', () => {
   const b = document.getElementById('pwaInstall'); if(b) b.remove();
   toast('App instalada ✓');
 });
+
 
 const GATE_HASH_DEFAULT = '7a6d29ab834a3ecb5f26316612ac2983f6e1c594e45b7518885b91727d0dafa8';
 async function sha256(text){
