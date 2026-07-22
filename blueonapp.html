@@ -22,6 +22,39 @@
   --shadow:0 4px 20px rgba(7,27,58,.10);--shadow-lg:0 8px 32px rgba(7,27,58,.16);
   --r:18px;--rsm:12px;--nav-h:68px;--safe-b:env(safe-area-inset-bottom,0px);
 }
+/* ===== JARVIS · HUD ===== */
+.jarvis{position:relative;overflow:hidden;border-radius:20px;padding:16px 16px 14px;margin-bottom:14px;
+  background:linear-gradient(135deg,#05122a 0%,#0b2350 55%,#0e2f63 100%);
+  border:1px solid rgba(0,196,204,.28);box-shadow:0 10px 34px rgba(5,18,42,.45),inset 0 0 0 1px rgba(0,196,204,.06)}
+.jarvis::before{content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(120% 90% at 88% -20%,rgba(0,196,204,.22),transparent 60%)}
+.jarvis-top{position:relative;display:flex;align-items:center;gap:12px}
+.jv-ring{flex-shrink:0;position:relative;width:92px;height:92px}
+.jv-ring svg{transform:rotate(-90deg)}
+.jv-ring .jv-val{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1}
+.jv-ring .jv-num{font-size:1.7rem;font-weight:900;color:#eaf6ff;letter-spacing:-1px}
+.jv-ring .jv-bpi{font-size:.52rem;font-weight:800;letter-spacing:1.5px;color:#5fd7de;margin-top:2px}
+.jv-info{flex:1;min-width:0;color:#dce9f7}
+.jv-hi{display:flex;align-items:center;gap:7px;font-size:.66rem;font-weight:800;letter-spacing:1.4px;color:#5fd7de;text-transform:uppercase}
+.jv-dot{width:7px;height:7px;border-radius:50%;background:#22d3ee;box-shadow:0 0 0 0 rgba(34,211,238,.7);animation:jvpulse 2s infinite}
+@keyframes jvpulse{0%{box-shadow:0 0 0 0 rgba(34,211,238,.6)}70%{box-shadow:0 0 0 7px rgba(34,211,238,0)}100%{box-shadow:0 0 0 0 rgba(34,211,238,0)}}
+.jv-class{font-size:1.06rem;font-weight:900;margin:3px 0 2px;color:#fff}
+.jv-sub{font-size:.74rem;color:#9db6d6;line-height:1.35}
+.jv-brief{position:relative;margin-top:12px;padding:11px 12px;border-radius:13px;background:rgba(0,196,204,.07);
+  border:1px solid rgba(0,196,204,.16);font-size:.82rem;line-height:1.55;color:#e6f1fb}
+.jv-brief b{color:#5fd7de;font-weight:800}
+.jv-acts{position:relative;display:flex;gap:8px;margin-top:11px;flex-wrap:wrap}
+.jv-btn{display:inline-flex;align-items:center;gap:6px;font-size:.76rem;font-weight:800;padding:8px 13px;border-radius:10px;
+  border:1px solid rgba(0,196,204,.35);background:rgba(0,196,204,.12);color:#7fe3ea;transition:.15s}
+.jv-btn:active{transform:scale(.96)}
+.jv-btn.primary{background:linear-gradient(90deg,#00C4CC,#00a3aa);color:#04121f;border-color:transparent}
+.jv-btn.speaking{background:rgba(239,68,68,.16);border-color:rgba(239,68,68,.45);color:#fda4a4}
+.jv-sys{position:relative;display:flex;gap:6px;margin-top:11px}
+.jv-seg{flex:1;text-align:center}
+.jv-seg .jsl{font-size:.54rem;font-weight:800;letter-spacing:.6px;color:#7f9bc0;text-transform:uppercase;margin-bottom:4px}
+.jv-seg .jsbar{height:5px;border-radius:4px;background:rgba(255,255,255,.09);overflow:hidden}
+.jv-seg .jsbar>span{display:block;height:100%;border-radius:4px}
+.jv-seg .jsv{font-size:.62rem;font-weight:800;color:#c7dcf3;margin-top:3px}
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html,body{margin:0;padding:0;}
 body{background:var(--bg);color:var(--text);
@@ -1942,9 +1975,193 @@ function ringSvg(pct, color, valLabel){
     <text class="lbl" x="32" y="32">${valLabel}</text></svg>`;
 }
 
+/* ============================================================
+   JARVIS · Blue Performance Index (BPI) + briefing por voz
+   BPI = Corpo(30%) + Sistema Nervoso(25%) + Clínico(25%) + Treino(20%)
+   Baseado na metodologia BIBLIA BLUE · Blue Engine PRO
+   ============================================================ */
+function clamp100(x){ return Math.max(0, Math.min(100, Math.round(x))); }
+
+function computeBPI(c, u){
+  const av = (c.avaliacoes||[]).slice(-1)[0] || null;
+  const sexo = (c.anamnese?.sexo) || (av && av.sexo) || 'M';
+
+  // — CORPO (30%) — composição corporal vs faixas saudáveis
+  let corpo = null;
+  if(av){
+    const parts = [];
+    // %MG: ótimo ♂ ~12, ♀ ~22; pontua 100 no ideal, cai fora da faixa
+    const bf = av.bf;
+    if(typeof bf==='number' && bf>0){
+      const ideal = sexo==='F' ? 22 : 13, spread = sexo==='F' ? 14 : 12;
+      parts.push(clamp100(100 - Math.abs(bf-ideal)/spread*100));
+    }
+    // IMC: ideal 22
+    if(typeof av.imc==='number' && av.imc>0) parts.push(clamp100(100 - Math.abs(av.imc-22)/8*100));
+    // WHR: menor melhor (♂<0.9 ♀<0.8 = 100)
+    const whr = av.whr;
+    if(typeof whr==='number' && whr>0){
+      const lim = sexo==='F' ? 0.80 : 0.90;
+      parts.push(clamp100(whr<=lim ? 100 : 100 - (whr-lim)/0.20*100));
+    }
+    if(parts.length) corpo = parts.reduce((a,b)=>a+b,0)/parts.length;
+  }
+
+  // — SISTEMA NERVOSO (25%) — check-in: sono, energia, dor (escalas 0-10)
+  let sn = null;
+  const ck = c.checkin;
+  if(ck && (ck.sono!=null || ck.energia!=null)){
+    const sono = (ck.sono!=null?ck.sono:6)/10*100;
+    const ener = (ck.energia!=null?ck.energia:6)/10*100;
+    const dorPen = (ck.dor!=null?ck.dor:0)/10*100; // penalização
+    sn = clamp100(sono*0.4 + ener*0.4 + (100-dorPen)*0.2);
+  }
+
+  // — CLÍNICO (25%) — semáforo, dor, PAR-Q
+  let clinico = null;
+  if(ck){
+    const semScore = {verde:100,amarelo:72,laranja:45,vermelho:20}[ck.semaforo] ?? 80;
+    const dorPen = (ck.dor!=null?ck.dor:0)/10*100;
+    const parq = (c.anamnese?.parq||'').toLowerCase().includes('sem aler') || !(c.anamnese?.parq) ? 100 : 70;
+    clinico = clamp100(semScore*0.55 + (100-dorPen)*0.25 + parq*0.20);
+  }
+
+  // — TREINO (20%) — adesão nos últimos 14 dias (só conta se houver histórico real)
+  let treino = null;
+  const hist = (c.treino?.historico || []).concat(c.sessions || []);
+  if(hist.length){
+    const now = Date.now();
+    const done14 = hist.filter(h=> h.date && (now-new Date(h.date).getTime()) <= 14*86400000).length;
+    const planDays = (c.treino?.plano||[]).length || 3;
+    const target = Math.max(1, Math.round(planDays*2)); // 2 semanas de plano
+    treino = clamp100(done14/target*100);
+  }
+
+  // — Ponderação adaptativa (só conta o que existe) —
+  const comp = [ [corpo,30], [sn,25], [clinico,25], [treino,20] ].filter(x=>x[0]!=null);
+  let score = null;
+  if(comp.length){
+    const wsum = comp.reduce((s,x)=>s+x[1],0);
+    score = clamp100(comp.reduce((s,x)=>s+x[0]*x[1],0)/wsum);
+  }
+
+  // — Classificação BIBLIA —
+  let classe, cor;
+  if(score==null){ classe='POR AVALIAR'; cor='#64748b'; }
+  else if(score<50){ classe='CORRETIVO'; cor='#ef4444'; }
+  else if(score<70){ classe='DESENVOLVIMENTO'; cor='#f59e0b'; }
+  else if(score<85){ classe='OTIMIZAÇÃO'; cor='#22c55e'; }
+  else { classe='ELITE'; cor='#00e0d0'; }
+
+  return {score, corpo, sn, clinico, treino, classe, cor, temAval:!!av};
+}
+
+/* Briefing falado (natural, pt-PT) */
+function jarvisBriefingText(c, u){
+  const bpi = computeBPI(c, u);
+  const nome = (u?.name||'atleta').split(' ')[0];
+  const hora = new Date().getHours();
+  const saud = hora<12?'Bom dia':hora<20?'Boa tarde':'Boa noite';
+  const wd = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'][new Date().getDay()];
+  const planoHoje = (c.treino?.plano||[]).find(p=>p.dia.startsWith(wd));
+  let t = `${saud}, ${nome}. `;
+
+  if(bpi.score==null){
+    t += `Ainda não tens uma avaliação registada, por isso o teu Blue Performance Index está por calcular. Fala com o teu coach para agendar a primeira avaliação. `;
+  } else {
+    t += `O teu Blue Performance Index está em ${bpi.score}, zona de ${bpi.classe.toLowerCase()}. `;
+    const parts = [];
+    if(bpi.sn!=null) parts.push(`sistema nervoso a ${bpi.sn}`);
+    if(bpi.corpo!=null) parts.push(`composição corporal a ${bpi.corpo}`);
+    if(bpi.treino!=null) parts.push(`adesão ao treino a ${bpi.treino}`);
+    if(parts.length) t += `Detalhe: ${parts.join(', ')}. `;
+  }
+
+  // recomendação principal (semáforo/recuperação)
+  const sem = c.checkin?.semaforo;
+  if(sem==='vermelho') t += `Hoje reportaste indisposição — recomendo descanso total. `;
+  else if(sem==='laranja') t += `Hoje pede esforço leve: mobilidade e zona 1 a 2. `;
+  else if(sem==='amarelo') t += `Reduz o volume em cerca de dez por cento hoje. `;
+  else if(planoHoje) t += `Estás pronto para a sessão de hoje: ${planoHoje.dia.split('·').slice(-1)[0].trim()}. `;
+  else t += `Hoje é dia de descanso ativo. `;
+
+  t += `Vamos a isto.`;
+  return t;
+}
+
+let _jvUtter = null;
+function jarvisSpeak(btn){
+  const c = state.clientData[session.activeClient || session.userId];
+  const u = state.users.find(x=>x.id===(session.activeClient||session.userId));
+  if(!('speechSynthesis' in window)){ toast('O teu navegador não suporta voz.'); return; }
+  // toggle: se já está a falar, pára
+  if(window.speechSynthesis.speaking && _jvUtter){
+    window.speechSynthesis.cancel(); _jvUtter=null;
+    document.querySelectorAll('.jv-btn.speaking').forEach(b=>{b.classList.remove('speaking'); b.innerHTML=b.dataset.idle;});
+    return;
+  }
+  const txt = jarvisBriefingText(c, u);
+  const utt = new SpeechSynthesisUtterance(txt);
+  utt.lang='pt-PT'; utt.rate=1.02; utt.pitch=1.0;
+  const vs = window.speechSynthesis.getVoices();
+  const pt = vs.find(v=>/pt[-_]?PT/i.test(v.lang)) || vs.find(v=>/^pt/i.test(v.lang));
+  if(pt) utt.voice=pt;
+  if(btn){ btn.dataset.idle=btn.innerHTML; btn.classList.add('speaking'); btn.innerHTML='⏹ A falar…'; }
+  utt.onend=()=>{ _jvUtter=null; if(btn){btn.classList.remove('speaking'); btn.innerHTML=btn.dataset.idle;} };
+  utt.onerror=utt.onend;
+  _jvUtter=utt;
+  window.speechSynthesis.speak(utt);
+}
+// pré-carrega vozes (Chrome carrega async)
+if('speechSynthesis' in window){ window.speechSynthesis.onvoiceschanged = ()=>{}; }
+
+function jvRing(score, cor){
+  const C = 2*Math.PI*40; const pct = score==null?0:score/100; const off = C*(1-pct);
+  return `<svg viewBox="0 0 92 92" width="92" height="92">
+    <circle cx="46" cy="46" r="40" fill="none" stroke="rgba(255,255,255,.10)" stroke-width="7"/>
+    <circle cx="46" cy="46" r="40" fill="none" stroke="${cor}" stroke-width="7" stroke-linecap="round"
+      stroke-dasharray="${C.toFixed(1)}" stroke-dashoffset="${off.toFixed(1)}"/>
+  </svg>`;
+}
+
+function renderJarvisCard(c, u){
+  const b = computeBPI(c, u);
+  const nome = (u?.name||'').split(' ')[0];
+  const seg = (lbl,val,cor)=> `<div class="jv-seg"><div class="jsl">${lbl}</div>
+    <div class="jsbar"><span style="width:${val==null?0:val}%;background:${cor}"></span></div>
+    <div class="jsv">${val==null?'—':val}</div></div>`;
+  const briefHtml = jarvisBriefingText(c, u)
+    .replace(/Blue Performance Index está em (\d+)/, 'BPI <b>$1</b>')
+    .replace(new RegExp(`(${b.classe.toLowerCase()})`), '<b>$1</b>');
+  return `<div class="jarvis">
+    <div class="jarvis-top">
+      <div class="jv-ring">${jvRing(b.score, b.cor)}
+        <div class="jv-val"><div class="jv-num" style="color:${b.score==null?'#8fa9cc':'#eaf6ff'}">${b.score==null?'—':b.score}</div><div class="jv-bpi">BPI</div></div>
+      </div>
+      <div class="jv-info">
+        <div class="jv-hi"><span class="jv-dot"></span>BLUE ON · JARVIS</div>
+        <div class="jv-class" style="color:${b.cor}">${b.classe}</div>
+        <div class="jv-sub">${b.score==null?'Avaliação inicial por realizar':'Blue Performance Index · índice holístico'}</div>
+      </div>
+    </div>
+    <div class="jv-brief">${briefHtml}</div>
+    <div class="jv-sys">
+      ${seg('Corpo', b.corpo==null?null:Math.round(b.corpo), '#00C4CC')}
+      ${seg('S. Nervoso', b.sn==null?null:Math.round(b.sn), '#818cf8')}
+      ${seg('Clínico', b.clinico==null?null:Math.round(b.clinico), '#f59e0b')}
+      ${seg('Treino', b.treino==null?null:Math.round(b.treino), '#22c55e')}
+    </div>
+    <div class="jv-acts">
+      <button class="jv-btn primary" data-idle='🔊 Ouvir briefing' onclick="jarvisSpeak(this)">🔊 Ouvir briefing</button>
+      <button class="jv-btn" onclick="selectTab('prog')">📊 Ver progresso</button>
+    </div>
+  </div>`;
+}
+
 function renderHoje(){
   const c = state.clientData[session.activeClient || session.userId];
   if(!c){ document.getElementById('p-hoje').innerHTML = empty(); return; }
+  const u = state.users.find(x=>x.id===(session.activeClient||session.userId)) || {};
   const today = new Date();
   const wd = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'][today.getDay()];
   const planoHoje = c.treino.plano.find(p=>p.dia.startsWith(wd));
@@ -1983,6 +2200,8 @@ function renderHoje(){
         <div class="rl">Treino</div><div class="rv">${wokDonePct?'feito':(planoHoje?'pendente':'descanso')}</div>
       </div>
     </div>
+
+    ${renderJarvisCard(c, u)}
 
     ${(function(){
       const sg = smartSuggestion(c, planoHoje);
