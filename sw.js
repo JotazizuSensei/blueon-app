@@ -7,7 +7,7 @@ const RUNTIME_CACHE = `runtime-${VERSION}`;
 
 const CORE_ASSETS = [
   './',
-  './blue-on-app.html',
+  './blueonapp.html',
   './manifest.json',
   './icon-192.png',
   './icon-512.png',
