@@ -13,15 +13,36 @@
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
 <title>Blue ON · App</title>
+<script>/* aplica o tema o mais cedo possível para não haver flash */
+(function(){try{var t=localStorage.getItem('blueon_theme')||'auto';document.documentElement.setAttribute('data-theme',t);}catch(e){document.documentElement.setAttribute('data-theme','auto');}})();</script>
 <style>
 :root{
   --navy:#071B3A;--blue:#0D2E5C;--blue2:#123b75;--cyan:#00C4CC;--cyan2:#00a3aa;
-  --bg:#f0f4f9;--card:#fff;--line:#dce8f3;--muted:#5d7493;--text:#0e2036;
+  --bg:#f0f4f9;--card:#fff;--line:#dce8f3;--muted:#5d7493;--text:#0e2036;--surface2:#f0f6fc;
   --ok:#16a34a;--ok-bg:#f0fdf4;--warn:#ca8a04;--warn-bg:#fefce8;
   --orange:#ea580c;--orange-bg:#fff7ed;--danger:#dc2626;--danger-bg:#fef2f2;
   --shadow:0 4px 20px rgba(7,27,58,.10);--shadow-lg:0 8px 32px rgba(7,27,58,.16);
   --r:18px;--rsm:12px;--nav-h:68px;--safe-b:env(safe-area-inset-bottom,0px);
 }
+/* ===== TEMA ESCURO · Jarvis blue ===== */
+:root[data-theme="dark"]{
+  --navy:#030a16;--blue:#5aa9ff;--blue2:#3d7fd6;
+  --bg:#060e1c;--card:#0c1d38;--line:#1a3458;--muted:#8ba6c9;--text:#e7f1fc;--surface2:#0f2340;
+  --ok:#34d399;--ok-bg:#0e2a1c;--warn:#fbbf24;--warn-bg:#2a2410;
+  --orange:#fb923c;--orange-bg:#2a1a0e;--danger:#f87171;--danger-bg:#2a1214;
+  --shadow:0 4px 22px rgba(0,0,0,.45);--shadow-lg:0 10px 34px rgba(0,0,0,.55);
+}
+@media (prefers-color-scheme: dark){
+  :root[data-theme="auto"]{
+    --navy:#030a16;--blue:#5aa9ff;--blue2:#3d7fd6;
+    --bg:#060e1c;--card:#0c1d38;--line:#1a3458;--muted:#8ba6c9;--text:#e7f1fc;--surface2:#0f2340;
+    --ok:#34d399;--ok-bg:#0e2a1c;--warn:#fbbf24;--warn-bg:#2a2410;
+    --orange:#fb923c;--orange-bg:#2a1a0e;--danger:#f87171;--danger-bg:#2a1214;
+    --shadow:0 4px 22px rgba(0,0,0,.45);--shadow-lg:0 10px 34px rgba(0,0,0,.55);
+  }
+}
+html{transition:background .25s ease}
+body,.card,.kpi,.bnav,.modal,input,select,textarea,.chart-card,.meal,.streak,.ring-card{transition:background-color .25s ease,border-color .25s ease,color .25s ease}
 /* ===== JARVIS · HUD ===== */
 .jarvis{position:relative;overflow:hidden;border-radius:20px;padding:16px 16px 14px;margin-bottom:14px;
   background:linear-gradient(135deg,#05122a 0%,#0b2350 55%,#0e2f63 100%);
@@ -62,7 +83,7 @@ body{background:var(--bg);color:var(--text);
   overflow-x:hidden;min-height:100vh;}
 button{cursor:pointer;border:none;background:none;font-family:inherit;color:inherit}
 input,select,textarea{font-family:inherit;width:100%;border:1.5px solid var(--line);
-  border-radius:var(--rsm);background:#fff;padding:11px 13px;font-size:1rem;
+  border-radius:var(--rsm);background:var(--card);padding:11px 13px;font-size:1rem;
   color:var(--text);outline:none;-webkit-appearance:none;appearance:none}
 input:focus,select:focus,textarea:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(0,196,204,.15)}
 textarea{resize:vertical;min-height:60px}
@@ -322,7 +343,7 @@ a{color:var(--cyan);text-decoration:none}
 .st-pill.pausa{background:#fee2e2;color:#991b1b}
 
 /* Pending request card */
-.pend{background:#fff;border:1.5px solid #fde68a;border-radius:var(--r);padding:14px;margin-bottom:10px;box-shadow:var(--shadow)}
+.pend{background:var(--card);border:1.5px solid var(--warn);border-radius:var(--r);padding:14px;margin-bottom:10px;box-shadow:var(--shadow)}
 .pend-h{display:flex;align-items:center;gap:10px;margin-bottom:8px}
 .pend-h .pic{width:38px;height:38px;border-radius:50%;background:#fef3c7;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
 .pend-h b{font-weight:900;flex:1}
@@ -584,7 +605,7 @@ a{color:var(--cyan);text-decoration:none}
 .food-img{width:46px;height:46px;border-radius:13px;object-fit:cover;background:linear-gradient(135deg,#fff3e0,#ffe0b2);flex-shrink:0;display:block}
 .food-img-fallback{width:46px;height:46px;border-radius:13px;background:linear-gradient(135deg,#fff3e0,#ffe0b2);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
 .supl-img{width:40px;height:40px;border-radius:50%;object-fit:cover;background:#e0f2fe;flex-shrink:0;display:block}
-.shop-img{width:32px;height:32px;border-radius:8px;object-fit:cover;background:#fff;flex-shrink:0;display:block;border:1px solid var(--line)}
+.shop-img{width:32px;height:32px;border-radius:8px;object-fit:cover;background:var(--surface2);flex-shrink:0;display:block;border:1px solid var(--line)}
 
 /* ===== Photo grid ===== */
 .photo-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
@@ -870,6 +891,29 @@ const WHATS_PHONE='351915425055';
 /* Backend de wearables (Cloudflare Worker). Vazio = modo manual.
    Setup: api/WEARABLES-SETUP.md · põe aqui o URL do teu Worker para ativar o Strava real. */
 const WEARABLES_API = '';
+
+/* ===== TEMA (claro / escuro / automático) ===== */
+function getTheme(){ return localStorage.getItem('blueon_theme') || 'auto'; }
+function applyTheme(t){ document.documentElement.setAttribute('data-theme', t); }
+function setTheme(t){
+  localStorage.setItem('blueon_theme', t);
+  applyTheme(t);
+  // theme-color da status bar
+  const dark = t==='dark' || (t==='auto' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  const mc = document.querySelector('meta[name="theme-color"]'); if(mc) mc.setAttribute('content', dark?'#060e1c':'#071B3A');
+  if(typeof session!=='undefined' && session && session.tab){ try{ selectTab(session.tab); }catch(e){} }
+  try{ toast('Tema: '+({auto:'Automático',light:'Claro',dark:'Escuro · Jarvis'}[t])); }catch(e){}
+}
+function themeSwitcher(){
+  const cur = getTheme();
+  const opt = (val,ic,lbl)=>`<button onclick="setTheme('${val}')" style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;padding:11px 6px;border-radius:12px;border:1.5px solid ${cur===val?'var(--cyan)':'var(--line)'};background:${cur===val?'rgba(0,196,204,.10)':'var(--card)'};color:var(--text);font-weight:${cur===val?'800':'600'};font-size:.74rem;transition:.15s">
+    <span style="font-size:1.15rem">${ic}</span>${lbl}</button>`;
+  return `<div style="display:flex;gap:8px">
+    ${opt('light','☀️','Claro')}
+    ${opt('auto','🌗','Auto')}
+    ${opt('dark','🌙','Escuro')}
+  </div>`;
+}
 
 const DEFAULT = ()=> ({
   users:[
@@ -3149,10 +3193,10 @@ function renderHealthSection(c){
           ${s.bullets.map(b=>`<li>${b}</li>`).join('')}
         </ul>
         <button class="btn btn-ghost" style="margin-top:8px;width:100%;padding:7px 10px;font-size:.75rem;color:var(--blue);border-color:var(--line)" onclick="toggleWearableGuide('${s.key}')">${open?'▲ Esconder guia':'▼ Como configurar'}</button>
-        ${open?`<div style="margin-top:8px;padding:12px;background:#f0f9ff;border-radius:8px;font-size:.78rem;color:#1e3a8a;line-height:1.55">
+        ${open?`<div style="margin-top:8px;padding:12px;background:var(--surface2);border-radius:8px;font-size:.78rem;color:#1e3a8a;line-height:1.55">
           <ol style="margin:0;padding-left:18px">${s.guia.map(g=>`<li style="margin-bottom:6px">${formatGuideText(g)}</li>`).join('')}</ol>
         </div>`:''}
-        ${!conn && !open?`<div style="margin-top:8px;padding:8px 10px;background:#fff7ed;border-radius:8px;font-size:.7rem;color:#9a3412">⚠ ${s.setupNote}</div>`:''}
+        ${!conn && !open?`<div style="margin-top:8px;padding:8px 10px;background:var(--warn-bg);border-radius:8px;font-size:.7rem;color:var(--orange)">⚠ ${s.setupNote}</div>`:''}
       </div>
     </div>`;
   }).join('');
@@ -3384,6 +3428,9 @@ function renderPerfil(){
 
     ${back?`<button class="btn btn-ghost" onclick="returnToGestor()" style="width:100%;background:rgba(0,196,204,.1);color:var(--cyan);border-color:rgba(0,196,204,.3);margin-bottom:10px">← Voltar ao modo Gestor</button>`:''}
 
+    <div class="sect-title">Aparência</div>
+    <div class="card"><div class="card-body">${themeSwitcher()}</div></div>
+
     ${(function(){
       const s = u.subscription;
       if(!s) return '';
@@ -3590,7 +3637,7 @@ function renderNotificationsSection(u){
             <button class="btn btn-${on?'primary':'ghost'}" style="padding:6px 12px;font-size:.74rem" onclick="toggleNotifPref('${it.key}')">${on?'ON':'OFF'}</button>
           </div>`;
         }).join('')}
-      </div>`:`<div style="margin-top:10px;padding:10px 12px;background:#fff7ed;border-radius:8px;font-size:.72rem;color:#9a3412">⚠ As notificações estão desligadas. Ativa para receber alertas dos teus horários de refeição, suplementação e treinos.</div>`}
+      </div>`:`<div style="margin-top:10px;padding:10px 12px;background:var(--warn-bg);border-radius:8px;font-size:.72rem;color:var(--orange)">⚠ As notificações estão desligadas. Ativa para receber alertas dos teus horários de refeição, suplementação e treinos.</div>`}
     </div></div>`;
 }
 
@@ -4991,7 +5038,7 @@ function recalcAval(){
   const {o,hm,vo2rk,vo2cp}=collectAval();
   const uid=session.activeClient, c=state.clientData[uid], u=state.users.find(x=>x.id===uid)||{};
   const sexo=o.sexo, idade=o.idade, peso=o.peso;
-  const pill=(l,v,extra='')=> `<div style="background:#f0f6fc;border:1px solid var(--line);border-radius:12px;padding:9px 11px"><div style="font-size:.6rem;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);font-weight:800">${l}</div><div style="font-weight:900;color:var(--blue);font-size:1.02rem">${v}</div>${extra?`<div style="font-size:.66rem;color:var(--muted)">${extra}</div>`:''}</div>`;
+  const pill=(l,v,extra='')=> `<div style="background:var(--surface2);border:1px solid var(--line);border-radius:12px;padding:9px 11px"><div style="font-size:.6rem;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);font-weight:800">${l}</div><div style="font-weight:900;color:var(--blue);font-size:1.02rem">${v}</div>${extra?`<div style="font-size:.66rem;color:var(--muted)">${extra}</div>`:''}</div>`;
 
   // TMR
   let tmrHtml='', tmrMed=null, adotada=null;
@@ -5017,7 +5064,7 @@ function recalcAval(){
   let fcHtml='';
   if(idade){
     const f=BENG.fcmax(idade); const fcmaxAd=f['Gellish'];
-    fcHtml=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px">${Object.entries(f).map(([k,v])=>`<div style="display:flex;justify-content:space-between;font-size:.74rem;padding:5px 9px;background:#f6f9fc;border-radius:8px;border:1px solid var(--line)"><span style="color:var(--muted)">${k}</span><b>${v}</b></div>`).join('')}</div>`;
+    fcHtml=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px">${Object.entries(f).map(([k,v])=>`<div style="display:flex;justify-content:space-between;font-size:.74rem;padding:5px 9px;background:var(--surface2);border-radius:8px;border:1px solid var(--line)"><span style="color:var(--muted)">${k}</span><b>${v}</b></div>`).join('')}</div>`;
     if(o.fc){
       const z=BENG.karvonen(fcmaxAd,o.fc);
       fcHtml+=`<div style="font-size:.64rem;color:var(--muted);margin:8px 0 3px;font-weight:700">Zonas Karvonen (FCmáx Gellish ${fcmaxAd} · FCrep ${o.fc})</div>`+
@@ -5106,7 +5153,7 @@ function printAvalReport(){
     td{padding:5px 2px;border-bottom:1px solid #e6eef7}
     td:last-child{text-align:right}
     .seg{display:flex;gap:8px;margin-top:10px}
-    .seg>div{flex:1;text-align:center;background:#f0f6fc;border:1px solid #dce8f3;border-radius:9px;padding:8px 4px}
+    .seg>div{flex:1;text-align:center;background:var(--surface2);border:1px solid #dce8f3;border-radius:9px;padding:8px 4px}
     .seg .v{font-size:18px;font-weight:900;color:#0D2E5C}
     .seg .l{font-size:9px;text-transform:uppercase;color:#5d7493;letter-spacing:.5px}
     .foot{margin-top:26px;padding-top:12px;border-top:1px solid #dce8f3;font-size:10px;color:#94a3b8;text-align:center}
@@ -5309,6 +5356,9 @@ function renderCoach(){
         </div>
       </div>` : ''}
 
+    <div class="sect-title">APARÊNCIA</div>
+    <div class="card"><div class="card-body">${themeSwitcher()}</div></div>
+
     <div class="sect-title">DADOS DA EMPRESA</div>
     <div class="card"><div class="card-body">
       <label>WhatsApp Blue ON</label><input value="${WHATS_PHONE}" readonly>
@@ -5331,7 +5381,7 @@ function renderCoach(){
           ? `<button class="btn btn-ghost" style="color:var(--danger);border-color:#fecaca;background:#fef2f2" onclick="localStorage.setItem('blueon_gate_disabled','1');toast('Gate desativado.');selectTab('coach')">⛔ Desativar gate</button>`
           : `<button class="btn btn-ghost" style="color:#10b981;border-color:#bbf7d0;background:#f0fdf4" onclick="localStorage.removeItem('blueon_gate_disabled');toast('Gate ativado.');selectTab('coach')">✓ Reativar gate</button>`}
       </div>
-      <div style="margin-top:10px;padding:10px 12px;background:#fff7ed;border-radius:8px;font-size:.7rem;color:#9a3412;line-height:1.4">
+      <div style="margin-top:10px;padding:10px 12px;background:var(--warn-bg);border-radius:8px;font-size:.7rem;color:var(--orange);line-height:1.4">
         ⚠ Senha por defeito: <b>blueon</b>. Muda já. Para privacidade total (esconder o código-fonte no GitHub), vê notas no chat.
       </div>
     </div></div>
@@ -5746,7 +5796,7 @@ function showInstallHelp(){
         <li>Confirma o nome <b>"Blue ON"</b> e toca <b>Instalar</b>.</li>
         <li>O ícone Blue ON aparece no teu ecrã principal, como qualquer app.</li>
       </ol>
-      <div style="margin-top:12px;padding:10px 12px;background:#fff7ed;border-radius:8px;font-size:.78rem;color:#9a3412">
+      <div style="margin-top:12px;padding:10px 12px;background:var(--warn-bg);border-radius:8px;font-size:.78rem;color:var(--orange)">
         ⚠ Se usares Samsung Internet, Firefox ou outro browser, o Chrome é o mais fiável para instalar PWAs.
       </div>
       <button class="btn btn-primary" style="width:100%;margin-top:14px" onclick="closeModal()">Já está, obrigado</button>`;

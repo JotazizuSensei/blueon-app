@@ -1,6 +1,6 @@
 // Blue ON · Service Worker
 // Estratégia: cache-first para o app shell, network-first com fallback para HTML, cache de imagens externas autorizadas
-const VERSION = 'blueon-v3.5.0-bpi-historico-jarvis-proativo-pdf';
+const VERSION = 'blueon-v3.6.0-tema-escuro-jarvis-claro-auto';
 const IMG_HOSTS = ['themealdb.com','www.themealdb.com','images.openfoodfacts.org','static.openfoodfacts.org','wger.de','www.wger.de'];
 const CORE_CACHE = `core-${VERSION}`;
 const RUNTIME_CACHE = `runtime-${VERSION}`;
@@ -69,7 +69,7 @@ self.addEventListener('fetch', (event) => {
           caches.open(RUNTIME_CACHE).then((c) => c.put(request, copy));
           return response;
         })
-        .catch(() => caches.match(request).then((r) => r || caches.match('./blue-on-app.html')))
+        .catch(() => caches.match(request).then((r) => r || caches.match('./blueonapp.html')))
     );
     return;
   }
