@@ -902,7 +902,7 @@ function setTheme(t){
   const dark = t==='dark' || (t==='auto' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
   const mc = document.querySelector('meta[name="theme-color"]'); if(mc) mc.setAttribute('content', dark?'#060e1c':'#071B3A');
   if(typeof session!=='undefined' && session && session.tab){ try{ selectTab(session.tab); }catch(e){} }
-  try{ toast('Tema: '+({auto:'Automático',light:'Claro',dark:'Escuro · Jarvis'}[t])); }catch(e){}
+  try{ toast('Tema: '+({auto:'Automático',light:'Claro',dark:'Escuro'}[t])); }catch(e){}
 }
 function themeSwitcher(){
   const cur = getTheme();
@@ -2237,7 +2237,7 @@ function renderJarvisCard(c, u){
         <div class="jv-val"><div class="jv-num" style="color:${b.score==null?'#8fa9cc':'#eaf6ff'}">${b.score==null?'—':b.score}</div><div class="jv-bpi">BPI</div></div>
       </div>
       <div class="jv-info">
-        <div class="jv-hi"><span class="jv-dot"></span>BLUE ON · JARVIS</div>
+        <div class="jv-hi"><span class="jv-dot"></span>BLUE ON · IA</div>
         <div class="jv-class" style="color:${b.cor}">${b.classe}</div>
         <div class="jv-sub">${b.score==null?'Avaliação inicial por realizar':'Blue Performance Index · índice holístico'}</div>
       </div>

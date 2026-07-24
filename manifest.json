@@ -2,7 +2,7 @@
   "name": "Blue ON",
   "short_name": "Blue ON",
   "description": "Treino, nutrição e acompanhamento personalizado Blue ON.",
-  "start_url": "./blue-on-app.html",
+  "start_url": "./",
   "scope": "./",
   "display": "standalone",
   "display_override": ["window-controls-overlay", "standalone", "browser"],
@@ -35,7 +35,7 @@
     {
       "name": "Treino de hoje",
       "short_name": "Hoje",
-      "url": "./blue-on-app.html#hoje",
+      "url": "./blueonapp.html#hoje",
       "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
     }
   ]
