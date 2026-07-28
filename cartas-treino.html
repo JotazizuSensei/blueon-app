@@ -475,9 +475,16 @@ function buildFilters(){
   const wrap=document.getElementById('filters');
   const items=[['all','Todas','🃏'],...Object.entries(FAM).map(([k,v])=>[k,v.label,v.emo])];
   wrap.innerHTML=items.map(([k,lab,emo])=>`<button class="chip" data-fam="${k}"><span class="emo">${emo}</span>${lab}</button>`).join('')
-    +`<button class="chip" id="printBtn" style="margin-left:auto"><span class="emo">🖨️</span>Imprimir baralho</button>`;
+    +`<button class="chip" id="printBtn" style="margin-left:auto"><span class="emo">🖨️</span>Imprimir baralho</button>`
+    +`<button class="chip" id="printBackBtn"><span class="emo">🔄</span>Imprimir versos</button>`;
   wrap.querySelectorAll('.chip[data-fam]').forEach(ch=>ch.onclick=()=>{filter=ch.dataset.fam;renderDeck();});
   document.getElementById('printBtn').onclick=()=>{filter='all';renderDeck();setTimeout(()=>window.print(),80);};
+  document.getElementById('printBackBtn').onclick=()=>{
+    const n=CARDS.length+WILD.length;
+    const back=`<div class="tcard" style="min-height:80mm;border:1px dashed #999"><div class="cardback" style="aspect-ratio:auto;height:100%;border-radius:0">${ring(120)}</div></div>`;
+    document.getElementById('deckGrid').innerHTML=Array(n).fill(back).join('');
+    setTimeout(()=>window.print(),80);
+  };
 }
 
 /* rotinas */
