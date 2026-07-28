@@ -31,7 +31,7 @@
 
 ## Plano por eixo (os 4 escolhidos)
 
-### Eixo 1 — Performance & Offline `[SEGURO · COMEÇAR AQUI]`
+### Eixo 1 — Performance & Offline `[✅ IMPLEMENTADO]`
 
 Três mudanças concretas e de baixo risco:
 
@@ -117,7 +117,7 @@ relatórios, etc.). Assim que houver alvo concreto, desenho + implemento.
 
 ## Ordem sugerida de execução
 
-1. **Eixo 1** (1.1 → 1.2 → 1.3) — ganho imediato, risco controlado, verificável.
+1. ~~**Eixo 1** (1.1 → 1.2 → 1.3)~~ — ✅ **feito** (SW cacheia Firebase SDK; persistência IndexedDB do Firestore; `VERSION` → `blueon-v3.7.0-perf-offline`).
 2. **Eixo 3** subset seguro (`innerHTML` de texto livre + degradação de rede).
 3. **Eixo 2** — só depois de decidir opção A/B/C e ter backup/migração.
 4. **Eixo 4** — quando houver spec.

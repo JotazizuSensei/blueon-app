@@ -1,6 +1,6 @@
 // Blue ON · Service Worker
 // Estratégia: cache-first para o app shell, network-first com fallback para HTML, cache de imagens externas autorizadas
-const VERSION = 'blueon-v3.6.1-app-publica-sem-codinome';
+const VERSION = 'blueon-v3.7.0-perf-offline';
 const IMG_HOSTS = ['themealdb.com','www.themealdb.com','images.openfoodfacts.org','static.openfoodfacts.org','wger.de','www.wger.de'];
 const CORE_CACHE = `core-${VERSION}`;
 const RUNTIME_CACHE = `runtime-${VERSION}`;
@@ -40,8 +40,23 @@ self.addEventListener('fetch', (event) => {
 
   const url = new URL(request.url);
 
-  // Imagens de hosts autorizados (TheMealDB, Open Food Facts): cache-first com fetch em background
   if (url.origin !== location.origin) {
+    // SDK do Firebase (gstatic): URLs versionadas e imutáveis → cache-first permanente.
+    // Torna o cold-start mais rápido e mantém o SDK disponível offline.
+    if (url.hostname === 'www.gstatic.com' && url.pathname.includes('/firebasejs/')) {
+      event.respondWith(
+        caches.match(request).then((cached) => cached || fetch(request).then((response) => {
+          if (response && response.status === 200) {
+            const copy = response.clone();
+            caches.open(RUNTIME_CACHE).then((c) => c.put(request, copy));
+          }
+          return response;
+        }))
+      );
+      return;
+    }
+
+    // Imagens de hosts autorizados (TheMealDB, Open Food Facts): cache-first com fetch em background
     if (IMG_HOSTS.includes(url.hostname) && request.destination === 'image') {
       event.respondWith(
         caches.match(request).then((cached) => {
