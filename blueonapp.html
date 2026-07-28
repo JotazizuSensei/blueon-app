@@ -5697,7 +5697,16 @@ async function firebaseBoot(){
     ]);
     const app = initializeApp(FIREBASE_CONFIG);
     const a = auth.getAuth(app);
-    const db = fs.getFirestore(app);
+    // Persistência offline (IndexedDB): a app lê dados em cache sem rede e enfileira
+    // escritas para sincronizar quando voltar a ligação. Fallback defensivo se falhar.
+    let db;
+    try {
+      db = fs.initializeFirestore(app, {
+        localCache: fs.persistentLocalCache({ tabManager: fs.persistentMultipleTabManager() })
+      });
+    } catch(_) {
+      db = fs.getFirestore(app);
+    }
     await auth.signInAnonymously(a);
     _fbDoc = fs.doc(db,'pwa_state','main');
     const snap = await fs.getDoc(_fbDoc);
