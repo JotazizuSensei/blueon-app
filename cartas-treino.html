@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#071B3A">
+<title>Blue ON · Cartas de Treino</title>
+<style>
+:root{
+  --navy:#071B3A; --blue:#0D2E5C; --cyan:#00C4CC;
+  --bg:#f0f4f9; --card:#fff; --line:#dce8f3; --muted:#5d7493; --text:#0e2036;
+  --shadow:0 4px 20px rgba(7,27,58,.10); --shadow-lg:0 12px 34px rgba(7,27,58,.18);
+  --r:18px; --rsm:12px;
+  /* famílias */
+  --fam-mind:#7c5cff; --fam-mob:#00b3bb; --fam-func:#2f7bff; --fam-kb:#ea580c; --fam-band:#12a150;
+}
+@media (prefers-color-scheme:dark){
+  :root{ --bg:#060e1c; --card:#0c1d38; --line:#1a3458; --muted:#8ba6c9; --text:#e7f1fc;
+    --shadow:0 4px 22px rgba(0,0,0,.45); --shadow-lg:0 12px 34px rgba(0,0,0,.55); }
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Inter,sans-serif;
+  background:
+     radial-gradient(1200px 600px at 80% -10%, rgba(0,196,204,.10), transparent 60%),
+     var(--bg);
+  color:var(--text); -webkit-font-smoothing:antialiased;
+  padding-bottom:60px;
+}
+.wrap{max-width:1120px;margin:0 auto;padding:0 18px}
+
+/* ---------- HEADER ---------- */
+header.top{
+  background:linear-gradient(135deg,var(--navy),var(--blue));
+  color:#fff;padding:30px 18px 34px;text-align:center;position:relative;overflow:hidden;
+}
+header.top:after{content:"";position:absolute;inset:0;
+  background:radial-gradient(500px 220px at 15% 120%, rgba(0,196,204,.28), transparent 70%);}
+.logo{font-family:Inter,sans-serif;font-weight:900;font-style:italic;font-size:30px;letter-spacing:-.02em;position:relative}
+.logo .n{color:var(--cyan)}
+.kicker{position:relative;margin-top:6px;font-size:12px;letter-spacing:.32em;text-transform:uppercase;opacity:.75}
+h1.title{position:relative;margin:14px 0 6px;font-size:34px;font-weight:900;letter-spacing:-.02em}
+.sub{position:relative;max-width:620px;margin:0 auto;font-size:15px;line-height:1.55;opacity:.85}
+
+/* ---------- SECTION ---------- */
+section{margin-top:34px}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--cyan);font-weight:800}
+h2{font-size:22px;font-weight:900;letter-spacing:-.01em;margin:8px 0 4px}
+.lead{color:var(--muted);font-size:15px;line-height:1.55;max-width:660px}
+
+/* ---------- REGRA DE OURO ---------- */
+.rule-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:18px}
+.rule{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px;box-shadow:var(--shadow);position:relative}
+.rule .step{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-weight:900;color:#fff;font-size:15px;margin-bottom:10px}
+.rule h3{margin:0 0 4px;font-size:17px}
+.rule p{margin:0;color:var(--muted);font-size:13.5px;line-height:1.5}
+.rule .tag{margin-top:10px;display:inline-block;font-size:12px;font-weight:800;padding:3px 9px;border-radius:999px;background:rgba(0,196,204,.12);color:#008b91}
+.s1{background:var(--fam-mob)} .s2{background:var(--fam-func)} .s3{background:var(--fam-mind)}
+@media (prefers-color-scheme:dark){.rule .tag{background:rgba(0,196,204,.16);color:#5ce0e6}}
+
+/* ---------- PACKS ---------- */
+.packs{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:18px}
+.pack{border-radius:var(--r);padding:20px;color:#fff;box-shadow:var(--shadow-lg);position:relative;overflow:hidden;min-height:150px;display:flex;flex-direction:column}
+.pack .emo{font-size:30px}
+.pack h3{margin:8px 0 4px;font-size:20px;font-weight:900}
+.pack p{margin:0;font-size:13.5px;line-height:1.5;opacity:.92;flex:1}
+.pack .meta{margin-top:12px;font-size:12px;font-weight:800;letter-spacing:.04em;opacity:.9}
+.pk-ferias{background:linear-gradient(140deg,#0891b2,#0e7490 60%,#155e75)}
+.pk-fds{background:linear-gradient(140deg,#ea580c,#c2410c 60%,#9a3412)}
+.pk-livre{background:linear-gradient(140deg,#4f46e5,#4338ca 60%,#3730a3)}
+
+/* ---------- GERADOR ---------- */
+.builder{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:20px;box-shadow:var(--shadow);margin-top:18px}
+.seg{display:inline-flex;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:4px;gap:2px;flex-wrap:wrap}
+.seg button{border:0;background:transparent;color:var(--muted);font-weight:800;font-size:13.5px;padding:9px 16px;border-radius:999px;cursor:pointer;font-family:inherit;transition:.15s}
+.seg button.on{background:var(--navy);color:#fff}
+@media (prefers-color-scheme:dark){.seg button.on{background:var(--cyan);color:#04202a}}
+.builder-actions{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;margin-top:16px}
+.btn{border:0;border-radius:12px;padding:13px 22px;font-weight:800;font-size:15px;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:9px;transition:.15s;box-shadow:var(--shadow)}
+.btn-primary{background:linear-gradient(135deg,var(--cyan),#0891b2);color:#042a2c}
+.btn-primary:hover{transform:translateY(-1px)}
+.btn-ghost{background:var(--bg);color:var(--text);border:1px solid var(--line);box-shadow:none}
+.hint{color:var(--muted);font-size:13px}
+
+.workout{margin-top:20px}
+.wo-phase{margin-top:16px}
+.wo-phase .lbl{display:flex;align-items:center;gap:9px;font-weight:900;font-size:14px;text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px}
+.wo-phase .lbl .dot{width:11px;height:11px;border-radius:50%}
+.deck-row{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:14px}
+.empty{color:var(--muted);font-size:14px;text-align:center;padding:26px;border:1.5px dashed var(--line);border-radius:var(--r)}
+
+/* ---------- CARTA ---------- */
+.tcard{
+  background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;
+  box-shadow:var(--shadow);display:flex;flex-direction:column;position:relative;min-height:236px;
+  break-inside:avoid;
+}
+.tcard .band{height:7px;width:100%}
+.tcard .body{padding:14px 14px 12px;display:flex;flex-direction:column;flex:1}
+.tcard .fam{display:flex;align-items:center;justify-content:space-between;font-size:10.5px;font-weight:800;letter-spacing:.12em;text-transform:uppercase}
+.tcard .fam .emo{font-size:19px}
+.tcard .nm{font-size:16.5px;font-weight:900;line-height:1.15;margin:8px 0 6px;letter-spacing:-.01em}
+.tcard .exec{font-size:12.5px;color:var(--muted);line-height:1.45;flex:1}
+.tcard .dose{margin-top:9px;display:inline-flex;align-self:flex-start;align-items:center;gap:6px;font-weight:900;font-size:13.5px;padding:5px 11px;border-radius:999px;background:var(--bg);border:1px solid var(--line)}
+.tcard .foot{margin-top:10px;padding-top:9px;border-top:1px solid var(--line);font-size:10.5px;color:var(--muted);line-height:1.4}
+.tcard .foot b{color:var(--text)}
+.tcard .lvl{position:absolute;top:11px;right:12px;display:flex;gap:3px}
+.tcard .lvl i{width:6px;height:6px;border-radius:50%;background:var(--line)}
+.tcard .lvl i.f{background:currentColor}
+
+/* ---------- DECK BROWSER ---------- */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.chip{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:999px;padding:8px 15px;font-weight:800;font-size:13px;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:7px;transition:.15s}
+.chip .emo{font-size:15px}
+.chip.on{color:#fff;border-color:transparent}
+#deckGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(178px,1fr));gap:14px;margin-top:16px}
+
+/* footer */
+.foot-note{margin-top:40px;text-align:center;color:var(--muted);font-size:12.5px;line-height:1.6}
+.foot-note .lo{font-weight:900;font-style:italic;color:var(--text)}
+.foot-note .lo .n{color:var(--cyan)}
+
+/* ---------- PRINT ---------- */
+.print-only{display:none}
+@media print{
+  @page{margin:10mm}
+  body{background:#fff;color:#000;padding:0}
+  .no-print{display:none!important}
+  .print-only{display:block}
+  .wrap{max-width:none;padding:0}
+  #deckGrid{grid-template-columns:repeat(3,1fr);gap:4mm}
+  .tcard{box-shadow:none;border:1px dashed #999;min-height:78mm;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .tcard .band{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  section:not(#deckSection){display:none}
+  #deckSection .filters,#deckSection .eyebrow{display:none}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="logo">BLUE <span class="n">ON</span></div>
+  <div class="kicker">Cartas de Treino</div>
+  <h1 class="title">Tira. Monta. Treina.</h1>
+  <p class="sub">Um baralho de exercícios Blue ON. Body&amp;Mind, Mobilidade, Funcional, Kettlebell e Elásticos.
+     Segue uma regra simples, olha para as cartas e tens um treino — em casa, no hotel ou no ginásio.</p>
+</header>
+
+<div class="wrap">
+
+  <!-- REGRA DE OURO -->
+  <section>
+    <span class="eyebrow">◆ A regra de ouro</span>
+    <h2>Todo o treino segue 3 fases</h2>
+    <p class="lead">Não precisas de pensar. O baralho já está organizado por cores. Só tens de respeitar a ordem: primeiro mobilizas, depois moves, no fim acalmas.</p>
+    <div class="rule-grid">
+      <div class="rule">
+        <div class="step s1">1</div>
+        <h3>Mobiliza</h3>
+        <p>Tira <b>2 cartas de Mobilidade</b> (azul-turquesa). É o aquecimento — prepara articulações e coluna.</p>
+        <span class="tag">≈ 3–5 min</span>
+      </div>
+      <div class="rule">
+        <div class="step s2">2</div>
+        <h3>Move</h3>
+        <p>Tira <b>4 cartas de treino</b> (Funcional, Kettlebell ou Elásticos). Faz em <b>circuito, 3 voltas</b> — reps da carta ou 40s trabalho / 20s descanso.</p>
+        <span class="tag">≈ 15–22 min</span>
+      </div>
+      <div class="rule">
+        <div class="step s3">3</div>
+        <h3>Acalma</h3>
+        <p>Termina com <b>1 carta Body&amp;Mind</b> (violeta). Respiração e alongamento para baixar o ritmo.</p>
+        <span class="tag">≈ 3–5 min</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PACKS -->
+  <section>
+    <span class="eyebrow">◆ Escolhe o teu pack</span>
+    <h2>Dois baralhos, dois momentos</h2>
+    <p class="lead">O mesmo sistema, adaptado a onde estás. Escolhe um pack e usa só as cartas dele.</p>
+    <div class="packs">
+      <div class="pack pk-ferias">
+        <div class="emo">🏝️</div>
+        <h3>Pack Férias</h3>
+        <p>Zero material. Só peso do corpo. Cabe na mala e faz-se em qualquer lado — quarto de hotel, praia, parque. Body&amp;Mind + Mobilidade + Funcional.</p>
+        <div class="meta">2 Mobilidade · 4 Funcional · 1 Body&amp;Mind</div>
+      </div>
+      <div class="pack pk-fds">
+        <div class="emo">🏋️</div>
+        <h3>Pack Fim de Semana</h3>
+        <p>Treino mais completo. Junta Kettlebell e Elásticos ao peso do corpo. Ideal para o teu treino de sábado ou domingo.</p>
+        <div class="meta">2 Mobilidade · 2 Funcional · 2 KB/Elástico · 1 Body&amp;Mind</div>
+      </div>
+      <div class="pack pk-livre">
+        <div class="emo">🎲</div>
+        <h3>Modo Livre</h3>
+        <p>Baralha tudo e deixa a sorte decidir. 5 famílias em jogo. Nunca fazes o mesmo treino duas vezes.</p>
+        <div class="meta">2 Mobilidade · 4 à sorte · 1 Body&amp;Mind</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GERADOR -->
+  <section class="no-print">
+    <span class="eyebrow">◆ Monta agora</span>
+    <h2>Gera o teu treino de hoje</h2>
+    <p class="lead">Escolhe o pack e carrega em tirar cartas. Aplica-se a regra de ouro automaticamente — como se estivesses a virar o baralho.</p>
+    <div class="builder">
+      <div class="seg" id="packSeg">
+        <button data-pack="ferias" class="on">🏝️ Férias</button>
+        <button data-pack="fds">🏋️ Fim de semana</button>
+        <button data-pack="livre">🎲 Livre</button>
+      </div>
+      <div class="builder-actions">
+        <button class="btn btn-primary" id="drawBtn">🃏 Tirar cartas</button>
+        <span class="hint" id="woHint">Treino ≈ 25–30 min · circuito de 3 voltas</span>
+      </div>
+      <div class="workout" id="workout">
+        <div class="empty">Carrega em <b>Tirar cartas</b> para montar o teu treino.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DECK BROWSER -->
+  <section id="deckSection">
+    <span class="eyebrow no-print">◆ O baralho completo</span>
+    <h2 class="no-print">Todas as cartas</h2>
+    <p class="lead no-print">52 exercícios com execução, dose e nível. Filtra por família — ou <b>imprime</b> para teres o baralho físico.</p>
+    <div class="filters no-print" id="filters"></div>
+    <div id="deckGrid"></div>
+  </section>
+
+  <div class="foot-note">
+    <div class="lo">BLUE <span class="n">ON</span> · Cartas de Treino</div>
+    Treina com segurança. Regride qualquer exercício se sentires dor. Em caso de lesão ou condição clínica, fala com o teu treinador Blue ON.
+  </div>
+
+</div>
+
+<script>
+/* ---------------- DADOS DO BARALHO ---------------- */
+const FAM = {
+  mind: {label:'Body & Mind', emo:'🧘', color:'var(--fam-mind)', hex:'#7c5cff'},
+  mob:  {label:'Mobilidade',  emo:'🔄', color:'var(--fam-mob)',  hex:'#00b3bb'},
+  func: {label:'Funcional',   emo:'💪', color:'var(--fam-func)', hex:'#2f7bff'},
+  kb:   {label:'Kettlebell',  emo:'🔔', color:'var(--fam-kb)',   hex:'#ea580c'},
+  band: {label:'Elásticos',   emo:'🎗️', color:'var(--fam-band)', hex:'#12a150'},
+};
+
+// n = nível 1..3 · reg = regressão · prog = progressão · ferias = entra no pack Férias
+const CARDS = [
+  // BODY & MIND (violeta)
+  {f:'mind',n:'Respiração 4-4-4-4',ex:'Sentado ou deitado: inspira 4s, segura 4s, expira 4s, segura 4s.',d:'6 ciclos',fo:'Sistema nervoso',lv:1,reg:'Sem retenção (4s dentro / 4s fora)',prog:'Aumenta para 5-5-5-5',ferias:true},
+  {f:'mind',n:'Gato–Camelo',ex:'Em quadrupedia, alterna arredondar e arquear a coluna, lento e com a respiração.',d:'8–10 reps',fo:'Coluna',lv:1,reg:'Amplitude menor',prog:'Pausa 2s em cada fim',ferias:true},
+  {f:'mind',n:'Postura da Criança',ex:'Sentado sobre os calcanhares, tronco à frente, braços esticados. Relaxa a lombar.',d:'30–45 s',fo:'Relax lombar',lv:1,reg:'Joelho afastado se incómodo',prog:'Alcança para cada lado',ferias:true},
+  {f:'mind',n:'Prancha Consciente',ex:'Prancha de antebraços, corpo em linha, respira devagar sem prender.',d:'20–40 s',fo:'Core',lv:2,reg:'Apoio nos joelhos',prog:'60 s ou eleva 1 pé',ferias:true},
+  {f:'mind',n:'Bird-Dog',ex:'Quadrupedia: estica braço e perna opostos, sem rodar a bacia. Lento.',d:'6–8/lado',fo:'Estabilidade',lv:2,reg:'Só braço ou só perna',prog:'Pausa 3s no topo',ferias:true},
+  {f:'mind',n:'Guerreiro II',ex:'Afastamento largo, joelho da frente fletido, braços à altura dos ombros. Mantém.',d:'20–30 s/lado',fo:'Equilíbrio / pernas',lv:2,reg:'Base mais estreita',prog:'Desce mais o joelho',ferias:true},
+  {f:'mind',n:'Ponte Lenta',ex:'Deitado, pés no chão, eleva a bacia expirando, desce a inspirar. Controlo total.',d:'10–12 reps',fo:'Glúteo / core',lv:1,reg:'Amplitude menor',prog:'Pausa 3s em cima',ferias:true},
+  {f:'mind',n:'Torção Sentada',ex:'Sentado, roda o tronco e olha por cima do ombro. Cresce a cada expiração.',d:'20–30 s/lado',fo:'Coluna torácica',lv:1,reg:'Menos rotação',prog:'Aumenta amplitude',ferias:true},
+  {f:'mind',n:'Equilíbrio 1 Perna',ex:'De pé, apoia numa perna. Estabiliza olhando para um ponto fixo.',d:'20–30 s/lado',fo:'Propriocepção',lv:2,reg:'Toca com dedos no apoio',prog:'Fecha os olhos',ferias:true},
+  {f:'mind',n:'Relaxamento Final',ex:'Deitado, olhos fechados. Respiração natural, solta todo o corpo.',d:'2–3 min',fo:'Recuperação',lv:1,reg:'—',prog:'Body scan guiado',ferias:true},
+
+  // MOBILIDADE (turquesa)
+  {f:'mob',n:'Círculos de Anca',ex:'Em pé, uma perna: desenha círculos grandes com o joelho, controlado.',d:'5/lado × direção',fo:'Anca',lv:1,reg:'Amplitude menor',prog:'Círculos maiores',ferias:true},
+  {f:'mob',n:'Open Book',ex:'Deitado de lado, joelhos fletidos: abre o braço de cima seguindo a mão com o olhar.',d:'8/lado',fo:'Coluna torácica',lv:1,reg:'Menos rotação',prog:'Pausa no fim de amplitude',ferias:true},
+  {f:'mob',n:"World's Greatest",ex:'Afundo, cotovelo junto ao pé da frente, roda e alcança o céu. O alongamento mais completo.',d:'5/lado',fo:'Global',lv:2,reg:'Mão no banco',prog:'Adiciona rotação torácica extra',ferias:true},
+  {f:'mob',n:'Agachamento Profundo',ex:'Desce ao fundo do agachamento, cotovelos empurram os joelhos. Mantém peito alto.',d:'30–45 s',fo:'Anca / tornozelo',lv:2,reg:'Segura num apoio à frente',prog:'Solta o apoio + alcança',ferias:true},
+  {f:'mob',n:'Joelho à Parede',ex:'Pé à frente da parede, empurra o joelho a tocar sem levantar o calcanhar.',d:'8/lado',fo:'Tornozelo',lv:1,reg:'Pé mais perto',prog:'Afasta o pé',ferias:true},
+  {f:'mob',n:'Círculos de Ombro',ex:'Com toalha ou pau à frente, passa por cima da cabeça e atrás, braços esticados.',d:'8–10 reps',fo:'Ombro / escápula',lv:1,reg:'Pega mais larga',prog:'Aproxima as mãos',ferias:true},
+  {f:'mob',n:'Transições 90/90',ex:'Sentado, joelhos a 90°: roda de um lado para o outro sem usar as mãos.',d:'6/lado',fo:'Rotação de anca',lv:2,reg:'Apoio das mãos atrás',prog:'Levanta ligeiramente ao rodar',ferias:true},
+  {f:'mob',n:'Alcance Posterior',ex:'Perna à frente esticada, dobra da anca e desliza as mãos pela perna. Dinâmico.',d:'8/lado',fo:'Posterior da coxa',lv:1,reg:'Joelho ligeiramente fletido',prog:'Mantém 2s no fim',ferias:true},
+  {f:'mob',n:'Thread the Needle',ex:'Quadrupedia: passa um braço por baixo do outro, apoia o ombro no chão e roda.',d:'6/lado',fo:'Coluna torácica',lv:1,reg:'Menos amplitude',prog:'Estica o braço de cima ao abrir',ferias:true},
+  {f:'mob',n:'Cossack Squat',ex:'Afastamento largo, desce para um lado dobrando esse joelho, outra perna esticada.',d:'5/lado',fo:'Adutores / anca',lv:2,reg:'Segura num apoio',prog:'Desce mais / sem apoio',ferias:true},
+
+  // FUNCIONAL (azul)
+  {f:'func',n:'Agachamento',ex:'Pés à largura dos ombros, senta para trás mantendo o peito alto e os joelhos alinhados.',d:'12–15 reps',fo:'Pernas / glúteo',lv:1,reg:'Agacha até uma cadeira',prog:'Adiciona salto',ferias:true},
+  {f:'func',n:'Afundo Alternado',ex:'Passo à frente, desce até o joelho de trás perto do chão. Tronco direito.',d:'8–10/lado',fo:'Pernas',lv:2,reg:'Apoio na parede',prog:'Afundo com salto',ferias:true},
+  {f:'func',n:'Flexão',ex:'Corpo em linha, desce o peito perto do chão, cotovelos a ~45°.',d:'8–12 reps',fo:'Peito / tríceps',lv:2,reg:'Joelhos ou na parede',prog:'Pés elevados',ferias:true},
+  {f:'func',n:'Prancha',ex:'Antebraços no chão, corpo em linha reta, abdómen e glúteo ativos.',d:'30–45 s',fo:'Core',lv:2,reg:'Apoio nos joelhos',prog:'Prancha com toque no ombro',ferias:true},
+  {f:'func',n:'Ponte de Glúteo',ex:'Deitado, pés no chão, eleva a bacia apertando o glúteo no topo.',d:'15 reps',fo:'Glúteo',lv:1,reg:'Amplitude menor',prog:'Uma perna de cada vez',ferias:true},
+  {f:'func',n:'Superman',ex:'Deitado de barriga, eleva braços e pernas ao mesmo tempo, controlado.',d:'10–12 reps',fo:'Cadeia posterior',lv:1,reg:'Só braços ou só pernas',prog:'Mantém 2s em cima',ferias:true},
+  {f:'func',n:'Mountain Climbers',ex:'Posição de flexão, leva os joelhos ao peito alternadamente, ritmo mantido.',d:'30–40 s',fo:'Cardio / core',lv:2,reg:'Ritmo lento',prog:'Acelera / cruza joelho',ferias:true},
+  {f:'func',n:'Burpee',ex:'Agacha, mãos no chão, salta os pés para trás, volta e salta em cima.',d:'8–10 reps',fo:'Corpo inteiro',lv:3,reg:'Sem salto (step-back)',prog:'Com flexão no fundo',ferias:true},
+  {f:'func',n:'Dead Bug',ex:'Deitado, braços ao teto: estica braço e perna opostos sem arquear a lombar.',d:'8/lado',fo:'Core anti-extensão',lv:1,reg:'Só as pernas',prog:'Mais lento / pausa',ferias:true},
+  {f:'func',n:'Step-Up',ex:'Sobe para um banco ou degrau, estica a anca em cima, desce controlado.',d:'10/lado',fo:'Pernas / equilíbrio',lv:2,reg:'Degrau mais baixo',prog:'Joelho alto no topo',ferias:true},
+  {f:'func',n:'Jumping Jacks',ex:'Salta abrindo pernas e braços em simultâneo, ritmo constante.',d:'40 s',fo:'Cardio',lv:1,reg:'Sem salto (step lateral)',prog:'Acelera o ritmo',ferias:true},
+
+  // KETTLEBELL (laranja)
+  {f:'kb',n:'KB Deadlift',ex:'KB entre os pés. Dobra da anca, coluna neutra, levanta apertando o glúteo.',d:'10–12 reps',fo:'Cadeia posterior',lv:1,reg:'KB mais leve / elevado',prog:'Uma perna',ferias:false},
+  {f:'kb',n:'KB Swing',ex:'Balanço a partir da anca (não dos braços). KB sobe até ao peito, explosivo.',d:'12–15 reps',fo:'Anca / potência',lv:2,reg:'Domina o Deadlift primeiro',prog:'KB mais pesado',ferias:false},
+  {f:'kb',n:'KB Goblet Squat',ex:'Segura a KB junto ao peito, agacha profundo mantendo o tronco direito.',d:'10–12 reps',fo:'Pernas / core',lv:1,reg:'Menos profundidade',prog:'Pausa 2s no fundo',ferias:false},
+  {f:'kb',n:'KB Press',ex:'KB na posição rack, empurra acima da cabeça sem arquear a lombar.',d:'8–10/lado',fo:'Ombro',lv:2,reg:'Press a duas mãos',prog:'KB mais pesado',ferias:false},
+  {f:'kb',n:'KB Row',ex:'Tronco inclinado, uma mão apoiada, puxa a KB à cintura apertando as costas.',d:'10–12/lado',fo:'Costas',lv:1,reg:'Mais apoio no banco',prog:'Pausa no topo',ferias:false},
+  {f:'kb',n:'KB Clean',ex:'Da anca, leva a KB à posição rack num só movimento, sem bater no antebraço.',d:'6–8/lado',fo:'Potência / técnica',lv:3,reg:'Pratica sem carga',prog:'Encadeia com press',ferias:false},
+  {f:'kb',n:'KB Reverse Lunge',ex:'KB no peito (goblet), passo atrás e desce o joelho controlado.',d:'8/lado',fo:'Pernas / estabilidade',lv:2,reg:'Sem carga',prog:'KB mais pesado',ferias:false},
+  {f:'kb',n:'KB Halo',ex:'KB pela pega, circula em torno da cabeça devagar, core apertado.',d:'6/lado',fo:'Ombro / core',lv:1,reg:'Círculos mais amplos',prog:'KB mais pesado',ferias:false},
+  {f:'kb',n:'KB Windmill',ex:'KB em cima, olha para ela, dobra da anca lateral descendo a mão livre. Leve.',d:'5/lado',fo:'Core / anca / ombro',lv:3,reg:'Sem carga primeiro',prog:'Aumenta amplitude',ferias:false},
+  {f:'kb',n:'KB Carry',ex:'Segura a KB em rack ou ao lado e caminha com o core e a postura firmes.',d:'30–40 s',fo:'Core / pega / postura',lv:1,reg:'Distância curta',prog:'KB mais pesado / rack',ferias:false},
+
+  // ELÁSTICOS (verde)
+  {f:'band',n:'Pull-Apart',ex:'Elástico à frente, braços esticados: afasta as mãos apertando as omoplatas.',d:'15 reps',fo:'Costas altas / postura',lv:1,reg:'Elástico mais fraco',prog:'Elástico mais forte',ferias:false},
+  {f:'band',n:'Remada',ex:'Elástico preso à frente, puxa os cotovelos à cintura apertando as costas.',d:'12–15 reps',fo:'Costas',lv:1,reg:'Menos tensão',prog:'Uma mão de cada vez',ferias:false},
+  {f:'band',n:'Agachamento c/ Banda',ex:'Pisa o elástico, pega nas pontas aos ombros, agacha contra a resistência.',d:'15 reps',fo:'Pernas / glúteo',lv:1,reg:'Menos tensão',prog:'Pausa no fundo',ferias:false},
+  {f:'band',n:'Chest Press',ex:'Elástico atrás das costas, empurra as mãos à frente até esticar os braços.',d:'12–15 reps',fo:'Peito',lv:2,reg:'Menos tensão',prog:'Uma mão de cada vez',ferias:false},
+  {f:'band',n:'Shoulder Press',ex:'Pisa o elástico, mãos aos ombros, empurra acima da cabeça sem arquear.',d:'10–12 reps',fo:'Ombro',lv:2,reg:'Elástico mais fraco',prog:'Elástico mais forte',ferias:false},
+  {f:'band',n:'Passo Lateral',ex:'Mini-banda nos tornozelos ou joelhos, passos laterais mantendo tensão.',d:'10/lado',fo:'Glúteo médio',lv:2,reg:'Banda mais alta (joelhos)',prog:'Semi-agachado',ferias:false},
+  {f:'band',n:'Ponte c/ Mini-banda',ex:'Mini-banda acima dos joelhos, ponte de glúteo empurrando os joelhos para fora.',d:'15 reps',fo:'Glúteo',lv:1,reg:'Sem abrir joelhos',prog:'Uma perna',ferias:false},
+  {f:'band',n:'Pallof Press',ex:'Elástico preso ao lado, mãos ao peito, empurra à frente resistindo à rotação.',d:'10/lado',fo:'Anti-rotação / core',lv:2,reg:'Menos tensão',prog:'Afasta-te do apoio',ferias:false},
+  {f:'band',n:'Curl de Bíceps',ex:'Pisa o elástico, cotovelos junto ao corpo, flete os antebraços controlado.',d:'12–15 reps',fo:'Bíceps',lv:1,reg:'Menos tensão',prog:'Mais lento na descida',ferias:false},
+  {f:'band',n:'Extensão Tríceps',ex:'Elástico preso em cima, empurra as mãos para baixo esticando os cotovelos.',d:'12–15 reps',fo:'Tríceps',lv:1,reg:'Menos tensão',prog:'Uma mão de cada vez',ferias:false},
+  {f:'band',n:'Face Pull',ex:'Elástico à altura do rosto, puxa às têmporas abrindo os cotovelos.',d:'15 reps',fo:'Ombro posterior / postura',lv:1,reg:'Menos tensão',prog:'Pausa 1s no fim',ferias:false},
+];
+
+/* ---------------- RENDER DE CARTA ---------------- */
+function cardHTML(c){
+  const fam = FAM[c.f];
+  const dots = [1,2,3].map(i=>`<i class="${i<=c.lv?'f':''}"></i>`).join('');
+  return `<article class="tcard" style="color:${fam.color}">
+    <div class="band" style="background:${fam.color}"></div>
+    <div class="lvl">${dots}</div>
+    <div class="body">
+      <div class="fam" style="color:${fam.color}"><span>${fam.label}</span><span class="emo">${fam.emo}</span></div>
+      <div class="nm" style="color:var(--text)">${c.n}</div>
+      <div class="exec">${c.ex}</div>
+      <div class="dose" style="color:var(--text)">⏱ ${c.d}</div>
+      <div class="foot"><b>Foco:</b> ${c.fo}<br><b>↓</b> ${c.reg} &nbsp; <b>↑</b> ${c.prog}</div>
+    </div>
+  </article>`;
+}
+
+/* ---------------- GERADOR DE TREINO ---------------- */
+function pick(arr,k){
+  const a=[...arr]; const out=[];
+  for(let i=0;i<k && a.length;i++){ out.push(a.splice(Math.floor(Math.random()*a.length),1)[0]); }
+  return out;
+}
+const byFam = f => CARDS.filter(c=>c.f===f);
+
+function build(pack){
+  const mob = pick(byFam('mob'),2);
+  const mind = pick(byFam('mind'),1);
+  let move=[];
+  if(pack==='ferias'){
+    move = pick(byFam('func'),4);
+  } else if(pack==='fds'){
+    move = [...pick(byFam('func'),2), ...pick([...byFam('kb'),...byFam('band')],2)];
+  } else { // livre
+    const all=[...byFam('func'),...byFam('kb'),...byFam('band')];
+    move = pick(all,4);
+  }
+  return {mob,move,mind};
+}
+
+function phaseHTML(title,color,emo,cards){
+  return `<div class="wo-phase">
+    <div class="lbl"><span class="dot" style="background:${color}"></span>${emo} ${title}</div>
+    <div class="deck-row">${cards.map(cardHTML).join('')}</div>
+  </div>`;
+}
+
+function renderWorkout(pack){
+  const w = build(pack);
+  const html =
+    phaseHTML('1 · Mobiliza', FAM.mob.color, '🔄', w.mob) +
+    phaseHTML('2 · Move — circuito 3 voltas', FAM.func.color, '💪', w.move) +
+    phaseHTML('3 · Acalma', FAM.mind.color, '🧘', w.mind);
+  document.getElementById('workout').innerHTML = html;
+}
+
+/* ---------------- DECK BROWSER ---------------- */
+let filter='all';
+function renderDeck(){
+  const list = filter==='all' ? CARDS : CARDS.filter(c=>c.f===filter);
+  document.getElementById('deckGrid').innerHTML = list.map(cardHTML).join('');
+  document.querySelectorAll('#filters .chip').forEach(ch=>{
+    const on = ch.dataset.fam===filter;
+    ch.classList.toggle('on',on);
+    ch.style.background = on ? (ch.dataset.fam==='all'?'var(--navy)':FAM[ch.dataset.fam].color) : '';
+  });
+}
+function buildFilters(){
+  const wrap=document.getElementById('filters');
+  const items=[['all','Todas','🃏'],...Object.entries(FAM).map(([k,v])=>[k,v.label,v.emo])];
+  wrap.innerHTML = items.map(([k,lab,emo])=>`<button class="chip" data-fam="${k}"><span class="emo">${emo}</span>${lab}</button>`).join('')
+    + `<button class="chip" id="printBtn" style="margin-left:auto"><span class="emo">🖨️</span>Imprimir baralho</button>`;
+  wrap.querySelectorAll('.chip[data-fam]').forEach(ch=>ch.onclick=()=>{filter=ch.dataset.fam;renderDeck();});
+  document.getElementById('printBtn').onclick=()=>{filter='all';renderDeck();setTimeout(()=>window.print(),60);};
+}
+
+/* ---------------- INIT ---------------- */
+let curPack='ferias';
+const HINTS={ferias:'Sem material · ≈ 25 min · faz em qualquer lado',
+             fds:'KB + elásticos · ≈ 30 min · treino completo',
+             livre:'5 famílias à sorte · nunca é igual'};
+document.querySelectorAll('#packSeg button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('#packSeg button').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on'); curPack=b.dataset.pack;
+  document.getElementById('woHint').textContent=HINTS[curPack];
+});
+document.getElementById('drawBtn').onclick=()=>renderWorkout(curPack);
+
+buildFilters();
+renderDeck();
+</script>
+</body>
+</html>
