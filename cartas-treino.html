@@ -110,6 +110,7 @@ h2{font-size:26px;font-weight:900;letter-spacing:-.02em;margin:10px 0 5px}
   border:1px solid var(--line)}
 .tcard .illo .fig{width:112px;height:112px;filter:drop-shadow(0 0 7px currentColor)}
 .tcard .illo .naipe{position:absolute;left:10px;bottom:8px;font-size:14px;opacity:.85}
+.tcard .illo .idx{position:absolute;left:10px;top:9px;font-size:9px;font-weight:900;letter-spacing:.08em;color:currentColor;opacity:.9;z-index:2;font-variant-numeric:tabular-nums}
 .tcard .lvl{position:absolute;top:9px;right:10px;display:flex;gap:4px;z-index:2}
 .tcard .lvl i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.22)}
 .tcard .lvl i.f{background:currentColor;box-shadow:0 0 8px currentColor}
@@ -282,11 +283,11 @@ h2{font-size:26px;font-weight:900;letter-spacing:-.02em;margin:10px 0 5px}
 <script>
 /* ============ FAMÍLIAS ============ */
 const FAM={
-  mind:{label:'Body & Mind',emo:'🧘',color:'var(--fam-mind)'},
-  mob :{label:'Mobilidade', emo:'🔄',color:'var(--fam-mob)'},
-  func:{label:'Funcional',  emo:'💪',color:'var(--fam-func)'},
-  kb  :{label:'Kettlebell', emo:'🔔',color:'var(--fam-kb)'},
-  band:{label:'Elásticos',  emo:'🎗️',color:'var(--fam-band)'},
+  mind:{label:'Body & Mind',emo:'🧘',color:'var(--fam-mind)',code:'BM'},
+  mob :{label:'Mobilidade', emo:'🔄',color:'var(--fam-mob)', code:'MB'},
+  func:{label:'Funcional',  emo:'💪',color:'var(--fam-func)',code:'FN'},
+  kb  :{label:'Kettlebell', emo:'🔔',color:'var(--fam-kb)',  code:'KB'},
+  band:{label:'Elásticos',  emo:'🎗️',color:'var(--fam-band)',code:'EL'},
 };
 
 /* ============ POSES ============ */
@@ -390,6 +391,9 @@ const CARDS=[
  {f:'band',p:'hinge',n:'Extensão Tríceps',ex:'Elástico preso em cima, empurra as mãos para baixo esticando os cotovelos.',d:'12–15 reps',fo:'Tríceps',lv:1,reg:'Menos tensão',prog:'Uma mão'},
  {f:'band',p:'hinge',n:'Face Pull',ex:'Elástico à altura do rosto, puxa às têmporas abrindo os cotovelos.',d:'15 reps',fo:'Ombro posterior',lv:1,reg:'Menos tensão',prog:'Pausa 1s'},
 ];
+/* numeração de coleção por família (BM·01, MB·01, ...) */
+const _ct={};CARDS.forEach(c=>{_ct[c.f]=(_ct[c.f]||0)+1;c.no=_ct[c.f];});
+CARDS.forEach(c=>c.tot=_ct[c.f]);
 
 /* ============ CORINGAS (regra, sem personagem) ============ */
 const WILD=[
@@ -417,7 +421,7 @@ function cardHTML(c){
   const dots=[1,2,3].map(i=>`<i class="${i<=c.lv?'f':''}"></i>`).join('');
   return `<article class="tcard" style="color:${fam.color}">
     <div class="band"></div>
-    <div class="illo"><div class="lvl">${dots}</div>${fig(c.p,c.f)}<div class="naipe">${fam.emo}</div></div>
+    <div class="illo"><div class="idx">${fam.code}·${String(c.no).padStart(2,'0')}</div><div class="lvl">${dots}</div>${fig(c.p,c.f)}<div class="naipe">${fam.emo}</div></div>
     <div class="body">
       <div class="fam">${fam.label}</div>
       <div class="nm">${c.n}</div>
