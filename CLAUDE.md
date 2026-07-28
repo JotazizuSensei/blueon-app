@@ -92,10 +92,11 @@ mesmo contexto e produzam conteúdo coerente e alinhado.
 
 ### Deploy
 - **Netlify** = deploy canónico e funcional (deploy previews por PR). ✅
-- **Cloudflare Workers** está configurado no projeto mas **falha** — o repo é
-  estático e não tem `wrangler.toml`/entry-point. Para estáticos o alvo certo é
-  **Cloudflare Pages**, não Workers. Esta falha é de configuração de
-  infraestrutura, não de código.
+- **Cloudflare Workers** — servido como **static assets** via `wrangler.toml`
+  (`[assets] directory = "."`, sem script `main`). A app é 100% estática, por
+  isso não há entry-point de Worker. Se o deploy voltar a falhar, verificar no
+  dashboard Cloudflare se o projeto tem um *build command*/*root directory*
+  custom que entre em conflito com esta config.
 
 ---
 
