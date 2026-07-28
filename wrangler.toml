@@ -1,0 +1,10 @@
+# Cloudflare Workers · Blue ON
+# PWA 100% estática — Worker apenas de static assets (sem script `main`).
+# Serve os ficheiros na raiz do repositório (blueonapp.html, index.html, sw.js, ícones…).
+name = "blueon-app"
+compatibility_date = "2025-01-01"
+
+[assets]
+directory = "."
+# Caminhos desconhecidos devolvem index.html (que redireciona para blueonapp.html).
+not_found_handling = "single-page-application"
