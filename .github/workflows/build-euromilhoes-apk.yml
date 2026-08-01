@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build:
@@ -54,3 +54,14 @@ jobs:
           name: Euromilhoes-Lab-Android
           path: euromilhoes-android/Euromilhoes-Lab.apk
           if-no-files-found: error
+
+      - name: Guardar ID da compilação
+        working-directory: .
+        run: |
+          mkdir -p build-output
+          printf '{"run_id":%s,"commit":"%s","artifact":"Euromilhoes-Lab-Android"}\n' "$GITHUB_RUN_ID" "$GITHUB_SHA" > build-output/run-info.json
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add build-output/run-info.json
+          git commit -m "Guardar referência do APK compilado" || true
+          git push
