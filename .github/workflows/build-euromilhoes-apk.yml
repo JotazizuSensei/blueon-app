@@ -1,0 +1,56 @@
+name: Build Euromilhoes Lab APK
+
+on:
+  push:
+    branches: [euromilhoes-lab-apk]
+    paths:
+      - 'euromilhoes-android/**'
+      - 'euromilhoes-apk-payload/**'
+      - '.github/workflows/build-euromilhoes-apk.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: euromilhoes-android
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Reconstruir aplicação web
+        run: |
+          mkdir -p app/src/main/assets
+          cat ../euromilhoes-apk-payload/chunk_* | base64 --decode | gzip --decompress > app/src/main/assets/index.html
+          test -s app/src/main/assets/index.html
+
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - uses: android-actions/setup-android@v3
+
+      - name: Instalar SDK Android
+        run: |
+          yes | sdkmanager --licenses >/dev/null || true
+          sdkmanager "platforms;android-35" "build-tools;35.0.0" "platform-tools"
+
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+
+      - name: Compilar APK instalável
+        run: gradle --no-daemon :app:assembleDebug
+
+      - name: Preparar ficheiro final
+        run: cp app/build/outputs/apk/debug/app-debug.apk Euromilhoes-Lab.apk
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Euromilhoes-Lab-Android
+          path: euromilhoes-android/Euromilhoes-Lab.apk
+          if-no-files-found: error
