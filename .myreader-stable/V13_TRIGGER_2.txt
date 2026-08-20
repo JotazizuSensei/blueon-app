@@ -1,0 +1,1 @@
+Trigger MyReader v1.3 rebuild after switching to verified patch workflow.
