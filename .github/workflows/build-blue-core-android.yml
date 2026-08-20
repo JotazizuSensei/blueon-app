@@ -1,40 +1,46 @@
 name: Build BLUE CORE Android Shell
 
 on:
-  push:
-    branches:
-      - build/blue-core-android-shell
-    paths:
-      - 'blue-core-android/**'
-      - '.github/workflows/build-blue-core-android.yml'
   pull_request:
     branches:
       - main
-    paths:
-      - 'blue-core-android/**'
-      - '.github/workflows/build-blue-core-android.yml'
-  workflow_dispatch:
 
 jobs:
   build:
+    if: github.head_ref == 'build/blue-core-android-shell'
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v4
+      - name: Checkout PR
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: '17'
-      - uses: android-actions/setup-android@v3
-      - name: Install Android SDK
-        run: sdkmanager 'platforms;android-35' 'build-tools;35.0.0'
-      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android SDK 35
+        run: |
+          yes | sdkmanager --licenses >/dev/null || true
+          sdkmanager "platforms;android-35" "build-tools;35.0.0"
+
+      - name: Set up Gradle 8.7
+        uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.7'
-      - name: Build APK
+
+      - name: Build unsigned release APK
         working-directory: blue-core-android
-        run: gradle assembleDebug --no-daemon
-      - uses: actions/upload-artifact@v4
+        run: gradle --no-daemon :app:assembleRelease
+
+      - name: Upload unsigned shell
+        uses: actions/upload-artifact@v4
         with:
           name: blue-core-android-shell
-          path: blue-core-android/app/build/outputs/apk/debug/app-debug.apk
+          path: blue-core-android/app/build/outputs/apk/release/app-release-unsigned.apk
           if-no-files-found: error
+          retention-days: 3
