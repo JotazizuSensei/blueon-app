@@ -43,9 +43,10 @@ jobs:
           unzip -q /tmp/myreader_payload.zip -d myreader-build
           test -f myreader-build/settings.gradle
           test -f myreader-build/app/src/main/AndroidManifest.xml
+          grep -q "namespace 'pt.myreader.stable'" myreader-build/app/build.gradle
+          grep -q "applicationId 'pt.myreader.stable'" myreader-build/app/build.gradle
           grep -q "versionCode 120" myreader-build/app/build.gradle
           grep -q "versionName '1.2'" myreader-build/app/build.gradle
-          grep -q 'package="pt.myreader.stable"' myreader-build/app/src/main/AndroidManifest.xml
           grep -q 'migrateEngineState' myreader-build/app/src/main/java/pt/myreader/stable/BookEngine.java
           grep -q 'runDiagnostics' myreader-build/app/src/main/java/pt/myreader/stable/BookEngine.java
 
