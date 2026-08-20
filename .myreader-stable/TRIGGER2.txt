@@ -1,1 +1,1 @@
-Retry after AndroidX fix
+MyReader stable isolated build branch. v1.3 built successfully on 2026-08-20.
