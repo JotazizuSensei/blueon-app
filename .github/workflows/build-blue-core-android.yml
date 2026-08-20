@@ -7,6 +7,12 @@ on:
     paths:
       - 'blue-core-android/**'
       - '.github/workflows/build-blue-core-android.yml'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'blue-core-android/**'
+      - '.github/workflows/build-blue-core-android.yml'
   workflow_dispatch:
 
 jobs:
