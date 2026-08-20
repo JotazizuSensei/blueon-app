@@ -33,40 +33,27 @@ jobs:
         with:
           gradle-version: '8.13'
 
-      - name: Recreate MyReader project
+      - name: Recreate MyReader v1.1 project
         run: |
           mkdir -p myreader-build
-          cat .myreader-stable/fix_*.b64 > /tmp/myreader_payload.b64
+          cat .myreader-stable/v11_*.b64 > /tmp/myreader_payload.b64
           base64 -d /tmp/myreader_payload.b64 > /tmp/myreader_payload.zip
           unzip -q /tmp/myreader_payload.zip -d myreader-build
           test -f myreader-build/settings.gradle
           test -f myreader-build/app/src/main/AndroidManifest.xml
+          grep -q "versionCode 110" myreader-build/app/build.gradle
 
       - name: Build unsigned release APK
         working-directory: myreader-build
         run: gradle --no-daemon :app:assembleRelease
 
-      - name: Prepare artifacts
-        run: |
-          cp myreader-build/app/build/outputs/apk/release/app-release-unsigned.apk MyReader-v1.0-unsigned.apk
-          mkdir -p apk-tools/lib
-          cp "$ANDROID_SDK_ROOT/build-tools/35.0.0/apksigner" apk-tools/
-          cp "$ANDROID_SDK_ROOT/build-tools/35.0.0/zipalign" apk-tools/
-          cp "$ANDROID_SDK_ROOT/build-tools/35.0.0/lib/apksigner.jar" apk-tools/lib/
-          chmod +x apk-tools/apksigner apk-tools/zipalign
+      - name: Prepare artifact
+        run: cp myreader-build/app/build/outputs/apk/release/app-release-unsigned.apk MyReader-v1.1-unsigned.apk
 
       - name: Upload unsigned APK
         uses: actions/upload-artifact@v4
         with:
-          name: MyReader-v1.0-unsigned
-          path: MyReader-v1.0-unsigned.apk
-          if-no-files-found: error
-          retention-days: 14
-
-      - name: Upload APK signing tools
-        uses: actions/upload-artifact@v4
-        with:
-          name: android-apk-tools
-          path: apk-tools
+          name: MyReader-v1.1-unsigned
+          path: MyReader-v1.1-unsigned.apk
           if-no-files-found: error
           retention-days: 14
