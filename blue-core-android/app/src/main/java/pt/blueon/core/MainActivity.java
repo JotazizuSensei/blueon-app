@@ -2,7 +2,7 @@ package pt.blueon.core;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.app.PrintManager;
+import android.print.PrintManager;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -19,7 +19,6 @@ import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import java.io.OutputStream;
