@@ -1,0 +1,14 @@
+plugins { id 'com.android.application' }
+
+android {
+    namespace 'pt.blueon.core'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId 'pt.blueon.core'
+        minSdk 23
+        targetSdk 35
+        versionCode 131
+        versionName '13.1'
+    }
+}
