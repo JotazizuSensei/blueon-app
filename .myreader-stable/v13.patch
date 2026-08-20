@@ -1,0 +1,201 @@
+--- a/app/build.gradle
++++ b/app/build.gradle
+@@ -10,8 +10,8 @@
+         applicationId 'pt.myreader.stable'
+         minSdk 26
+         targetSdk 36
+-        versionCode 120
+-        versionName '1.2'
++        versionCode 130
++        versionName '1.3'
+     }
+ 
+     buildTypes {
+--- a/app/src/main/assets/index.html
++++ b/app/src/main/assets/index.html
+@@ -19,13 +19,13 @@
+ </style>
+ </head>
+ <body>
+-<header><div class="brand"><div class="logo">M+</div><div><h1>MyReader+</h1><small>Biblioteca audível · v1.2</small></div></div></header>
++<header><div class="brand"><div class="logo">M+</div><div><h1>MyReader+</h1><small>Biblioteca audível · v1.3</small></div></div></header>
+ <main>
+ <section id="home">
+   <div class="hero"><h2>Os teus livros. Só o que interessa.</h2><p>Importa os packs uma vez e ouve apenas o conteúdo principal. A app guarda o ponto exato de leitura, prepara as páginas seguintes e tenta automaticamente uma voz alternativa se a atual falhar.</p><div class="essential"><b>Modo Essencial</b> · sem prefácios, agradecimentos, sumários, créditos e material final sempre que o pack estiver configurado para isso.</div></div>
+-  <div id="installBox" style="display:none"><h3>Adicionar a primeira biblioteca</h3><p>Seleciona qualquer pack MyReader+. Podes adicionar os restantes depois — nenhum pack apaga os livros que já estão instalados.</p><button class="btn primary wide" onclick="installLibrary()">Escolher pack MyReader+</button></div>
++  <div id="installBox" style="display:none"><h3>Adicionar a primeira biblioteca</h3><p>Seleciona um ou vários packs MyReader+ de uma só vez. A app instala-os e mantém os livros que já estão na biblioteca.</p><button class="btn primary wide" onclick="installLibrary()">Escolher packs no telemóvel</button></div>
+   <div id="library" style="display:none">
+-    <div class="libraryActions"><button class="btn primary" onclick="installLibrary()">+ Adicionar / atualizar pack</button><button class="btn secondary" onclick="runDiag()">✓ Diagnóstico da app</button></div>
++    <div class="libraryActions"><button class="btn primary" onclick="installLibrary()">+ Adicionar / atualizar packs</button><button class="btn secondary" onclick="runDiag()">✓ Diagnóstico da app</button></div>
+     <div id="diag" class="diag"></div>
+     <div class="toolbar"><input id="search" placeholder="Procurar livro…" oninput="renderBooks()"><span class="counter" id="count"></span></div><div class="grid" id="books"></div>
+   </div>
+@@ -55,7 +55,7 @@
+ function renderBooks(){const q=(document.getElementById('search')?.value||'').toLowerCase().trim();const list=(manifest.books||[]).filter(b=>(b.title+' '+(b.author||'')+' '+(b.category||'')).toLowerCase().includes(q));const c=document.getElementById('count');if(c)c.textContent=list.length+' / '+(manifest.books||[]).length+' livros';const box=document.getElementById('books');if(!box)return;box.innerHTML=list.map(b=>`<article class="book" data-id="${escAttr(b.id)}"><div class="cover">${b.cover?`<img src="https://app.myreader.local/cover/${encodeURIComponent(b.cover)}" loading="lazy" onerror="this.outerHTML='<div class=&quot;coverFallback&quot;>MYREADER+</div>'">`:'<div class="coverFallback">MYREADER+</div>'}</div><div class="meta"><div class="title">${esc(b.title)}</div><div class="author">${esc(b.author||'')}</div><div class="category">${esc(b.category||'')}</div><div class="listen">Ouvir capítulos →</div></div></article>`).join('');box.querySelectorAll('.book').forEach(el=>el.addEventListener('click',()=>openBook(el.dataset.id)))}
+ function esc(s){return String(s||'').replace(/[&<>\"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c]))}
+ function escAttr(s){return esc(s).replace(/'/g,'&#39;')}
+-function installLibrary(){native.importLibrary();showToast('Seleciona um pack MyReader+. Os livros existentes serão mantidos.')}
++function installLibrary(){native.importLibrary();showToast('Seleciona um ou vários packs ZIP. Depois de instalados, os livros ficam diretamente disponíveis na Biblioteca.')}
+ function openBook(id){current=(manifest.books||[]).find(b=>b.id===id);if(!current)return;document.getElementById('home').style.display='none';document.getElementById('player').style.display='block';document.getElementById('pTitle').textContent=current.title;document.getElementById('pAuthor').textContent=current.author||'';const pc=document.getElementById('pCover');pc.src=current.cover?'https://app.myreader.local/cover/'+encodeURIComponent(current.cover):'';document.getElementById('chapterList').innerHTML=(current.chapters||[]).map((c,i)=>`<div class="chapter">${i+1}. ${esc(c)}</div>`).join('')||'<div class="chapter">Conteúdo principal</div>';document.getElementById('status').textContent='A preparar o conteúdo principal…';native.playBook(id)}
+ function goHome(){native.stop();current=null;document.getElementById('player').style.display='none';document.getElementById('home').style.display='block'}
+ function togglePlay(){state=parse(native.getState(),state);if(!state.playing){if(current)native.playBook(current.id)}else if(state.paused)native.resume();else native.pause()}
+--- a/app/src/main/java/pt/myreader/stable/BookEngine.java
++++ b/app/src/main/java/pt/myreader/stable/BookEngine.java
+@@ -372,7 +372,7 @@
+             out.put("freeBytes", new StatFs(context.getFilesDir().getAbsolutePath()).getAvailableBytes());
+             out.put("issues", issues);
+             out.put("ok", issues.length() == 0 && books.length() > 0);
+-            out.put("version", "1.2");
++            out.put("version", "1.3");
+             return out.toString();
+         } catch (Exception e) {
+             return "{\"ok\":false,\"issues\":[\"Falha no diagnóstico.\"]}";
+@@ -417,35 +417,65 @@
+     }
+ 
+     public void importLibraryPack(Uri uri) {
++        List<Uri> one = new ArrayList<>();
++        if (uri != null) one.add(uri);
++        importLibraryPacks(one);
++    }
++
++    public void importLibraryPacks(List<Uri> uris) {
++        if (uris == null || uris.isEmpty()) {
++            emitStatus("Não foi selecionado nenhum pack.", true);
++            return;
++        }
++        final List<Uri> queue = new ArrayList<>(uris);
+         final int token = generation.incrementAndGet();
+         stopInternal(false);
+         io.execute(() -> {
+             synchronized (importLock) {
+                 File base = context.getFilesDir();
+-                File stage = new File(base, "pack_import_" + System.currentTimeMillis());
+-                deleteRecursive(stage);
+-                stage.mkdirs();
+-                try {
+-                    emitStatus("A validar e extrair o pack…", false);
+-                    extractPack(uri, stage);
+-                    JSONObject packManifest = new JSONObject(readTextFile(new File(stage, "manifest.json")));
+-                    JSONArray packBooks = packManifest.optJSONArray("books");
+-                    if (packBooks == null || packBooks.length() < 1) throw new IllegalStateException("o pack não contém livros");
+-                    validatePack(stage, packBooks);
+-                    if (new StatFs(base.getAbsolutePath()).getAvailableBytes() < MIN_FREE_AFTER_IMPORT) {
+-                        throw new IllegalStateException("há pouco espaço livre no telemóvel; liberta algum espaço e tenta novamente");
+-                    }
+-                    int added = mergePackIntoLibrary(stage, packManifest, packBooks);
++                int packsOk = 0;
++                int booksAdded = 0;
++                List<String> failures = new ArrayList<>();
++
++                for (int i = 0; i < queue.size(); i++) {
++                    Uri uri = queue.get(i);
++                    File stage = new File(base, "pack_import_" + System.currentTimeMillis() + "_" + i);
+                     deleteRecursive(stage);
+-                    if (token == generation.get()) {
++                    stage.mkdirs();
++                    try {
++                        emitStatus("A instalar pack " + (i + 1) + " de " + queue.size() + "…", false);
++                        extractPack(uri, stage);
++                        JSONObject packManifest = new JSONObject(readTextFile(new File(stage, "manifest.json")));
++                        JSONArray packBooks = packManifest.optJSONArray("books");
++                        if (packBooks == null || packBooks.length() < 1) throw new IllegalStateException("o pack não contém livros");
++                        validatePack(stage, packBooks);
++                        if (new StatFs(base.getAbsolutePath()).getAvailableBytes() < MIN_FREE_AFTER_IMPORT) {
++                            throw new IllegalStateException("há pouco espaço livre no telemóvel; liberta algum espaço e tenta novamente");
++                        }
++                        booksAdded += mergePackIntoLibrary(stage, packManifest, packBooks);
++                        packsOk++;
++                    } catch (Exception e) {
++                        failures.add("Pack " + (i + 1) + ": " + safeMessage(e));
++                    } finally {
++                        deleteRecursive(stage);
++                    }
++                }
++
++                if (token == generation.get()) {
++                    try {
+                         JSONObject merged = new JSONObject(getManifestJson());
+                         int total = merged.optJSONArray("books") == null ? 0 : merged.optJSONArray("books").length();
+-                        emitStatus("Pack instalado: " + added + " livro(s). Biblioteca atual: " + total + " livro(s).", false);
++                        if (failures.isEmpty()) {
++                            emitStatus("Instalação concluída: " + packsOk + " pack(s), " + booksAdded +
++                                    " livro(s) adicionados/atualizados. Biblioteca: " + total + " livro(s).", false);
++                        } else {
++                            emitStatus("Instalação parcial: " + packsOk + " de " + queue.size() +
++                                    " pack(s) instalados. " + failures.get(0), true);
++                        }
+                         js.emit("window.__myReaderLibraryChanged && window.__myReaderLibraryChanged();");
++                    } catch (Exception e) {
++                        emitStatus("Os packs foram processados, mas não consegui atualizar o ecrã da biblioteca.", true);
+                     }
+-                } catch (Exception e) {
+-                    deleteRecursive(stage);
+-                    emitStatus("Não consegui instalar este pack: " + safeMessage(e), true);
+                 }
+             }
+         });
+--- a/app/src/main/java/pt/myreader/stable/MainActivity.java
++++ b/app/src/main/java/pt/myreader/stable/MainActivity.java
+@@ -2,6 +2,7 @@
+ 
+ import android.app.Activity;
+ import android.content.Intent;
++import android.content.ClipData;
+ import android.graphics.Color;
+ import android.net.Uri;
+ import android.os.Bundle;
+@@ -18,6 +19,8 @@
+ import java.io.FileInputStream;
+ import java.io.InputStream;
+ import java.util.HashMap;
++import java.util.ArrayList;
++import java.util.List;
+ 
+ public class MainActivity extends Activity {
+     private static final String APP_HOST = "app.myreader.local";
+@@ -99,6 +102,7 @@
+         intent.addCategory(Intent.CATEGORY_OPENABLE);
+         intent.setType("*/*");
+         intent.putExtra(Intent.EXTRA_MIME_TYPES, new String[]{"application/zip", "application/octet-stream", "application/x-zip-compressed"});
++        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+         try {
+             startActivityForResult(intent, REQ_LIBRARY_PACK);
+@@ -110,14 +114,29 @@
+     @Override
+     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+         super.onActivityResult(requestCode, resultCode, data);
+-        if (requestCode == REQ_LIBRARY_PACK && resultCode == RESULT_OK && data != null && data.getData() != null) {
+-            Uri uri = data.getData();
+-            try {
+-                int flags = data.getFlags() & (Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+-                getContentResolver().takePersistableUriPermission(uri, flags);
+-            } catch (Exception ignored) { }
+-            engine.importLibraryPack(uri);
++        if (requestCode != REQ_LIBRARY_PACK || resultCode != RESULT_OK || data == null) return;
++
++        List<Uri> uris = new ArrayList<>();
++        ClipData clip = data.getClipData();
++        if (clip != null) {
++            for (int i = 0; i < clip.getItemCount(); i++) {
++                Uri uri = clip.getItemAt(i).getUri();
++                if (uri != null && !uris.contains(uri)) uris.add(uri);
++            }
++        } else if (data.getData() != null) {
++            uris.add(data.getData());
++        }
++
++        if (uris.isEmpty()) {
++            Toast.makeText(this, "Não foi selecionado nenhum pack.", Toast.LENGTH_LONG).show();
++            return;
++        }
++
++        int flags = data.getFlags() & (Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
++        for (Uri uri : uris) {
++            try { getContentResolver().takePersistableUriPermission(uri, flags); } catch (Exception ignored) { }
+         }
++        engine.importLibraryPacks(uris);
+     }
+ 
+     @Override
