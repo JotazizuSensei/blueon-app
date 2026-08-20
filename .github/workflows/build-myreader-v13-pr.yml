@@ -1,0 +1,69 @@
+name: Build MyReader v1.3 APK PR
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    if: github.head_ref == 'myreader-stable-v1-build'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout PR
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android SDK 36
+        run: |
+          yes | sdkmanager --licenses >/dev/null || true
+          sdkmanager "platforms;android-36" "build-tools;35.0.0"
+
+      - name: Set up Gradle 8.13
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.13'
+
+      - name: Recreate and verify MyReader v1.3 project
+        run: |
+          base64 -d .myreader-stable/v13_payload.b64 > /tmp/myreader_v13_project.zip
+          echo "834de81536e9854a06abbc8f8c7ddcd5e23b8fc2ed43453ec04a08cf5737f05b  /tmp/myreader_v13_project.zip" | sha256sum -c -
+          unzip -t /tmp/myreader_v13_project.zip
+          mkdir -p myreader-build
+          unzip -q /tmp/myreader_v13_project.zip -d myreader-build
+          cd myreader-build/myreader_v12_project
+          grep -q "versionCode 130" app/build.gradle
+          grep -q "versionName '1.3'" app/build.gradle
+          grep -q "applicationId 'pt.myreader.stable'" app/build.gradle
+          grep -q "importLibraryPacks" app/src/main/java/pt/myreader/stable/BookEngine.java
+          grep -q "EXTRA_ALLOW_MULTIPLE" app/src/main/java/pt/myreader/stable/MainActivity.java
+          grep -q "Biblioteca audível · v1.3" app/src/main/assets/index.html
+
+      - name: Build unsigned release APK
+        working-directory: myreader-build/myreader_v12_project
+        run: gradle --no-daemon :app:assembleRelease
+
+      - name: Verify APK metadata
+        run: |
+          APK=myreader-build/myreader_v12_project/app/build/outputs/apk/release/app-release-unsigned.apk
+          test -s "$APK"
+          "$ANDROID_SDK_ROOT/build-tools/35.0.0/aapt" dump badging "$APK" | tee /tmp/badging.txt
+          grep -q "package: name='pt.myreader.stable' versionCode='130' versionName='1.3'" /tmp/badging.txt
+          cp "$APK" MyReader-v1.3-unsigned.apk
+
+      - name: Upload unsigned APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: MyReader-v1.3-unsigned
+          path: MyReader-v1.3-unsigned.apk
+          if-no-files-found: error
+          retention-days: 14
