@@ -33,14 +33,17 @@ jobs:
         with:
           gradle-version: '8.13'
 
-      - name: Recreate and verify MyReader v1.3 project
+      - name: Recreate v1.2 baseline and apply verified v1.3 patch
         run: |
-          base64 -d .myreader-stable/v13_payload.b64 > /tmp/myreader_v13_project.zip
-          echo "834de81536e9854a06abbc8f8c7ddcd5e23b8fc2ed43453ec04a08cf5737f05b  /tmp/myreader_v13_project.zip" | sha256sum -c -
-          unzip -t /tmp/myreader_v13_project.zip
+          cat .myreader-stable/v12x_*.b64 > /tmp/myreader_v12_payload.b64
+          base64 -d /tmp/myreader_v12_payload.b64 > /tmp/myreader_v12_payload.zip
+          echo "d7d867817de50978e6d8484db5922ddf616684f0a38b3cd2dcb89c18fa975a61  /tmp/myreader_v12_payload.zip" | sha256sum -c -
+          unzip -t /tmp/myreader_v12_payload.zip
           mkdir -p myreader-build
-          unzip -q /tmp/myreader_v13_project.zip -d myreader-build
-          cd myreader-build/myreader_v12_project
+          unzip -q /tmp/myreader_v12_payload.zip -d myreader-build
+          cd myreader-build
+          patch -p1 --dry-run < ../.myreader-stable/v13.patch
+          patch -p1 < ../.myreader-stable/v13.patch
           grep -q "versionCode 130" app/build.gradle
           grep -q "versionName '1.3'" app/build.gradle
           grep -q "applicationId 'pt.myreader.stable'" app/build.gradle
@@ -49,12 +52,12 @@ jobs:
           grep -q "Biblioteca audível · v1.3" app/src/main/assets/index.html
 
       - name: Build unsigned release APK
-        working-directory: myreader-build/myreader_v12_project
+        working-directory: myreader-build
         run: gradle --no-daemon :app:assembleRelease
 
       - name: Verify APK metadata
         run: |
-          APK=myreader-build/myreader_v12_project/app/build/outputs/apk/release/app-release-unsigned.apk
+          APK=myreader-build/app/build/outputs/apk/release/app-release-unsigned.apk
           test -s "$APK"
           "$ANDROID_SDK_ROOT/build-tools/35.0.0/aapt" dump badging "$APK" | tee /tmp/badging.txt
           grep -q "package: name='pt.myreader.stable' versionCode='130' versionName='1.3'" /tmp/badging.txt
