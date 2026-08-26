@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Blue ON · Galeria de Imagens Geradas</title>
+<style>
+:root{--bg:#05070A;--panel:#0c1424;--text:#F7FAFF;--muted:#8ea6c8;--blue:#0076FF;--cyan:#3CCEFF;--line:rgba(120,165,230,.16);--bad:#ff5c5c;--ok:#2fe0a0}
+*{box-sizing:border-box}
+body{margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Inter,sans-serif;background:radial-gradient(1200px 640px at 82% -6%,rgba(0,118,255,.16),transparent 60%),var(--bg);color:var(--text);padding:28px 18px 60px;line-height:1.5}
+.wrap{max-width:1200px;margin:0 auto}
+h1{font-size:30px;font-weight:900;letter-spacing:-.02em;margin:0 0 6px}
+h1 em{font-style:normal;background:linear-gradient(120deg,var(--cyan),var(--blue));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{color:var(--muted);font-size:14.5px;max-width:760px}
+.howto{margin:18px 0 8px;padding:16px 18px;border:1px solid var(--line);border-radius:14px;background:rgba(255,255,255,.03);font-size:14px}
+.howto b{color:var(--cyan)}
+.howto ol{margin:8px 0 0;padding-left:20px}
+.howto li{margin:4px 0}
+.warn{margin-top:14px;padding:14px 16px;border:1px solid rgba(255,92,92,.4);border-radius:14px;background:rgba(255,92,92,.08);font-size:14px}
+.warn b{color:var(--bad)}
+h2{font-size:20px;font-weight:900;margin:34px 0 4px}
+.sub{color:var(--muted);font-size:13px;margin-bottom:14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:16px}
+.card{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--panel);display:flex;flex-direction:column}
+.card img{width:100%;aspect-ratio:1;object-fit:cover;display:block;background:#0a1220}
+.card .meta{padding:10px 12px 12px}
+.card .nm{font-size:13.5px;font-weight:800;line-height:1.2}
+.card .fn{font-size:11px;color:var(--muted);margin-top:3px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;word-break:break-all}
+.card a.dl{display:block;text-align:center;margin:8px 12px 12px;padding:8px;border-radius:9px;background:linear-gradient(120deg,var(--blue),var(--cyan));color:#04101f;font-weight:800;font-size:12.5px;text-decoration:none}
+.chk{margin-top:8px;font-size:11.5px;color:var(--muted)}
+.chk label{display:flex;gap:6px;align-items:center;cursor:pointer}
+footer{margin-top:44px;color:var(--muted);font-size:12.5px;text-align:center;line-height:1.7}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>Blue ON · <em>Galeria de Imagens</em></h1>
+<p class="lead">As 35 imagens geradas com o teu avatar. Esta página carrega-as diretamente do servidor do Higgsfield — por isso funciona no teu computador, mesmo que os ficheiros não estejam guardados em lado nenhum.</p>
+
+<div class="howto">
+  <b>Como guardar as imagens</b>
+  <ol>
+    <li>Se a imagem aparecer, está acessível. Se aparecer um quadrado vazio, o link já expirou.</li>
+    <li>Carrega em <b>Guardar imagem</b> (abre em separador novo) e depois botão direito → <i>Guardar imagem como…</i></li>
+    <li>Guarda tudo numa pasta <code>img/</code> dentro do projeto, com o nome de ficheiro indicado em cada cartão.</li>
+  </ol>
+</div>
+
+<div class="warn">
+  <b>Atenção — validação necessária.</b> Já foi detetado que várias imagens têm a <b>tatuagem no sítio errado</b>.
+  Verifica em cada uma: tatuagem sânscrita só no antebraço <b>esquerdo</b> (face interna) · antebraço <b>direito completamente limpo</b> ·
+  Garmin só no pulso esquerdo · pulseiras só no direito · anel Ganesha só no anelar esquerdo · Om no peito na pele ·
+  ténis verde-tropa integral · 2 braços e 2 pernas, mãos com 5 dedos.
+  Usa a caixa de cada cartão para marcares as que estão erradas.
+</div>
+
+<h2>Cartas · Funcional</h2>
+<div class="sub">Poses em pé / agachadas / prancha</div>
+<div class="grid" id="g-func"></div>
+
+<h2>Cartas · Mobilidade</h2>
+<div class="grid" id="g-mob"></div>
+
+<h2>Cartas · Body &amp; Mind</h2>
+<div class="grid" id="g-mind"></div>
+
+<h2>Cartas · Kettlebell</h2>
+<div class="grid" id="g-kb"></div>
+
+<h2>Cartas · Elásticos</h2>
+<div class="grid" id="g-band"></div>
+
+<h2>Stickers WhatsApp</h2>
+<div class="sub">Verificar acentos (FORÇA / TÉCNICA) e se o fundo saiu transparente</div>
+<div class="grid" id="g-stk"></div>
+
+<footer>
+  35 imagens · trial Higgsfield terminado e renovação cancelada (sem cobrança)<br>
+  Poses deitadas foram descartadas — o modelo falha nelas (membros a mais).
+</footer>
+</div>
+
+<script>
+const B='https://d8j0ntlcm91z4.cloudfront.net/user_3AoxVXnKdyQ9DN13C3q63gbGAZ7/';
+const DATA={
+ 'g-func':[
+  ['Agachamento','func-agachamento.png','hf_20260728_195431_ff466493-06b0-4201-ab2d-a6d98e3f532d.png'],
+  ['Afundo Alternado','func-afundo.png','hf_20260728_201430_e93e1e70-674e-4ee6-ba1d-84e1951ddb5c.png'],
+  ['Flexão','func-flexao.png','hf_20260728_201437_3de2ae08-2b94-4752-842e-e98790e25db4.png'],
+  ['Ponte de Glúteo','func-ponte-gluteo.png','hf_20260728_201447_7b1e7a02-d997-47ff-9930-4dd20c7eb0a3.png'],
+  ['Mountain Climbers','func-mountain-climbers.png','hf_20260728_202545_4b268304-2870-449a-937b-a1d7c0de7eea.png'],
+  ['Burpee','func-burpee.png','hf_20260728_202817_56e98deb-98e0-4e5c-8190-bc49106d12a7.png'],
+  ['Step-Up','func-step-up.png','hf_20260729_230810_5b7b6d00-5448-47c8-b5a8-a744f682baed.png'],
+  ['Jumping Jacks','func-jumping-jacks.png','hf_20260728_202917_e8a34a81-6839-4ca3-b2ff-0741db0eb88c.png']],
+ 'g-mob':[
+  ['Círculos de Anca','mob-circulos-anca.png','hf_20260728_195835_84222c07-f96e-4f5f-b8d7-43f42a764505.png'],
+  ["World's Greatest",'mob-worlds-greatest.png','hf_20260728_195931_7ac28992-a2b0-49c4-a1a4-6adea493e4bf.png'],
+  ['Agachamento Profundo','mob-agachamento-profundo.png','hf_20260728_200106_339bba42-b0fd-4f62-abd2-6be3df862392.png'],
+  ['Joelho à Parede','mob-joelho-parede.png','hf_20260728_200420_7319487f-fcfb-48e8-9eae-bae72b72af17.png'],
+  ['Círculos de Ombro','mob-circulos-ombro.png','hf_20260728_200816_d87a3b52-8ca1-4f03-b553-67301d28c4b4.png'],
+  ['Alcance Posterior','mob-alcance-posterior.png','hf_20260728_200855_64db5a3c-712e-4498-a19e-43a97371fc49.png'],
+  ['Cossack Squat','mob-cossack.png','hf_20260728_201321_f45d6067-e283-4167-b526-d117e420fa36.png']],
+ 'g-mind':[
+  ['Gato–Camelo','mind-gato-camelo.png','hf_20260728_195655_2dc968fe-594b-48e1-beaa-c96234ad89ce.png'],
+  ['Bird-Dog','mind-bird-dog.png','hf_20260728_195800_fd019d82-9029-4e07-b02d-2506938a89f9.png'],
+  ['Guerreiro II','mind-guerreiro.png','hf_20260728_195817_50637e54-77ad-4daa-988b-7434f567ac1e.png']],
+ 'g-kb':[
+  ['KB Deadlift','kb-deadlift.png','hf_20260728_203535_cdc4c1be-5b46-460e-a4f3-45aaa2be9e27.png'],
+  ['KB Swing','kb-swing.png','hf_20260729_224958_68a58a9c-0fba-41f8-bdc1-921e03395043.png'],
+  ['KB Goblet Squat','kb-goblet.png','hf_20260729_225010_51aef268-4a04-4261-8947-86142a3f161b.png'],
+  ['KB Press','kb-press.png','hf_20260729_230721_002c3350-ba65-493a-ae3a-3d0f866f40f4.png'],
+  ['KB Row','kb-row.png','hf_20260729_230725_4f7468b8-fbb4-47aa-86ac-e53f6c4fc042.png'],
+  ['KB Carry','kb-carry.png','hf_20260729_230728_e619cc03-39b6-4869-a674-256c7a93aaa3.png']],
+ 'g-band':[
+  ['Pull-Apart','band-pull-apart.png','hf_20260729_230732_b195b34b-f322-4005-896d-811cf7a6dceb.png'],
+  ['Remada c/ Banda','band-remada.png','hf_20260729_230737_a92ea042-51fc-4dde-8203-d00ced08379f.png'],
+  ['Agachamento c/ Banda','band-agachamento.png','hf_20260729_230758_4112912c-487a-45ce-b4ed-e94eb780c87e.png'],
+  ['Chest Press','band-chest-press.png','hf_20260729_230803_2c6336fa-63b7-43c3-86ee-31adabdf74c2.png'],
+  ['Shoulder Press','band-shoulder-press.png','hf_20260729_230751_acec16de-b3c0-493d-bd4c-2e6c26835ae6.png'],
+  ['Pallof Press','band-pallof.png','hf_20260729_230807_3751bc1d-f57b-4594-bc22-3a5bc847349f.png']],
+ 'g-stk':[
+  ['BORA! SEGUE O PLANO!','stk-bora.png','hf_20260729_230850_3d852447-29ca-457c-b3af-ceac84bc1838.png'],
+  ['FOCO NO PLANO.','stk-foco.png','hf_20260729_230854_8dfe840e-f556-4961-a338-fb17d94ea452.png'],
+  ['FORÇA!','stk-forca.png','hf_20260729_230858_d964cc1f-5050-4a1d-8a83-1624dc01f61b.png'],
+  ['TÉCNICA PRIMEIRO!','stk-tecnica.png','hf_20260729_230902_1beec154-250c-4f57-9afa-148eb3503f24.png'],
+  ['OK!','stk-ok.png','hf_20260729_230907_b27e3b17-5b59-43e4-a8c7-1b32186e38d3.png']]
+};
+for(const [id,items] of Object.entries(DATA)){
+  document.getElementById(id).innerHTML = items.map(([nm,fn,file])=>{
+    const url = B+file;
+    return `<div class="card">
+      <a href="${url}" target="_blank" rel="noopener"><img src="${url}" alt="${nm}" loading="lazy"></a>
+      <div class="meta">
+        <div class="nm">${nm}</div>
+        <div class="fn">${fn}</div>
+        <div class="chk"><label><input type="checkbox"> marcar como ERRADA</label></div>
+      </div>
+      <a class="dl" href="${url}" target="_blank" rel="noopener">Guardar imagem</a>
+    </div>`;
+  }).join('');
+}
+</script>
+</body>
+</html>
