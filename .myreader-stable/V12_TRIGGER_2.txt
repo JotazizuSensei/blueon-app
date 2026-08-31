@@ -1,0 +1,1 @@
+Retry MyReader+ v1.2 build after correcting package verification.
