@@ -1,0 +1,31 @@
+name: Dump MyReader v1.4 source
+
+on:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  dump:
+    if: github.head_ref == 'myreader-stable-v1-build'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Reconstruct project
+        run: |
+          cat .myreader-stable/v14p_*.b64 | tr -d '\n\r' | base64 -d > /tmp/MyReader-v1.4-project.zip
+          unzip -q /tmp/MyReader-v1.4-project.zip -d /tmp/v14
+      - name: Dump BookEngine
+        run: |
+          echo '===BOOKENGINE_BEGIN==='
+          cat /tmp/v14/myreader_v14_project/app/src/main/java/pt/myreader/stable/BookEngine.java
+          echo '===BOOKENGINE_END==='
+      - name: Dump MainActivity
+        run: |
+          echo '===MAINACTIVITY_BEGIN==='
+          cat /tmp/v14/myreader_v14_project/app/src/main/java/pt/myreader/stable/MainActivity.java
+          echo '===MAINACTIVITY_END==='
+      - name: Dump Gradle
+        run: |
+          echo '===GRADLE_BEGIN==='
+          cat /tmp/v14/myreader_v14_project/app/build.gradle
+          echo '===GRADLE_END==='
