@@ -14,18 +14,16 @@ jobs:
         run: |
           cat .myreader-stable/v14p_*.b64 | tr -d '\n\r' | base64 -d > /tmp/MyReader-v1.4-project.zip
           unzip -q /tmp/MyReader-v1.4-project.zip -d /tmp/v14
-      - name: Dump BookEngine
+      - name: Verify project
         run: |
-          echo '===BOOKENGINE_BEGIN==='
-          cat /tmp/v14/myreader_v14_project/app/src/main/java/pt/myreader/stable/BookEngine.java
-          echo '===BOOKENGINE_END==='
-      - name: Dump MainActivity
-        run: |
-          echo '===MAINACTIVITY_BEGIN==='
-          cat /tmp/v14/myreader_v14_project/app/src/main/java/pt/myreader/stable/MainActivity.java
-          echo '===MAINACTIVITY_END==='
-      - name: Dump Gradle
-        run: |
-          echo '===GRADLE_BEGIN==='
-          cat /tmp/v14/myreader_v14_project/app/build.gradle
-          echo '===GRADLE_END==='
+          grep -q "versionCode 140" /tmp/v14/myreader_v14_project/app/build.gradle
+          grep -q "versionName '1.4'" /tmp/v14/myreader_v14_project/app/build.gradle
+          grep -q "applicationId 'pt.myreader.stable'" /tmp/v14/myreader_v14_project/app/build.gradle
+          unzip -t /tmp/MyReader-v1.4-project.zip >/dev/null
+      - name: Upload reconstructed source
+        uses: actions/upload-artifact@v4
+        with:
+          name: MyReader-v1.4-project-source
+          path: /tmp/MyReader-v1.4-project.zip
+          if-no-files-found: error
+          retention-days: 7
